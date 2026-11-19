@@ -94,3 +94,5 @@ curl --fail-with-body https://retail-assist-api.vercel.app/api/chat \
 ```
 
 Open the public frontend and demonstrate oats/KES budget, a narrower follow-up, an unknown dietary exclusion and medical refusal. Check the mode badge: fallback is not a successful Groq generation. Full local/Docker/deployment commands remain in QUICKSTART.md, CONTAINERS.md and VERCEL_DEPLOYMENT.md. Keep provider calls bounded to the presentation need.
+
+Review handoff: draft pull request https://github.com/afrochic/RetailAssistant/pull/2 . It contains the verified fixes and academic evidence. No merge performed; production app code remains tested7d46aea.
