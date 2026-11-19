@@ -1,0 +1,86 @@
+[
+  {
+    "url": "https://retail-assistant-tau.vercel.app/",
+    "status": 200,
+    "latency_seconds": 0.808,
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "Server": "Vercel",
+      "X-Vercel-Cache": "MISS",
+      "X-Vercel-Id": "cpt1::iad1::zrmgb-1795127561593-a6eac7ad0f5d"
+    },
+    "body_preview": "18093 bytes"
+  },
+  {
+    "url": "https://retail-assistant-tau.vercel.app/health",
+    "status": 200,
+    "latency_seconds": 0.943,
+    "headers": {
+      "Content-Type": "application/json",
+      "Server": "Vercel",
+      "X-Vercel-Cache": "MISS",
+      "X-Vercel-Id": "cpt1::iad1::crd4r-1795127562303-61a2a4c50d7c"
+    },
+    "body_preview": "{\"status\":\"ok\",\"service\":\"retailassist-web\"}"
+  },
+  {
+    "url": "https://retail-assistant-tau.vercel.app/api/runtime-config",
+    "status": 503,
+    "latency_seconds": 0.667,
+    "headers": {
+      "Content-Type": "application/json",
+      "Server": "Vercel",
+      "X-Vercel-Cache": "MISS",
+      "X-Vercel-Id": "cpt1::iad1::sdrnj-1795127563229-d5eec2bace58"
+    },
+    "body_preview": "{\"apiBaseUrl\":\"\",\"error\":\"API_BASE_URL must be a public HTTPS API origin (HTTP localhost is allowed locally).\"}"
+  },
+  {
+    "url": "https://retail-assist-api.vercel.app/health",
+    "status": 200,
+    "latency_seconds": 0.847,
+    "headers": {
+      "Content-Type": "application/json",
+      "Server": "Vercel",
+      "X-Vercel-Cache": "MISS",
+      "X-Vercel-Id": "cpt1::iad1::sdrnj-1795127563998-b0cfdf4926b9"
+    },
+    "body_preview": "{\"status\":\"alive\",\"service\":\"retailassist-mvp\"}"
+  },
+  {
+    "url": "https://retail-assist-api.vercel.app/ready",
+    "status": 503,
+    "latency_seconds": 0.945,
+    "headers": {
+      "Content-Type": "application/json",
+      "Server": "Vercel",
+      "X-Vercel-Cache": "MISS",
+      "X-Vercel-Id": "cpt1::iad1::zrmgb-1795127564779-46d04ffd0a3e"
+    },
+    "body_preview": "{\"ready\":false,\"reason\":\"catalogue_or_index_missing\",\"catalogue_available\":false,\"generation_configured\":true}"
+  },
+  {
+    "url": "https://retail-assist-api.vercel.app/api/system-info",
+    "status": 200,
+    "latency_seconds": 0.91,
+    "headers": {
+      "Content-Type": "application/json",
+      "Server": "Vercel",
+      "X-Vercel-Cache": "MISS",
+      "X-Vercel-Id": "cpt1::iad1::pgf6c-1795127565710-ed3aa217c652"
+    },
+    "body_preview": "{\"ready\":false,\"reason\":\"catalogue_or_index_missing\",\"model\":\"openai/gpt-oss-120b\",\"generation_configured\":true,\"catalogue_count\":0,\"currency\":\"KES\",\"retrieval\":\"unavailable\",\"source_snapshot_date\":null,\"permission\":\"user_approved_presentation_mvp\",\"limitations\":[\"Not an official Healthy U service.\",\"Historical snapshot; confirm prices and stock.\",\"No clinical advice or efficacy claims.\"]}"
+  },
+  {
+    "url": "https://retail-assist-api.vercel.app/openapi.json",
+    "status": 200,
+    "latency_seconds": 1.046,
+    "headers": {
+      "Content-Type": "application/json",
+      "Server": "Vercel",
+      "X-Vercel-Cache": "MISS",
+      "X-Vercel-Id": "cpt1::iad1::jqxwr-1795127566648-b514b020d4df"
+    },
+    "body_preview": "5276 bytes"
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "ready": {
+    "status": 200,
+    "body": {
+      "ready": true,
+      "reason": null,
+      "catalogue_available": true,
+      "generation_configured": false
+    }
+  },
+  "medical": {
+    "status": 200,
+    "body": {
+      "answer": "This could need urgent medical attention. Please contact local emergency services or seek urgent care now. I cannot assess symptoms or recommend retail products as treatment.",
+      "references": [],
+      "mode": "urgent_safety",
+      "retrieval": "not_invoked",
+      "preferences": {
+        "max_price": null,
+        "min_price": null,
+        "currency": "KES",
+        "category": null,
+        "brand": null,
+        "required_labels": [],
+        "excluded_ingredients": [],
+        "in_stock": false
+      },
+      "notices": [],
+      "retry_after": null,
+      "request_id": "2f118156cdc940e3a5d596f48e1b5d1c"
+    }
+  },
+  "pass": true,
+  "image": "sha256:2ac364c800d5d06d919895d9e86bbe0de841a56e60554cb90d03b3b0461e032e",
+  "removed_container": "retailassist-final-audit-api-urgent",
+  "criterion": "mode urgent_safety, no references, retrieval not_invoked"
+}

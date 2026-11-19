@@ -18,3 +18,9 @@ New benchmarks, clinical safety performance, latency, live service URLs and depl
 
 ### Container amendment (20 November 2026)
 AI assistance authored the two-app Docker/Compose setup, runtime public configuration route and manual Vercel Container deployment documentation. Official Vercel documentation was consulted; images, tests and deployments were not executed. The student must verify all builds, safety behavior and measured research results.
+
+### Final audit and measured evidence (20 November 2026)
+
+AI assistance performed controlled public endpoint checks, local tests, approved catalogue ingestion/index fitting, diagnostic evaluation, Docker build/runtime probes, nonproduction CI investigation, regression fixes and academic report/presentation drafting. Actual outputs and failures are retained under reports/final. Human relevance judgments were not fabricated; Precision/Recall/MRR/NDCG remain blocked. GPT-OSS was used as a hosted generator and was not trained/fine-tuned by this project. The student remains responsible for reviewing code, validating interpretation, supplying independent relevance labels and defending the individual submission. Production rollout was not performed; nonproduction branch publication preserves review.
+
+After the initial final audit, the user explicitly authorized production repair and redeployment. AI assistance set the public API URL/CORS and private anonymous rate-limit salt in the existing projects, built/promoted verified source7d46aea, and recorded successful unauthenticated public readiness/CORS/chat tests. The user completed Vercel identity verification and interacted with the public chat. Both the failed initial audit and successful post-release evidence are retained; no blanket clinical or relevance accuracy is inferred.

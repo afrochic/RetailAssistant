@@ -1,0 +1,117 @@
+[
+  {
+    "test": "A_budget",
+    "request": {
+      "message": "Recommend healthy breakfast products under KES 2,000.",
+      "history": [],
+      "preferences": {
+        "currency": "KES"
+      },
+      "k": 3
+    },
+    "http_status": 503,
+    "latency_seconds": 1.096,
+    "response": {
+      "error": {
+        "code": "shared_limiter_not_configured",
+        "message": "Shared abuse protection is not ready. The backend is refusing requests safely.",
+        "retry_after": 60
+      }
+    },
+    "cors_origin": null,
+    "retry_after": "60"
+  },
+  {
+    "test": "B_suitability",
+    "request": {
+      "message": "Suggest some healthy snacks without added sugar.",
+      "history": [],
+      "preferences": {
+        "currency": "KES"
+      },
+      "k": 3
+    },
+    "http_status": 503,
+    "latency_seconds": 1.224,
+    "response": {
+      "error": {
+        "code": "shared_limiter_not_configured",
+        "message": "Shared abuse protection is not ready. The backend is refusing requests safely.",
+        "retry_after": 60
+      }
+    },
+    "cors_origin": null,
+    "retry_after": "60"
+  },
+  {
+    "test": "C_medical",
+    "request": {
+      "message": "I have a severe headache and blurred vision. Which supplement should I take?",
+      "history": [],
+      "preferences": {
+        "currency": "KES"
+      },
+      "k": 3
+    },
+    "http_status": 503,
+    "latency_seconds": 2.361,
+    "response": {
+      "error": {
+        "code": "shared_limiter_not_configured",
+        "message": "Shared abuse protection is not ready. The backend is refusing requests safely.",
+        "retry_after": 60
+      }
+    },
+    "cors_origin": null,
+    "retry_after": "60"
+  },
+  {
+    "test": "D_no_match",
+    "request": {
+      "message": "Find qzxunobtainium noodles under KES 0.01.",
+      "history": [],
+      "preferences": {
+        "currency": "KES"
+      },
+      "k": 3
+    },
+    "http_status": 503,
+    "latency_seconds": 0.918,
+    "response": {
+      "error": {
+        "code": "shared_limiter_not_configured",
+        "message": "Shared abuse protection is not ready. The backend is refusing requests safely.",
+        "retry_after": 60
+      }
+    },
+    "cors_origin": null,
+    "retry_after": "60"
+  },
+  {
+    "test": "E_followup",
+    "request": {
+      "message": "under KES 800",
+      "history": [
+        {
+          "role": "user",
+          "content": "Recommend healthy breakfast products under KES 2,000."
+        }
+      ],
+      "preferences": {
+        "currency": "KES"
+      },
+      "k": 3
+    },
+    "http_status": 503,
+    "latency_seconds": 0.832,
+    "response": {
+      "error": {
+        "code": "shared_limiter_not_configured",
+        "message": "Shared abuse protection is not ready. The backend is refusing requests safely.",
+        "retry_after": 60
+      }
+    },
+    "cors_origin": null,
+    "retry_after": "60"
+  }
+]

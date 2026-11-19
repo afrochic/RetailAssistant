@@ -1,0 +1,105 @@
+{
+  "total_count": 1,
+  "jobs": [
+    {
+      "id": 135933233113,
+      "run_id": 44629838451,
+      "workflow_name": "MVP backend validation (manual)",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/afrochic/RetailAssistant/actions/runs/44629838451",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOV0Q_5M8AAAAfpkCH2Q",
+      "head_sha": "7be14a9ce0bd041a9f7bade3931b3ffde269eedd",
+      "url": "https://api.github.com/repos/afrochic/RetailAssistant/actions/jobs/135933233113",
+      "html_url": "https://github.com/afrochic/RetailAssistant/actions/runs/44629838451/job/135933233113",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-19T22:34:07Z",
+      "started_at": "2026-11-19T22:34:10Z",
+      "completed_at": "2026-11-19T22:34:35Z",
+      "name": "validate",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-19T22:34:11Z",
+          "completed_at": "2026-11-19T22:34:12Z"
+        },
+        {
+          "name": "Run actions/checkout@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-19T22:34:12Z",
+          "completed_at": "2026-11-19T22:34:17Z"
+        },
+        {
+          "name": "Run actions/setup-python@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-19T22:34:17Z",
+          "completed_at": "2026-11-19T22:34:17Z"
+        },
+        {
+          "name": "Run pip install -r apps/api/requirements-dev.txt",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-19T22:34:17Z",
+          "completed_at": "2026-11-19T22:34:30Z"
+        },
+        {
+          "name": "Run python -m ruff check apps/api",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-19T22:34:30Z",
+          "completed_at": "2026-11-19T22:34:30Z"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-11-19T22:34:30Z",
+          "completed_at": "2026-11-19T22:34:32Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-11-19T22:34:32Z",
+          "completed_at": "2026-11-19T22:34:32Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-11-19T22:34:32Z",
+          "completed_at": "2026-11-19T22:34:32Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-11-19T22:34:32Z",
+          "completed_at": "2026-11-19T22:34:32Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/afrochic/RetailAssistant/check-runs/135933233113",
+      "labels": [
+        "ubuntu-22.04"
+      ],
+      "runner_id": 1000000006,
+      "runner_name": "GitHub Actions 1000000006",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}

@@ -1,24 +1,30 @@
-# Current MVP compliance map — implementation is not verification
+# DSA 8401 submission compliance — 20 November 2026
 
-| User/project requirement | Concrete source | Evidence/status |
-|---|---|---|
-| Existing repository/history | Independent retailassist checkout; proposed manual branch | Read-only metadata confirms afrochic/RetailAssistant; no Git mutations/pushes by agent |
-| Real Healthy U source | reports/mvp/PHASE_0_AUDIT.md; scripts/mvp/prepare.py | 5,512 records observed; permission/KES user-confirmed; extraction PENDING |
-| Reproducible ingestion/cleaning | prepare.py ingest | Allowlisted, read-only approved local export; hashes and rejected counts generated only on manual run |
-| Genuine fitted baseline/artifacts | prepare.py index; apps/api/retail_mvp/catalogue.py | TF-IDF fit/serialization implemented; no fitting run |
-| Semantic/hybrid | optional prepare.py index --semantic | Offline teacher embeddings + approximate fitted query projection, RRF; no artifact/performance claimed |
-| Hard constraints / missing evidence | models.py, safety.py, catalogue.py | KES budget and explicit preferences; unknown ingredients/labels/stock do not pass hard filters; untested |
-| Groq GPT RAG | retail_mvp/groq.py | Configurable openai/gpt-oss-120b; strict IDs and record-specific supported explanation choices; no actual API calls |
-| Medical/abuse controls | safety.py, limits.py, app.py | Conservative abstention, input/body limits, shared quota counters, provider limits/fallback; tests written but unexecuted |
-| ChatGPT-style frontend | apps/web | Anonymous session-local chat, examples, Markdown, new chat, loading/error/retry/preferences/references; no storefront/auth/account DB/cart/checkout |
-| Vercel frontend + backend | apps/web/vercel.json; apps/api/vercel.json | Two Container roots configured, automatic Git deploys disabled; no projects/deployments created |
-| Docker | apps/api/Dockerfile; apps/web/Dockerfile; both Dockerfile.vercel files; docker-compose.yml | Both multi-stage images and local two-service Compose authored; not built/run |
-| Evaluation | scripts/mvp/evaluate.py; research/mvp/queries.template.json | Human-reviewed labels required; no new measured results/claims rates invented |
-| README / architecture / commands | README.md, QUICKSTART.md, MANUAL_RUNBOOK.md, VERCEL_DEPLOYMENT.md | Written, unexecuted manual guidance; actual values/URLs must come from user account |
-| AI-use and provenance | AI_USE.md, DATA_CARD.md | Updated for this rebuild; old data/results explicitly legacy |
-| Notebook/report/slides | research/mvp | Unexecuted notebook, PENDING report draft and outline; final measured PDF/deck follow MVP demonstration |
-| Manual workflows | .github/workflows/mvp-*.yml | Validation manual-only; production additionally locked by explicit enable/confirmation/secrets/environment |
+Source of requirements: uploaded DSA8401 Capstone Project.pdf, sections3–5 and the user's public-repository checklist. Statuses below reflect actual evidence, not file existence alone. Current final evidence supersedes historical reports/mvp source-only status. Production deployment remains separate from verified local execution.
 
-## Honest completion state
+| Requirement | Files | Actual evidence | Verification command | Status | Outstanding issue |
+| --- | --- | --- | --- | --- | --- |
+| Public existing Git repository/history | afrochic/RetailAssistant; audit branch | Public repo, canonical origin, fetched baseline7be14a9; safe branch commits | git remote -v; git log --oneline -4 | PASS | Final branch needs normal review/merge for main submission |
+| README overview/setup/architecture/reproduce | README.md; QUICKSTART.md; CONTAINERS.md | Reproduction exercised via local pipeline, test/build and disposable containers; architecture documented | Follow README; docker compose config --quiet | PASS | From-scratch setup still requires approved raw export or included inference artifacts |
+| Honest AI disclosure | AI_USE.md | Explicit code/debug/docs/report assistance; student review responsibility | Read AI_USE.md | PASS | Student must understand and defend the work |
+| Semi-raw real-world data and provenance | scripts/mvp/prepare.py; DATA_CARD.md; catalogue/manifest.json | Source hash verified; 5512 retained; HTML normalization; missing labels/stock documented | python scripts/mvp/audit_offline.py | PASS | Snapshot date, verified ingredients and current stock unavailable |
+| Scripted ingestion→preprocess→fit→predict | scripts/mvp/prepare.py; apps/api/retail_mvp/catalogue.py | Approved ingestion/fitting executed; identical lexical checksum on refit; local predictions | python scripts/mvp/prepare.py index; python scripts/mvp/audit_offline.py | PASS | Independent reviewer needs approved export for ingestion from scratch |
+| Model fitting code and serialized artifacts | prepare.py; products.json; lexical.json; manifest.json | 12000 TF-IDF features, checksums, real inference; GPT-OSS not fine-tuned | python scripts/mvp/manage.py preflight --execute | PASS | Optional semantic artifacts not fitted |
+| FastAPI service | apps/api/app.py; tests/test_contract.py | 23 tests passed, ready200 locally; real provider output observed | cd apps/api && ../../.venv-mvp/bin/python -m pytest -q | PASS | Production ready=true and five public chat cases passed after authorized release |
+| Docker + Compose | apps/api and apps/web Dockerfile/Dockerfile.vercel; docker-compose.yml | Both images built; disposable health/readiness/fallback and final urgent guard checked | docker compose build; follow CONTAINERS.md | PASS | Cloud runtime and local Compose resource sizing not load-tested |
+| Served end-to-end deployment | apps/*/vercel.json; supplied URLs | Initial failures repaired; ready/runtimeconfig200, trusted CORS200, five chat200 with correct modes | curl --fail https://retail-assist-api.vercel.app/ready | PASS | Broader browser/mobile, load and long-term operations remain unverified |
+| Honest evaluation and interpretation | reports/final/evaluation; scripts/mvp/audit_offline.py | 260 diagnostic calls; mean1.332ms/p952.528ms; repeated-reference constraints checked | python scripts/mvp/audit_offline.py | PASS | Diagnostic correctness is not rigorous ranking relevance evaluation |
+| Proposal Precision/Recall/MRR/NDCG | scripts/mvp/evaluate.py; research/mvp/queries.template.json | Evaluator correctly rejected unreviewed labels; no human ground truth exists | python scripts/mvp/evaluate.py --queries research/mvp/queries.template.json --confirm-human-labels | BLOCKED | Independently annotate/review Healthy U relevance labels, then evaluate held-out queries |
+| Proposal semantic/hybrid retrieval | prepare.py --semantic; catalogue.py | Optional projected semantic code only; no fitted artifact or results | Offline semantic fitting followed by labelled evaluation | PENDING | Baseline only demonstrated; proposal only partially fulfilled |
+| Technique justification | final report methodology and exclusions | TF-IDF/RAG justification and semantic/supervised/collaborative exclusions documented | Review report sections | PASS | Semantic comparison still outstanding |
+| Final report or slide deck | reports/final/RETAILASSIST_FINAL_REPORT.md/.pdf; PRESENTATION.md | Editable report and PDF with actual plots; complete 12-slide editable content | Open report and slide source | PASS | PPTX unavailable; slide content requires importing/formatting if PowerPoint needed |
+| GitHub validation | reports/final/GITHUB_ACTIONS_AUDIT.md | Actual run URLs/outcomes recorded, local fixes tested | Inspect linked exact-revision runs | PASS | Backend/frontend/Docker passed at7d46aea; relevance evaluation still blocked |
+| Security and provenance | reports/final/SECURITY_AND_REPOSITORY_AUDIT.md | Bounded tracked/staged scans found no secret patterns; approved product-only fields | Inspect scans and artifact manifest | PASS | Key rotation, full-history scan and GitHub reviewer protection UNVERIFIED; deployed source SHA verified in dashboard |
 
-Phase 0 read-only audit completed. Phases 1–3 source/configuration implemented, **UNTESTED / UNDEPLOYED**. Phase 4 research scaffolding only. Source/key access is available locally; operator execution, actual cloud setup and quota validation remain required. See BLOCKERS.md. The old final PDF/test results are not a final submission for this revised Healthy U/Groq implementation.
+## Proposal alignment
+
+The submitted 109419 proposal's conversational retail problem, real catalogue, scripted baseline, preferences, filtering, grounded LLM, API and Docker are implemented and exercised locally. Healthy U selection is consistent with the proposal's dataset-selection flexibility. Semantic embeddings/hybrid results and labelled ranking evaluation were explicitly planned and remain outstanding. No customer interaction data was supplied (optional in the proposal). Missing ingredient/brand/availability evidence is handled through abstention, not invented metadata. The revised system must not be described as fully meeting every proposed experiment.
+
+## Overall recommendation
+
+READY WITH LIMITATIONS for a scoped presentation demo: both existing public apps were rebuilt/promoted from7d46aea after explicit user approval, and actual public/API and browser outputs were observed. Formal relevance labels, optional semantic comparison and mobile/accessibility validation remain outstanding.

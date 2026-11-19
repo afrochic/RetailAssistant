@@ -1,0 +1,121 @@
+{
+  "total_count": 1,
+  "jobs": [
+    {
+      "id": 135933252565,
+      "run_id": 44629843678,
+      "workflow_name": "MVP frontend validation (manual)",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/afrochic/RetailAssistant/actions/runs/44629843678",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOV0Q_5M8AAAAfpkDT1Q",
+      "head_sha": "7be14a9ce0bd041a9f7bade3931b3ffde269eedd",
+      "url": "https://api.github.com/repos/afrochic/RetailAssistant/actions/jobs/135933252565",
+      "html_url": "https://github.com/afrochic/RetailAssistant/actions/runs/44629843678/job/135933252565",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-11-19T22:34:09Z",
+      "started_at": "2026-11-19T22:34:12Z",
+      "completed_at": "2026-11-19T22:34:39Z",
+      "name": "validate",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-19T22:34:13Z",
+          "completed_at": "2026-11-19T22:34:14Z"
+        },
+        {
+          "name": "Run actions/checkout@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-19T22:34:14Z",
+          "completed_at": "2026-11-19T22:34:18Z"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-19T22:34:18Z",
+          "completed_at": "2026-11-19T22:34:18Z"
+        },
+        {
+          "name": "Require the student-generated reviewed lockfile",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-19T22:34:18Z",
+          "completed_at": "2026-11-19T22:34:18Z"
+        },
+        {
+          "name": "Run npm ci",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-19T22:34:18Z",
+          "completed_at": "2026-11-19T22:34:32Z"
+        },
+        {
+          "name": "Run npm run typecheck",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-11-19T22:34:32Z",
+          "completed_at": "2026-11-19T22:34:34Z"
+        },
+        {
+          "name": "Run npm run lint",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 7,
+          "started_at": "2026-11-19T22:34:34Z",
+          "completed_at": "2026-11-19T22:34:37Z"
+        },
+        {
+          "name": "Run npm run build",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 8,
+          "started_at": "2026-11-19T22:34:37Z",
+          "completed_at": "2026-11-19T22:34:37Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 15,
+          "started_at": "2026-11-19T22:34:37Z",
+          "completed_at": "2026-11-19T22:34:37Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16,
+          "started_at": "2026-11-19T22:34:37Z",
+          "completed_at": "2026-11-19T22:34:37Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17,
+          "started_at": "2026-11-19T22:34:37Z",
+          "completed_at": "2026-11-19T22:34:37Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/afrochic/RetailAssistant/check-runs/135933252565",
+      "labels": [
+        "ubuntu-22.04"
+      ],
+      "runner_id": 1000000007,
+      "runner_name": "GitHub Actions 1000000007",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}

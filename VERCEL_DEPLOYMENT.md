@@ -1,3 +1,5 @@
+> Final audit update (20 November 2026): ingestion, fitting, local tests/builds, Docker probes, CI and an explicitly authorized production repair have now been executed. Both existing projects run tested source7d46aea. See reports/final/FINAL_HANDOFF.md for actual outcomes; earlier source-only/unexecuted statements below describe the prior preparation phase.
+
 # Two Vercel Container projects — manual deployment
 
 Source configuration only. No image has been built, no deployment has been made, and no public URL has been verified. Run commands yourself from the independent `retailassist` checkout.
