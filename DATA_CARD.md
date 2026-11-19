@@ -1,11 +1,13 @@
-# Data card
+# Healthy U presentation-MVP data card
 
-Source: PromptCloudHQ Flipkart product sample, 20,000 scraped product records, mirrored at https://huggingface.co/datasets/jason1966/PromptCloudHQ_flipkart-products . Pinned source revision: ac16731c75907ab9f212c372ec637c00f257c36a.
+Source: the existing HU-NutritionistsVA product export at `rag_pipeline/data/Enhanced_Product_List.json`. Phase 0 read-only observation: 5,512 records, SHA-256 `6d33c9d54279076aeb6105d675e327caf308c9590a47bf7cbe8c4382ed15840d`. This is actual accessible product data, not a synthetic or Flipkart substitute.
 
-The catalogue is historical Indian retail data, not Kenyan inventory. Discounted prices are treated as INR, with their original values preserved. Optional KES estimates use the dated KRA weekly reference 1 INR = 1.37 KES for 16–22 November 2026. This does not establish Kenyan inventory or current Kenyan retail prices. Crawl timestamps describe collection, not transactions. There are no sales outcomes, sessions or reliable live stock fields. Unknown availability remains unknown. Requests for confirmed in-stock products therefore abstain.
+The user confirmed permission for public presentation-MVP use and that RRP is KES. This is a user-confirmed use basis, not a claim that a general open-data licence exists. Re-confirm other uses separately.
 
-Raw fields include product names, brand, category tree, descriptions, prices, textual ratings, URLs and specifications. Missing descriptions become empty; unknown brands are explicit; nonnumeric ratings remain null. Records missing ID/name/valid positive price are excluded; duplicate product IDs are removed. Nested category trees can contain malformed/product-like categories; preserved top-level labels are imperfect. No fabricated descriptions, prices, stock or ratings are imputed.
+Allowlisted fields: original ID/SKU, product name, stripped description, categories, listed price, KES currency, approved retailer link and source record ID. Customer accounts, orders, loyalty records, health histories and private infrastructure are excluded. The export is read-only; actual extraction/cleaning/fitting remain manual and unexecuted by the agent.
 
-The source mirror marks its license as unknown. Raw catalogue and derived record-level model artifacts should be kept for local academic reproduction; do not claim redistribution rights or commercial permission. The repository downloads the source instead of bundling the raw CSV. Serialized local artifacts are packaged separately for the student. Confirm source rights before public redistribution or operational use.
+Unknown: export timestamp, current stock, structured brand, ingredients/allergen list and verified dietary labels. A word absent from a description is not evidence of allergen freedom. Marketing claims are not clinical evidence. Requested constraints that require unknown fields produce abstention/clarification.
 
-The benchmark is a small silver set, authored independently of retrieval outputs. Exhaustive regex predicates over product titles plus explicit category/price constraints generate binary judgments. Such labels omit synonyms, overinclude accessories and do not assess suitability. Dev/test split is by query, not product; all catalogue products are indexed because this is catalogue retrieval, not supervised purchase prediction. Related intents occur in both splits; results are exploratory, not a strict generalization estimate. Human annotation remains necessary.
+Generated artifacts record actual extraction time, input/output SHA-256, accepted/rejected counts, model revision, optional semantic method, fitting timestamp and limitations. Only after student execution can accepted catalogue counts, data-quality summaries or model results be reported.
+
+The old Flipkart card is preserved in docs/LEGACY_FLIPKART_DATA_CARD.md. Historical results are not current Healthy U/Groq evidence.

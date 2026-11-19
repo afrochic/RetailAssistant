@@ -1,0 +1,16 @@
+# Deploy from repository root with project Root Directory apps/api or apps/web.
+# Never upload legacy Flipkart checkpoints, raw source repositories or private env files.
+**
+!apps/
+!apps/api/
+!apps/api/**
+!apps/web/
+!apps/web/**
+apps/**/.env
+apps/**/.env.*
+apps/**/.venv/**
+apps/**/node_modules/**
+apps/**/.next/**
+apps/**/__pycache__/**
+apps/**/.vercel/**
+apps/api/tests/**

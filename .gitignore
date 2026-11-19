@@ -19,3 +19,19 @@ artifacts/product_images.json
 !artifacts/retriever_index.joblib
 !artifacts/encoder/
 artifacts/generator/
+
+# Presentation MVP: secrets and local/generated state
+apps/**/.env
+apps/**/.env.local
+apps/**/.env.*.local
+apps/**/.vercel/
+apps/**/node_modules/
+apps/**/.next/
+apps/**/.venv/
+apps/api/catalogue/*.json
+apps/api/catalogue/*.npz
+apps/api/catalogue/*.npy
+!apps/api/catalogue/schema.json
+.venv-mvp/
+apps/**/tsconfig.tsbuildinfo
+reports/mvp/results/

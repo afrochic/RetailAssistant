@@ -1,9 +1,48 @@
+# Run manually from this repository: docker compose up --build -d
 services:
-  retailassist:
-    build: .
-    ports:
-      - "127.0.0.1:8000:8000"
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    image: retailassist-api:local
+    env_file: ./apps/api/.env
     environment:
-      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
-      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4.1-mini}
+      APP_ENV: local
+      REQUIRE_SHARED_LIMITER: "false"
+      PORT: "8080"
+      ALLOWED_ORIGINS: http://localhost:3000,http://127.0.0.1:3000
+    ports: ["127.0.0.1:8001:8080"]
+    init: true
     restart: unless-stopped
+    read_only: true
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=32m"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 768m
+    cpus: 1.0
+    pids_limit: 128
+    stop_grace_period: 30s
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    image: retailassist-web:local
+    environment:
+      PORT: "8080"
+      API_BASE_URL: http://localhost:8001
+    ports: ["127.0.0.1:3000:8080"]
+    depends_on:
+      api:
+        condition: service_healthy
+    init: true
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=32m
+      - /app/.next/cache:rw,noexec,nosuid,size=64m,uid=10001,gid=10001
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 128
+    stop_grace_period: 30s

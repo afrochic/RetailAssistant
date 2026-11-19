@@ -1,0 +1,16 @@
+name: MVP Docker validation (manual, no publish)
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Require prepared approved artifacts
+        run: test -f apps/api/catalogue/products.json && test -f apps/api/catalogue/lexical.json && test -f apps/api/catalogue/manifest.json
+      - name: Require reviewed frontend lockfile
+        run: test -f apps/web/package-lock.json
+      - run: docker compose build
+      - run: docker build -f apps/api/Dockerfile.vercel -t retailassist-api-vercel-validation apps/api
+      - run: docker build -f apps/web/Dockerfile.vercel -t retailassist-web-vercel-validation apps/web

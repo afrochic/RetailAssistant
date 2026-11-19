@@ -1,0 +1,26 @@
+name: MVP frontend production (explicit manual gate)
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_production:
+        description: Type DEPLOY only after backend readiness, CORS, frontend env and protected environment are configured
+        required: true
+permissions:
+  contents: read
+jobs:
+  deploy:
+    if: ${{ vars.ENABLE_RETAILASSIST_PRODUCTION == 'true' && inputs.confirm_production == 'DEPLOY' }}
+    environment: retailassist-production
+    runs-on: ubuntu-22.04
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.MVP_WEB_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Refuse absent production prerequisites
+        run: test -n "$VERCEL_TOKEN" && test -n "$VERCEL_PROJECT_ID" && test -n "$VERCEL_ORG_ID" && test -f apps/web/package-lock.json
+      - run: npx --yes vercel@66.4.0 --prod --yes --token "$VERCEL_TOKEN"
