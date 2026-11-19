@@ -1,0 +1,10 @@
+{
+  "pipeline": "Executed successfully on 20,000 raw rows, 19,920 retained; TF-IDF, SVD and pinned MiniLM artifacts saved.",
+  "evaluation": "All 30 queries evaluated across four methods; 24 test queries have positive silver judgments.",
+  "unit_tests": "14 passed, including cleaning, constraints, API validation, metric sanity and mocked LLM membership validation.",
+  "notebook": "All 14 walkthrough stages executed in sequence with no error outputs; outputs saved in the notebook.",
+  "api": "Live HTTP test against the Docker service passed: /health reports 19,920 products, / serves the UI, and /recommend returns five hybrid results within the INR 1,500 ceiling and Footwear category.",
+  "llm": "Schema and invented-ID handling covered by mocks. No real paid LLM call made.",
+  "docker": "Docker Compose image built successfully and container is running healthy, mapped to 127.0.0.1:8000. This is verified local deployment, not public cloud hosting.",
+  "github": "Prepared as a standalone repository for https://github.com/afrochic/AML_project.git . Upload status is recorded by Git history and final delivery message."
+}
