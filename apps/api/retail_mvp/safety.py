@@ -81,6 +81,11 @@ def resolve_request(req: ChatRequest) -> tuple[str, Preferences]:
                 query = new_subject
             else:
                 query = re.sub(patterns[0][1], '', prior, flags=re.I) + ' ' + text
+    # Parsed budget clauses are hard filters, not lexical evidence (e.g. 2000 IU).
+    for _, pattern in patterns:
+        query = re.sub(pattern, ' ', query, flags=re.I)
+    query = re.sub(r'\b(?:KES|KShs?|shillings)\b', ' ', query, flags=re.I)
+    query = re.sub(r'\s+', ' ', query).strip()
     try:
         return query[:1600], Preferences(**values)
     except ValueError:

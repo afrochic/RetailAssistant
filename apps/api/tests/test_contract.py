@@ -128,3 +128,15 @@ async def test_urgent_visual_symptoms_never_retrieve_or_generate(monkeypatch):
     assert result.status_code == 200
     assert result.json()['mode'] == 'urgent_safety'
     assert result.json()['references'] == []
+
+
+def test_budget_phrases_are_filters_not_retrieval_features():
+    query, prefs = resolve_request(ChatRequest(message='Recommend healthy breakfast products under KES 2,000.'))
+    assert prefs.max_price == 2000
+    assert '2,000' not in query and 'KES' not in query
+    assert 'breakfast' in query
+    query, prefs = resolve_request(ChatRequest(message='under KES 800', history=[{'role':'user','content':'Find oats under KES 2000'}]))
+    assert 'oats' in query and '800' not in query and '2000' not in query
+    assert prefs.max_price == 800
+    query, _ = resolve_request(ChatRequest(message='Vitamin D3 2000 IU'))
+    assert '2000' in query
