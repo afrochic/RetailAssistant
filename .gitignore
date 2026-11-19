@@ -35,3 +35,8 @@ apps/api/catalogue/*.npy
 .venv-mvp/
 apps/**/tsconfig.tsbuildinfo
 reports/mvp/results/
+
+# Approved compact Healthy U inference artifacts for reproducible deployment
+!apps/api/catalogue/products.json
+!apps/api/catalogue/lexical.json
+!apps/api/catalogue/manifest.json

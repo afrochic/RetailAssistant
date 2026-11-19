@@ -108,3 +108,35 @@ def test_history_only_client_preserves_prior_hard_constraints():
 def test_unrecognized_exclusion_requests_clarification():
     with pytest.raises(ValueError):
         resolve_request(ChatRequest(message='Find oats without artificial preservatives'))
+
+
+def test_severe_headache_with_visual_disturbance_is_urgent():
+    mode, answer = boundary('I have a severe headache and blurred vision. Which supplement should I take?')
+    assert mode == 'urgent_safety'
+    assert 'urgent' in answer.lower()
+
+
+@pytest.mark.asyncio
+async def test_urgent_visual_symptoms_never_retrieve_or_generate(monkeypatch):
+    import app as module
+    monkeypatch.setattr(module, 'settings', replace(Settings.read(), api_key='', require_shared=False))
+    def forbidden_catalogue():
+        raise AssertionError('Urgent symptoms must not retrieve products')
+    monkeypatch.setattr(module, 'get_catalogue', forbidden_catalogue)
+    async with httpx.AsyncClient(transport=httpx.ASGITransport(app=module.app), base_url='http://test') as client:
+        result = await client.post('/api/chat', json={'message': 'Severe headache and blurred vision. Which supplement?'})
+    assert result.status_code == 200
+    assert result.json()['mode'] == 'urgent_safety'
+    assert result.json()['references'] == []
+
+
+def test_budget_phrases_are_filters_not_retrieval_features():
+    query, prefs = resolve_request(ChatRequest(message='Recommend healthy breakfast products under KES 2,000.'))
+    assert prefs.max_price == 2000
+    assert '2,000' not in query and 'KES' not in query
+    assert 'breakfast' in query
+    query, prefs = resolve_request(ChatRequest(message='under KES 800', history=[{'role':'user','content':'Find oats under KES 2000'}]))
+    assert 'oats' in query and '800' not in query and '2000' not in query
+    assert prefs.max_price == 800
+    query, _ = resolve_request(ChatRequest(message='Vitamin D3 2000 IU'))
+    assert '2000' in query
