@@ -18,7 +18,7 @@ def test_budget_and_brand(engine):
 def test_impossible_constraints_abstain(engine,c):
     assert engine.search('running shoe',method='tfidf',constraints=c)['products']==[]
 def test_currency_rejected(engine):
-    with pytest.raises(ValueError):engine.search('running shoes under KSh 80000',method='tfidf')
+    with pytest.raises(ValueError):engine.search('running shoes under USD 80000',method='tfidf')
 def test_conflicting_budget(engine):
     with pytest.raises(ValueError):engine.search('shoes',method='tfidf',constraints={'min_price':10,'max_price':1})
 def test_schema():
@@ -30,9 +30,9 @@ def test_llm_invented_id_fallback(engine,monkeypatch):
     import requests
     class Response:
         def raise_for_status(self):pass
-        def json(self):return {'choices':[{'message':{'content':'{"product_ids":["invented"]}'}}]}
+        def json(self):return {'choices':[{'message':{'content':'{"explanations":[{"product_id":"invented","text":"Invented"}]}'}}]}
     monkeypatch.setenv('OPENAI_API_KEY','fake-test-key');monkeypatch.setattr(requests,'post',lambda *a,**k:Response())
-    r=explain(engine.search('running shoe',method='tfidf'),True)
+    r=explain(engine.search('running shoe',method='tfidf'),True,provider='openai')
     assert r['generation_mode']=='llm_failed_safe_fallback';assert 'invented' not in r['answer']
 def test_api(engine,monkeypatch):
     from fastapi.testclient import TestClient
@@ -56,10 +56,12 @@ def test_llm_valid_selection(engine,monkeypatch):
     import requests
     class Response:
         def raise_for_status(self):pass
-        def json(self):return {'choices':[{'message':{'content':'{"product_ids":["a"]}'}}]}
+        def json(self):return {'choices':[{'message':{'content':'{"explanations":[{"product_id":"a","text":"This option is listed at INR 500.00 in Footwear. Stock availability is unknown."}]}'}}]}
     monkeypatch.setenv('OPENAI_API_KEY','fake-test-key');monkeypatch.setattr(requests,'post',lambda *a,**k:Response())
-    r=explain(engine.search('running shoe',method='tfidf'),True)
-    assert r['generation_mode']=='llm_validated_ids';assert [p['id'] for p in r['products']]==['a']
+    r=explain(engine.search('running shoe',method='tfidf'),True,provider='openai')
+    assert r['generation_mode']=='openai_llm'
+    assert r['explanations'][0]['source']=='openai_llm'
+    assert r['explanations'][1]['source']=='fact_fallback'
 
 def test_plain_brand_word_does_not_overfilter(engine):
     # A catalogue brand token in prose is not always an intended brand constraint.
@@ -111,3 +113,31 @@ def test_insights_uses_real_catalogue_counts(engine,monkeypatch):
         assert sum(c['count'] for c in catalogue['top_categories'])==2
         assert data['model']['semantic_available'] is False
         assert 'silver' in data['evaluation_note']
+
+
+def test_kes_conversion_budget_and_provenance(engine):
+    r=engine.search('running shoe under KSh 700',method='tfidf')
+    assert r['currency']=='KES' and len(r['products'])==1
+    p=r['products'][0]
+    assert p['price']==685.0 and p['source_price']==500.0
+    assert p['source_currency']=='INR' and p['price_is_estimate'] is True
+    assert p['conversion']['rate']==1.37
+    assert engine.search('running shoe',method='tfidf',currency='KES',constraints={'max_price':684.99})['products']==[]
+    with pytest.raises(ValueError):engine.search('running shoe under INR 1000',method='tfidf',currency='KES')
+
+def test_claim_checks_reject_invented_attributes_and_prices():
+    from retailassist.generation import check_claims
+    p={'name':'Shoe','brand':'Acme','category':'Footwear','price':500.,'currency':'INR','rating':4.,'availability':'unknown'}
+    assert check_claims('This option is listed at INR 500.00 in Footwear. Stock availability is unknown.',p,{})==[]
+    assert check_claims('This is perfect for gaming and is in stock for INR 1.',p,{})
+
+def test_actual_local_generation_boundary(engine,monkeypatch):
+    import retailassist.generation as generation
+    monkeypatch.setattr(generation,'local_generate',lambda messages:'This option is listed at INR 500.00 in Footwear. Stock availability is unknown.')
+    r=explain(engine.search('running shoe under INR 1000',method='tfidf'),True)
+    assert r['generation_mode']=='local_llm'
+    assert r['explanations'][0]['source']=='local_llm'
+    monkeypatch.setattr(generation,'local_generate',lambda messages:'This is perfect for gaming for INR 1.')
+    r=explain(engine.search('running shoe under INR 1000',method='tfidf'),True)
+    assert r['generation_mode']=='local_llm_guarded_fallback'
+    assert 'gaming' not in r['answer'] and r['explanations'][0]['raw_generated_text']

@@ -6,6 +6,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src src
 COPY web web
 COPY artifacts artifacts
+RUN if [ ! -f artifacts/retriever.joblib ]; then python -m retailassist.bootstrap; fi
 RUN useradd --uid 10001 --create-home appuser && chown -R appuser:appuser /app
 USER appuser
 EXPOSE 8000
