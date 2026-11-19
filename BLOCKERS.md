@@ -1,34 +1,10 @@
-# MVP blockers and pending actions
+# Remaining final-audit limitations
 
-## Available by read-only evidence
+The original runtime blockers were repaired after explicit user authorization. Both public applications are running source7d46aea with the approved5512-product catalogue; final HTTP/browser and CI evidence is in reports/final.
 
-- Existing canonical repository afrochic/RetailAssistant; history/remote preserved locally.
-- Real Healthy U export: 5,512 existing records, schema/hash in the Phase 0 audit.
-- User explicitly approved public presentation-MVP product use and confirmed KES RRP.
-- Supplied Groq key stored only in ignored local backend .env, owner-only permissions. It has NOT been validated or called. Rotate it because it was pasted in chat.
-
-## Required before a working local MVP
-
-1. **PENDING USER EXECUTION:** Python 3.12 / Node 22 environment and pinned package installation. No dependency installation was performed by the agent.
-2. **PENDING USER EXECUTION:** approved ingestion and fitted lexical index. Catalogue directory initially contains no generated product/index files. Backend must return unready rather than silently using other products.
-3. **PENDING USER EXECUTION:** npm install, reviewed lockfile, backend tests, frontend type/lint/build checks and browser acceptance.
-4. **UNVERIFIED:** Groq key validity, model access and actual account quota. The fallback path is implemented, not tested here.
-
-## Required before live public hosting
-
-- User-created/configured two Vercel projects with correct Root Directories and actual project/org IDs.
-- Backend server env, rotated Groq key, shared Redis REST quota counters, stable secret salt, actual CORS origin.
-- Frontend runtime API_BASE_URL set to the actual backend production origin; PORT=8080 set on both Container projects.
-- Public-readiness, quota, medical-safety, CORS and browser smoke checks by the student.
-- No public MVP URL is known or claimed. No cloud resources, environment variables or deployments were created by the agent.
-
-## Research work after the demo
-
-- Optional offline semantic fitting; no semantic artifact or performance claimed yet.
-- Human-reviewed dev/test relevance data and generation/safety assessment; no invented ground truth or scores.
-- Docker reproduction and all six manual workflow validations.
-- Complete reviewed report, charts, notebook outputs and presentation with actual results. Current academic materials are scaffolding, not a measured final submission.
-
-The original source lacks live inventory and structured brand/ingredients/allergen/verified-label fields. This is a real data limitation, not a credential problem. The system abstains when a hard constraint depends on absent evidence. A refreshed approved export with these fields and source timestamp is needed to expand capability.
-
-Container implementation is source-only: generate the lockfile/catalogue artifacts and manually verify both images, health endpoints and resource limits using CONTAINERS.md. Vercel Container beta project availability and deployments are unverified.
+- BLOCKED: independently reviewed Healthy U relevance labels. Supply reviewed query/product relevance judgments and held-out split before Precision@K, Recall@K, MRR or NDCG claims.
+- PENDING: optional offline semantic fitting and controlled comparison. The demonstrated inference method is fitted TF-IDF.
+- UNVERIFIED: Groq key rotation, GitHub production-environment reviewer protection, comprehensive mobile/accessibility and load testing.
+- Dataset limits: no verified ingredients/allergens/stock or snapshot date. Obtain authorized structured updates; do not infer missing fields.
+- Presentation is complete editable12-slide content, not PPTX; artifact-tool export unavailable. The final PDF report is under reports/final.
+- Audit branch needs normal review/merge before submitting main as the final academic snapshot. Production uses tested7d46aea directly; documentation-only follow-up commits do not change deployed app code.

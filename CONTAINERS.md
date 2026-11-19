@@ -1,3 +1,5 @@
+> Final audit update (20 November 2026): ingestion, fitting, local tests/builds, Docker probes, CI and an explicitly authorized production repair have now been executed. Both existing projects run tested source7d46aea. See reports/final/FINAL_HANDOFF.md for actual outcomes; earlier source-only/unexecuted statements below describe the prior preparation phase.
+
 # Local container runbook
 
 All commands are manual and unexecuted by the agent. Requires Docker Desktop with Compose v2, Python 3.12 for offline preparation, Node 22/npm to generate a reviewed lockfile. No training or raw export ingestion runs in a production image.

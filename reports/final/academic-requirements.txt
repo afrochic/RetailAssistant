@@ -1,0 +1,4 @@
+# Offline report authoring only; never install these in inference images.
+reportlab==5.1.0
+pypdf==7.1.1
+pillow==13.0.0

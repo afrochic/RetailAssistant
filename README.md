@@ -1,62 +1,94 @@
-> Container architecture update: both app images and the root two-service Compose stack are now defined. Use [CONTAINERS.md](CONTAINERS.md) locally and [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md) for the current Container-runtime deployment instructions, which supersede earlier native-framework hosting steps below. Builds and deployments remain unexecuted.
+# RetailAssist — Healthy U conversational recommendations
 
-# RetailAssist — Healthy U / Groq chat MVP
+DSA 8401 Applied Machine Learning · MSc Data Science & Analytics · Admission 109419.
 
-An anonymous, chat-first retail recommender for the DSA 8401 presentation. New implementation roots: **apps/web** (Next.js) and **apps/api** (FastAPI), deployed as **two Vercel projects from the existing afrochic/RetailAssistant repository**.
+**Final audit (20 November 2026): READY WITH LIMITATIONS.** The existing public [chat application](https://retail-assistant-tau.vercel.app/) and [API](https://retail-assist-api.vercel.app/health) are working after an explicitly authorized repair. Both production projects run verified source `7d46aea`. API readiness reports 5,512 records; five controlled public chat cases passed, including two actual Groq generations. The live browser rendered grounded product references and KES prices. See [final handoff](reports/final/FINAL_HANDOFF.md) and [before/after evidence](reports/final/production/PRODUCTION_VERIFICATION.md). Human-labelled retrieval-quality evaluation and optional semantic experiments remain outstanding.
 
-**Status: source/configuration implemented; ingestion, fitting, tests, builds and deployment are PENDING USER EXECUTION. No live MVP URL or new evaluation result is claimed.**
+## Problem and objectives
 
-Start with [QUICKSTART.md](QUICKSTART.md), then [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md). [MANUAL_RUNBOOK.md](MANUAL_RUNBOOK.md) gives the full command order. [BLOCKERS.md](BLOCKERS.md) distinguishes missing configuration from unexecuted work.
+A shopper should be able to describe a product interest and KES budget, compare real catalogue matches and narrow a conversation without scanning a storefront. The project combines fitted retrieval, hard constraints and controlled language generation. Objectives are reproducible data preparation; factual recommendations with traceable product IDs; explicit handling of unknown attributes; and a safe anonymous chat service.
+
+## Data and provenance
+
+The user approved the existing Healthy U product export for this public presentation MVP and confirmed RRP currency as KES. Executed ingestion retained **5,512 records**, rejected zero, and fitted **12,000 TF-IDF features**. The source SHA-256, normalization details and artifact checksums are in `apps/api/catalogue/manifest.json` and [evaluation evidence](reports/final/evaluation/). Compact allowlisted inference artifacts accompany the application; the raw enclosing HU export and all customer/order records are excluded.
+
+The snapshot has no verified current stock, structured ingredients, dietary labels or snapshot date. No ingredient suitability, clinical efficacy or availability claims may be inferred from marketing text. Current prices must be confirmed with the retailer. The source HU application is unchanged.
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-  HU[Approved local Healthy U product export] --> OFF[Student-run allowlisted ingestion and offline fitting]
-  OFF --> ART[Portable product and fitted index artifacts]
-  WEB[Anonymous Next.js chat on Vercel] --> API[FastAPI on Vercel]
-  API --> SAFE[Input limits and medical safeguards]
-  SAFE --> RET[Lexical or optional projected semantic hybrid retrieval]
-  ART --> RET
-  RET --> CONS[Hard KES and metadata constraints]
-  CONS --> GROQ[Groq openai/gpt-oss-120b]
-  GROQ --> VALID[Record-specific supported explanations and citations]
-  CONS --> FALL[Transparent deterministic fallback]
-  VALID --> WEB
-  FALL --> WEB
-  API --> LIMIT[Shared anonymous Redis quota counters]
+    HU[Approved Healthy U export] --> PRE[Offline cleaning and feature fitting]
+    PRE --> ART[Products + TF-IDF + integrity manifest]
+    WEB[Anonymous Next.js chat] --> API[FastAPI]
+    API --> LIMIT[Shared anonymous quota counters]
+    API --> SAFE[Validation and safety checks]
+    SAFE --> RET[Constraint-filtered retrieval]
+    ART --> RET
+    RET --> GROQ[Groq GPT-OSS structured composition]
+    GROQ --> CHECK[Validate IDs and supported reasons]
+    CHECK --> WEB
+    RET --> FALL[Transparent catalogue fallback]
+    FALL --> WEB
 ```
 
-## Product scope
+Both services have multi-stage production containers and Vercel Container configurations. Training/index fitting stays offline. No auth, account database, cart, checkout or product-browsing interface is included. Redis stores expiring anonymous quota counters only; browser session storage retains recent chat locally. Requests submitted to Groq may leave the device as explained in the app.
 
-No login, registration, accounts, user database, catalogue browsing, cart or checkout. Session-local chat, new conversation, examples, Markdown text, loading/errors/retry, KES preferences and traceable recommendation references. This is an independent student project, not an official Healthy U service or medical practitioner.
+## Machine learning methodology
 
-Real source located in the enclosing HU workspace: `rag_pipeline/data/Enhanced_Product_List.json`, 5,512 existing records. User confirmed presentation-use approval and KES RRP. The export lacks current stock, structured ingredients/brands/verified dietary labels and export date. The source application is unchanged. Run manual ingestion before claiming an accepted catalogue count. No Flipkart substitutions or test fixtures populate the MVP.
+The deployed source supports a genuine fitted TF-IDF baseline: cleaned text, tokenization, learned IDF, normalized sparse product vectors and query ranking. Budgets and supported metadata constraints filter candidates; unknown attributes fail required constraints. Offline optional MiniLM teacher embeddings, PCA and a ridge query projection plus reciprocal rank fusion are implemented but **not fitted/evaluated for this final audit**. It is an approximate projected query encoder, not a transformer query model running online.
 
-## Inference and Groq
+Groq uses environment-selected `openai/gpt-oss-120b` through its compatible HTTP API. GPT-OSS is neither trained nor fine-tuned here. Generation chooses catalogue IDs and record-specific supported explanations; fabricated IDs/unsupported reasons fail validation. Missing key, quota exhaustion or provider errors return labelled factual fallbacks. Medical questions bypass recommendations. Public requests fail closed without shared rate limiting.
 
-- Genuine fitted TF-IDF baseline, serialized as JSON; no training or model download during requests.
-- Optional offline MiniLM teacher embeddings and fitted lightweight query projection with RRF. This is an **approximate projected query encoder**, not native transformer encoding at request time. Default MVP is honestly labelled lexical until semantic artifacts are manually built.
-- Server-only `GROQ_API_KEY`, environment-selected `GROQ_MODEL=openai/gpt-oss-120b`, supported compatible HTTP endpoint and strict structured output.
-- Groq composes answers from approved record IDs and supported, fact-checked explanation choices. This intentionally restricts free-form product/medical claims. No 120B checkpoint runs on Vercel.
-- Missing key, 429/quota, timeout, provider errors and failed grounding produce labelled catalogue-fact fallbacks. No automatic provider retries in the MVP. Explicit user retry is available.
-- Public requests require shared ephemeral Redis rate/quota controls. This is not a customer/account/chat database. If shared controls are missing or fail, public requests fail closed.
+## Actual verification and evaluation
 
-## Entry points and deliverables
+- 23 backend tests passed after the urgent visual-symptom regression fix; Ruff passed.
+- Frontend Node 22 type-check, lint and production build passed after the navigation fix. Backend, frontend and Docker GitHub Actions all passed at source 7d46aea.
+- Both Docker images built; disposable-container probes verified health, readiness and fallback. See current audit for build revision scope.
+- Local ASGI requests with real data made **two successful Groq generations**. Suitability clarification, urgent safety and no-match abstention were also observed. Post-release public checks separately established two successful Groq generations and correct clarification/safety/no-match modes.
+- 260 warm local retrieval diagnostics across 13 scripted cases: mean 1.332 ms, p95 2.528 ms. 640 returned reference occurrences had zero invalid IDs or evaluated hard-constraint violations; five expected abstention scenarios passed. These diagnostics are not relevance accuracy or general safety estimates.
+- Precision@K, Recall@K, MRR and NDCG are **BLOCKED** until a defensible human-reviewed Healthy U relevance set exists. No comparative semantic/hybrid accuracy is claimed.
 
-- `apps/api/app.py`: /health, /ready, /api/chat, /api/recommend, /api/system-info, /docs.
-- `apps/api/retail_mvp`: retrieval, strict schemas, source provenance, safety, Groq and quota controls.
-- `apps/web`: Next.js 16 / React / TypeScript / Tailwind, Node 22.
-- `scripts/mvp/prepare.py`: manual approved export and lexical/optional semantic fitting.
-- `scripts/mvp/manage.py`: dry-run-first local/server/test/build/Docker/smoke/deploy commands.
-- `scripts/mvp/evaluate.py`: refuses unreviewed labels; produces actual retrieval/generation evidence when executed by the student.
-- `research/mvp`: unexecuted query template, notebook, academic report draft and slide outline.
-- `reports/mvp`: read-only audit, source review and execution-status record.
-- `apps/api/Dockerfile`, `docker-compose.mvp.yml`: academic local reproduction; not the Vercel hosting mechanism.
-- `.github/workflows/mvp-*.yml`: manual validation and guarded deployment scaffolding, not automatically executed.
+Read [evaluation summary](reports/final/evaluation/EVALUATION_SUMMARY.md), raw JSON/CSV and measured plots. Legacy Flipkart results are not Healthy U evidence.
 
-## Historical implementation
+## Reproduce locally
 
-The older `src/retailassist`, `web`, `artifacts`, `notebooks` and `reports/RetailAssist_Report.pdf` belong to the previous Flipkart/SmolLM implementation. Their measured scores and deployment checks **are not Healthy U/Groq evidence**. Old instructions are preserved in `docs/LEGACY_FLIPKART_*`. New Vercel roots exclude those heavyweight assets. Do not run old root commands for this MVP.
+Python 3.12, Node 22 and Docker Desktop/Compose v2 are required. See [QUICKSTART](QUICKSTART.md), [container runbook](CONTAINERS.md) and [deployment instructions](VERCEL_DEPLOYMENT.md).
 
-Read [AI_USE.md](AI_USE.md), [DATA_CARD.md](DATA_CARD.md) and [PROJECT_COMPLIANCE.md](PROJECT_COMPLIANCE.md) before submission. Preserve the repository's history and execute Git operations yourself after reviewing the changed files.
+```bash
+python3.12 -m venv .venv-mvp
+source .venv-mvp/bin/activate
+pip install -r apps/api/requirements-dev.txt
+python scripts/mvp/manage.py env --execute
+# Supply approved original export at this local path; it is not a public raw-data download.
+python scripts/mvp/prepare.py ingest --source ../rag_pipeline/data/Enhanced_Product_List.json --currency KES --approved
+python scripts/mvp/prepare.py index
+(cd apps/web && npm ci)
+(cd apps/api && ../../.venv-mvp/bin/python -m pytest -q)
+python scripts/mvp/audit_offline.py
+# Edit private local backend key/settings before starting; no key belongs in source.
+docker compose up --build -d
+```
+
+Open http://localhost:3000; API port 8001. `/health` is liveness; `/ready` checks prepared catalogue and configured controls. Frontend `/api/runtime-config` exposes the public API origin only. POST `/api/chat` and `/api/recommend` accept message/history/preferences/k; GET `/api/system-info` reports actual catalogue and retrieval mode. `/docs` and `/openapi.json` document the API.
+
+The authorized production repair set API_BASE_URL on the web project, exact ALLOWED_ORIGINS on the API and a private rate-limit salt alongside existing shared Redis settings. Both projects were rebuilt/promoted from 7d46aea without merging or rewriting main. Preserve these settings and PORT=8080 for future approved releases.
+
+## Academic submission and repository map
+
+- [Compliance evidence](PROJECT_COMPLIANCE.md)
+- [Final report source](reports/final/RETAILASSIST_FINAL_REPORT.md) and report PDF when generated
+- [Presentation content](reports/final/PRESENTATION.md)
+- [AI assistance disclosure](AI_USE.md)
+- `apps/api`, `apps/web`: current implementation and containers
+- `scripts/mvp`, `research/mvp`: reproducible preparation, evaluation and notebook
+- `reports/final`: current audit, measured evidence and academic deliverables
+- `.github/workflows/mvp-*.yml`: validation and guarded manual production deployment
+
+## Limitations and future work
+
+The public application passed the recorded smoke checks; continued provider quota and snapshot freshness remain operational limitations. Human relevance annotation and semantic/hybrid comparisons remain outstanding. The diagnostic suite is small, warm-process and not representative of production network latency; conservative regex safety is not clinical validation. Obtain maintained manufacturer ingredient/allergen metadata and current stock, broaden independently reviewed evaluations, and test multilingual/accessibility behaviour before expanding scope.
+
+## Historical material
+
+`src/retailassist`, `web`, `artifacts`, old notebooks and older top-level report results are retained as explicitly **legacy Flipkart/SmolLM experiments**. They are excluded from the two app build contexts. `docker-compose.legacy.yml` preserves the previous stack; root Compose is canonical and `docker-compose.mvp.yml` is a compatibility copy. No historical results are reused as Healthy U metrics. See [cleanup inventory](reports/final/REPOSITORY_CLEANUP.md).

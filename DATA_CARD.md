@@ -1,3 +1,5 @@
+> Final audit update (20 November 2026): ingestion, fitting, local tests/builds, Docker probes, CI and an explicitly authorized production repair have now been executed. Both existing projects run tested source7d46aea. See reports/final/FINAL_HANDOFF.md for actual outcomes; earlier source-only/unexecuted statements below describe the prior preparation phase.
+
 # Healthy U presentation-MVP data card
 
 Source: the existing HU-NutritionistsVA product export at `rag_pipeline/data/Enhanced_Product_List.json`. Phase 0 read-only observation: 5,512 records, SHA-256 `6d33c9d54279076aeb6105d675e327caf308c9590a47bf7cbe8c4382ed15840d`. This is actual accessible product data, not a synthetic or Flipkart substitute.

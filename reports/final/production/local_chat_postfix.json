@@ -1,0 +1,164 @@
+{
+  "scope": "Actual local ASGI/Groq post budget-token fix; not production deployment evidence.",
+  "cases": [
+    {
+      "test": "A_budget",
+      "request": {
+        "message": "Recommend healthy breakfast products under KES 2,000.",
+        "history": [],
+        "preferences": {
+          "currency": "KES"
+        },
+        "k": 3
+      },
+      "http_status": 200,
+      "latency_seconds": 1.792,
+      "response": {
+        "answer": "Here are catalogue matches for your request.\n\n**C/Spring Org Rice Cakes Multi-Grains 130G #Gr113** [HU:19553]\n\nListed at KES 499.00. Within your KES 2,000.00 budget. Current stock is unknown.\n\n**C/Spring Org Rice Cakes Nas 130G #Gr111** [HU:19554]\n\nThe listed price, KES 499.00, is within your KES 2,000.00 budget. Current stock is unknown.\n\n**C/Spring Org Rice Cakes Lightly Salted 130G #Gr112** [HU:19552]\n\nThis catalogue option is priced at KES 499.00. Current stock is unknown.\n\nWould you like to compare these options?",
+        "references": [
+          {
+            "id": "19553",
+            "name": "C/Spring Org Rice Cakes Multi-Grains 130G #Gr113",
+            "description": "Clearspring Organic Puffed Rice Cakes are light and crispy, and make a delicious snack straight from the pack or served with toppings or spreads. As with all Clearspring products, we choose ingredients that are authentic and sustainably sourced.",
+            "price": 499.0,
+            "currency": "KES",
+            "url": "https://www.healthyu.co.ke/product/clearspring-organic-rice-cakes-multigrain-130g/",
+            "category": [
+              "Foods > Healthy Snacks"
+            ],
+            "stock": "unknown",
+            "source_record_id": "19553",
+            "reason": "Listed at KES 499.00. Within your KES 2,000.00 budget. Current stock is unknown."
+          },
+          {
+            "id": "19554",
+            "name": "C/Spring Org Rice Cakes Nas 130G #Gr111",
+            "description": "Clearspring Organic Puffed Rice Cakes are light and crispy, and make a delicious snack straight from the pack or served with toppings or spreads. As with all Clearspring products, we choose ingredients that are authentic and sustainably sourced.",
+            "price": 499.0,
+            "currency": "KES",
+            "url": "https://www.healthyu.co.ke/product/clearspring-organic-rice-cakes-no-added-salt-130g/",
+            "category": [
+              "Foods > Healthy Snacks"
+            ],
+            "stock": "unknown",
+            "source_record_id": "19554",
+            "reason": "The listed price, KES 499.00, is within your KES 2,000.00 budget. Current stock is unknown."
+          },
+          {
+            "id": "19552",
+            "name": "C/Spring Org Rice Cakes Lightly Salted 130G #Gr112",
+            "description": "Clearspring Organic Puffed Rice Cakes are light and crispy, and make a delicious snack straight from the pack or served with toppings or spreads. As with all Clearspring products, we choose ingredients that are authentic and sustainably sourced.",
+            "price": 499.0,
+            "currency": "KES",
+            "url": "https://www.healthyu.co.ke/product/clearspring-organic-rice-cakes-lightly-salted-130g/",
+            "category": [
+              "Foods > Healthy Snacks"
+            ],
+            "stock": "unknown",
+            "source_record_id": "19552",
+            "reason": "This catalogue option is priced at KES 499.00. Current stock is unknown."
+          }
+        ],
+        "mode": "groq_grounded",
+        "retrieval": "fitted_tfidf",
+        "preferences": {
+          "max_price": 2000.0,
+          "min_price": null,
+          "currency": "KES",
+          "category": null,
+          "brand": null,
+          "required_labels": [],
+          "excluded_ingredients": [],
+          "in_stock": false
+        },
+        "notices": [
+          "Listed prices are KES from the approved source snapshot. Current stock and price changes are not confirmed."
+        ],
+        "retry_after": null,
+        "request_id": "e78979fb2400414eafd05aff7d7add36"
+      }
+    },
+    {
+      "test": "E_followup",
+      "request": {
+        "message": "under KES 800",
+        "history": [
+          {
+            "role": "user",
+            "content": "Recommend healthy breakfast products under KES 2,000."
+          }
+        ],
+        "preferences": {
+          "currency": "KES"
+        },
+        "k": 3
+      },
+      "http_status": 200,
+      "latency_seconds": 1.212,
+      "response": {
+        "answer": "Here are catalogue matches for your request.\n\n**C/Spring Org Rice Cakes Multi-Grains 130G #Gr113** [HU:19553]\n\nListed at KES 499.00. Within your KES 800.00 budget. Current stock is unknown.\n\n**C/Spring Org Rice Cakes Nas 130G #Gr111** [HU:19554]\n\nListed at KES 499.00. Within your KES 800.00 budget. Current stock is unknown.\n\n**C/Spring Org Rice Cakes Lightly Salted 130G #Gr112** [HU:19552]\n\nListed at KES 499.00. Within your KES 800.00 budget. Current stock is unknown.\n\nWould you like a different budget or category?",
+        "references": [
+          {
+            "id": "19553",
+            "name": "C/Spring Org Rice Cakes Multi-Grains 130G #Gr113",
+            "description": "Clearspring Organic Puffed Rice Cakes are light and crispy, and make a delicious snack straight from the pack or served with toppings or spreads. As with all Clearspring products, we choose ingredients that are authentic and sustainably sourced.",
+            "price": 499.0,
+            "currency": "KES",
+            "url": "https://www.healthyu.co.ke/product/clearspring-organic-rice-cakes-multigrain-130g/",
+            "category": [
+              "Foods > Healthy Snacks"
+            ],
+            "stock": "unknown",
+            "source_record_id": "19553",
+            "reason": "Listed at KES 499.00. Within your KES 800.00 budget. Current stock is unknown."
+          },
+          {
+            "id": "19554",
+            "name": "C/Spring Org Rice Cakes Nas 130G #Gr111",
+            "description": "Clearspring Organic Puffed Rice Cakes are light and crispy, and make a delicious snack straight from the pack or served with toppings or spreads. As with all Clearspring products, we choose ingredients that are authentic and sustainably sourced.",
+            "price": 499.0,
+            "currency": "KES",
+            "url": "https://www.healthyu.co.ke/product/clearspring-organic-rice-cakes-no-added-salt-130g/",
+            "category": [
+              "Foods > Healthy Snacks"
+            ],
+            "stock": "unknown",
+            "source_record_id": "19554",
+            "reason": "Listed at KES 499.00. Within your KES 800.00 budget. Current stock is unknown."
+          },
+          {
+            "id": "19552",
+            "name": "C/Spring Org Rice Cakes Lightly Salted 130G #Gr112",
+            "description": "Clearspring Organic Puffed Rice Cakes are light and crispy, and make a delicious snack straight from the pack or served with toppings or spreads. As with all Clearspring products, we choose ingredients that are authentic and sustainably sourced.",
+            "price": 499.0,
+            "currency": "KES",
+            "url": "https://www.healthyu.co.ke/product/clearspring-organic-rice-cakes-lightly-salted-130g/",
+            "category": [
+              "Foods > Healthy Snacks"
+            ],
+            "stock": "unknown",
+            "source_record_id": "19552",
+            "reason": "Listed at KES 499.00. Within your KES 800.00 budget. Current stock is unknown."
+          }
+        ],
+        "mode": "groq_grounded",
+        "retrieval": "fitted_tfidf",
+        "preferences": {
+          "max_price": 800.0,
+          "min_price": null,
+          "currency": "KES",
+          "category": null,
+          "brand": null,
+          "required_labels": [],
+          "excluded_ingredients": [],
+          "in_stock": false
+        },
+        "notices": [
+          "Listed prices are KES from the approved source snapshot. Current stock and price changes are not confirmed."
+        ],
+        "retry_after": null,
+        "request_id": "f0ac936dccbf436db89cf1f6fe95d9eb"
+      }
+    }
+  ]
+}

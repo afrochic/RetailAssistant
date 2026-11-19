@@ -1,0 +1,42 @@
+/Users/dianamusee/Desktop/HU-NutritionistsVA/retailassist/.venv-mvp/lib/python3.12/site-packages/pytest_asyncio/plugin.py:306: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session". Set it to "fixture-scope" to keep the current behavior.
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+____________ test_severe_headache_with_visual_disturbance_is_urgent ____________
+
+    def test_severe_headache_with_visual_disturbance_is_urgent():
+        mode, answer = boundary('I have a severe headache and blurred vision. Which supplement should I take?')
+>       assert mode == 'urgent_safety'
+E       AssertionError: assert 'medical_boundary' == 'urgent_safety'
+E         
+E         - urgent_safety
+E         + medical_boundary
+
+apps/api/tests/test_contract.py:115: AssertionError
+____________ test_urgent_visual_symptoms_never_retrieve_or_generate ____________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x107e1e600>
+
+    @pytest.mark.asyncio
+    async def test_urgent_visual_symptoms_never_retrieve_or_generate(monkeypatch):
+        import app as module
+        monkeypatch.setattr(module, 'settings', replace(Settings.read(), api_key='', require_shared=False))
+        def forbidden_catalogue():
+            raise AssertionError('Urgent symptoms must not retrieve products')
+        monkeypatch.setattr(module, 'get_catalogue', forbidden_catalogue)
+        async with httpx.AsyncClient(transport=httpx.ASGITransport(app=module.app), base_url='http://test') as client:
+            result = await client.post('/api/chat', json={'message': 'Severe headache and blurred vision. Which supplement?'})
+        assert result.status_code == 200
+>       assert result.json()['mode'] == 'urgent_safety'
+E       AssertionError: assert 'medical_boundary' == 'urgent_safety'
+E         
+E         - urgent_safety
+E         + medical_boundary
+
+apps/api/tests/test_contract.py:129: AssertionError
+=========================== short test summary info ============================
+FAILED apps/api/tests/test_contract.py::test_severe_headache_with_visual_disturbance_is_urgent
+FAILED apps/api/tests/test_contract.py::test_urgent_visual_symptoms_never_retrieve_or_generate
+2 failed, 20 deselected in 0.20s

@@ -1,0 +1,67 @@
+[
+  {
+    "url": "https://retail-assist-api.vercel.app/health",
+    "status": 200,
+    "response": {
+      "status": "alive",
+      "service": "retailassist-mvp"
+    }
+  },
+  {
+    "url": "https://retail-assist-api.vercel.app/ready",
+    "status": 200,
+    "response": {
+      "ready": true,
+      "reason": null,
+      "catalogue_available": true,
+      "generation_configured": true
+    }
+  },
+  {
+    "url": "https://retail-assist-api.vercel.app/api/system-info",
+    "status": 200,
+    "response": {
+      "ready": true,
+      "reason": null,
+      "model": "openai/gpt-oss-120b",
+      "generation_configured": true,
+      "catalogue_count": 5512,
+      "currency": "KES",
+      "retrieval": "fitted_tfidf",
+      "source_snapshot_date": null,
+      "permission": "user_approved_presentation_mvp",
+      "limitations": [
+        "Not an official Healthy U service.",
+        "Historical snapshot; confirm prices and stock.",
+        "No clinical advice or efficacy claims."
+      ]
+    }
+  },
+  {
+    "url": "https://retail-assistant-tau.vercel.app/health",
+    "status": 200,
+    "response": {
+      "status": "ok",
+      "service": "retailassist-web"
+    }
+  },
+  {
+    "url": "https://retail-assistant-tau.vercel.app/api/runtime-config",
+    "status": 200,
+    "response": {
+      "apiBaseUrl": "https://retail-assist-api.vercel.app"
+    }
+  },
+  {
+    "origin": "https://retail-assistant-tau.vercel.app",
+    "status": 200,
+    "allow_origin": "https://retail-assistant-tau.vercel.app",
+    "response": "OK"
+  },
+  {
+    "origin": "https://untrusted.invalid",
+    "status": 400,
+    "allow_origin": null,
+    "response": "Disallowed CORS origin"
+  }
+]

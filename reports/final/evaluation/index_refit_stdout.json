@@ -1,0 +1,6 @@
+{
+  "products": 5512,
+  "features": 12000,
+  "retrieval": "fitted_tfidf",
+  "status": "Artifacts written by the operator. Evaluation still required."
+}

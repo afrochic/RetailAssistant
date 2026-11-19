@@ -1,3 +1,5 @@
+> Final audit update (20 November 2026): ingestion, fitting, local tests/builds, Docker probes, CI and an explicitly authorized production repair have now been executed. Both existing projects run tested source7d46aea. See reports/final/FINAL_HANDOFF.md for actual outcomes; earlier source-only/unexecuted statements below describe the prior preparation phase.
+
 # Get the presentation MVP running
 
 **All commands below are for you to execute. None were run by the agent.** Use the existing checkout `retailassist/`, not the enclosing Healthy U application's frontend. A live website still requires your manual deployment.
