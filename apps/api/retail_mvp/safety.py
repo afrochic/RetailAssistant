@@ -11,7 +11,9 @@ class InvalidPreference(ValueError):
     pass
 
 def boundary(message: str) -> tuple[str, str] | None:
-    if URGENT.search(message):
+    visual_headache = (re.search(r'\bsevere headache\b', message, re.I)
+                       and re.search(r'\b(?:blurred vision|vision loss|loss of vision)\b', message, re.I))
+    if URGENT.search(message) or visual_headache:
         return ('urgent_safety', 'This could need urgent medical attention. Please contact local emergency services or seek urgent care now. I cannot assess symptoms or recommend retail products as treatment.')
     if MEDICAL.search(message) or re.search(r'\b(?:supplement|vitamin|herb|product)\w*\s+(?:that\s+)?(?:helps?|treats?|cures?|relieves?|prevents?)\b', message, re.I):
         return ('medical_boundary', 'I can help compare catalogue products, but I cannot diagnose symptoms or recommend medicines or supplements to treat a medical concern. Please speak with a qualified healthcare professional, especially if symptoms are new, severe or persistent. For ordinary shopping, you can ask for a product category and budget.')

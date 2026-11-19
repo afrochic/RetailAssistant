@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import Link from 'next/link';
 import { Leaf, Plus, Menu, X, Sparkles, SlidersHorizontal, ShieldCheck, ExternalLink, RotateCcw, Copy, Check, Info, BookOpen, CircleHelp, Send, Square } from 'lucide-react';
 
 type Preferences = { max_price?: number | null; min_price?: number | null; currency: 'KES'; category?: string | null; brand?: string | null; required_labels?: string[]; excluded_ingredients?: string[]; in_stock?: boolean };
@@ -124,7 +125,7 @@ export default function Chat() {
     <a className="skip" href="#composer">Skip to chat input</a>
     {mobileMenu && <button className="sidebar-scrim" onClick={() => setMobileMenu(false)} aria-label="Close navigation" />}
     <aside className={`sidebar ${mobileMenu ? 'is-open' : ''}`}>
-      <a className="brand" href="/" aria-label="RetailAssist home"><span className="brand-symbol"><Leaf size={21} /></span><span>retail<strong>assist</strong><i>.</i></span></a>
+      <Link className="brand" href="/" aria-label="RetailAssist home"><span className="brand-symbol"><Leaf size={21} /></span><span>retail<strong>assist</strong><i>.</i></span></Link>
       <button className="new-chat" onClick={newChat}><Plus size={17} /> New conversation <span>＋</span></button>
       <div className="sidebar-section"><span className="side-caption">YOUR SPACE TO DISCOVER</span><button className="side-item selected" onClick={() => setMobileMenu(false)}><Sparkles size={17} /> Shopping companion <span className="small-ai">AI</span></button><button className="side-item" onClick={() => { setHelp(true); setMobileMenu(false); }}><BookOpen size={17} /> About the catalogue</button></div>
       <div className="sidebar-note"><span className="note-spark">✳</span><h3>A little clarity.<br />A more thoughtful choice.</h3><p>Tell us what you’re looking for. We’ll start with what’s actually in the catalogue.</p></div>

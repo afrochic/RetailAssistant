@@ -24,5 +24,5 @@ jobs:
       - name: Refuse absent production prerequisites
         run: |
           test -n "$VERCEL_TOKEN" && test -n "$VERCEL_PROJECT_ID" && test -n "$VERCEL_ORG_ID"
-          test -f apps/api/catalogue/products.json && test -f apps/api/catalogue/lexical.json
+          test -f apps/api/catalogue/products.json && test -f apps/api/catalogue/lexical.json && test -f apps/api/catalogue/manifest.json
       - run: npx --yes vercel@66.4.0 --prod --yes --token "$VERCEL_TOKEN"
