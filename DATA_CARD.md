@@ -2,7 +2,7 @@
 
 Source: PromptCloudHQ Flipkart product sample, 20,000 scraped product records, mirrored at https://huggingface.co/datasets/jason1966/PromptCloudHQ_flipkart-products . Pinned source revision: ac16731c75907ab9f212c372ec637c00f257c36a.
 
-The catalogue is historical Indian retail data, not Kenyan inventory. Discounted prices are treated as INR, with no currency conversion. Crawl timestamps describe collection, not transactions. There are no sales outcomes, sessions or reliable live stock fields. Unknown availability remains unknown. Requests for confirmed in-stock products therefore abstain.
+The catalogue is historical Indian retail data, not Kenyan inventory. Discounted prices are treated as INR, with their original values preserved. Optional KES estimates use the dated KRA weekly reference 1 INR = 1.37 KES for 16–22 November 2026. This does not establish Kenyan inventory or current Kenyan retail prices. Crawl timestamps describe collection, not transactions. There are no sales outcomes, sessions or reliable live stock fields. Unknown availability remains unknown. Requests for confirmed in-stock products therefore abstain.
 
 Raw fields include product names, brand, category tree, descriptions, prices, textual ratings, URLs and specifications. Missing descriptions become empty; unknown brands are explicit; nonnumeric ratings remain null. Records missing ID/name/valid positive price are excluded; duplicate product IDs are removed. Nested category trees can contain malformed/product-like categories; preserved top-level labels are imperfect. No fabricated descriptions, prices, stock or ratings are imputed.
 

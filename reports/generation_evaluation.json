@@ -1,0 +1,385 @@
+[
+  {
+    "query_id": "q07",
+    "product_id": "SHODZDFBUZVTNZUH",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for the misunderstanding, but as an online retailer, I don't have the ability to provide information about the availability of specific products or services. I recommend checking the official website of the retailer for the most accurate and up-to-date information.",
+    "served_text": "This option is listed at INR 449.00 in Footwear. It is within your INR 2000.00 budget. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "no_specific_catalogue_fact",
+      "unverified_words:ability,about,accurate,but,checking,date,don,have,i,information,m,misunderstanding"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 2004.2692080000002,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q08",
+    "product_id": "GLSEEADZCH9FJGXW",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for the misunderstanding, but as an AI, I don't have the ability to access or view financial information. I'm unable to provide financial information or make decisions based on that information. I recommend checking the restaurant's website or contacting them directly for the most accurate and up-to-date information.",
+    "served_text": "This option is listed at INR 370.00 in Kitchen & Dining. It is within your INR 400.00 budget. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "no_specific_catalogue_fact",
+      "unverified_words:ability,access,accurate,ai,but,checking,contacting,date,decisions,directly,don,financial"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 1014.6019590000002,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q09",
+    "product_id": "TLPEHCCVZGZ5VPEY",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "This option is listed at INR 349.00 in Home Decor & Festive Needs. The stock availability is unknown.",
+    "served_text": "This option is listed at INR 349.00 in Home Decor & Festive Needs. The stock availability is unknown.",
+    "source": "local_llm",
+    "claim_check_issues": [],
+    "generation_mode": "local_llm",
+    "latency_ms": 528.1997500000007,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q10",
+    "product_id": "ACCEGH6SPZF3AHH6",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for the misunderstanding, but as an INR 454.00 option, it's not available in Mobiles & Accessories. I'm unable to provide a specific price or availability. Please let me know if you need any other information or if you have any questions.",
+    "served_text": "This option is listed at INR 454.00 in Mobiles & Accessories. It is within your INR 600.00 budget. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "unverified_words:any,available,but,have,i,if,information,know,let,m,me,misunderstanding"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 1000.0415,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q11",
+    "product_id": "WATE26J7ZMQDQGZN",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for any confusion, but as an INR 950.00 option, you cannot purchase it within your INR 2000.00 budget.",
+    "served_text": "This option is listed at INR 950.00 in Watches. It is within your INR 2000.00 budget. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "unverified_words:any,but,cannot,confusion,i,m,purchase,sorry"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 629.4438749999997,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q12",
+    "product_id": "DREDPSWBYRPGWXJ7",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for any confusion, but as an INR 800.00 option, you can't purchase clothing at this price. I recommend checking the official website of the company for the most accurate information.",
+    "served_text": "This option is listed at INR 800.00 in Clothing. It is within your INR 1500.00 budget. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "unverified_words:accurate,any,but,checking,company,confusion,i,information,m,most,official,purchase"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 716.754667,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q13",
+    "product_id": "PRCEGXNFFZ2MHBYN",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for the misunderstanding, but as an AI, I don't have the ability to access or provide information about specific products or services. I'm designed to provide information and guidance only when it's relevant to a specific situation or topic. I recommend checking the official website or contacting the manufacturer directly for accurate information.",
+    "served_text": "This option is listed at INR 2222.00 in Kitchen & Dining. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "no_specific_catalogue_fact",
+      "unverified_words:ability,about,access,accurate,ai,but,checking,contacting,designed,directly,don,guidance"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 1000.0630839999989,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q14",
+    "product_id": "BKPECS6HJVHHBKBC",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "This option is listed at INR 599.00 in Bags, Wallets & Belts. Stock availability is unknown.",
+    "served_text": "This option is listed at INR 599.00 in Bags, Wallets & Belts. Stock availability is unknown.",
+    "source": "local_llm",
+    "claim_check_issues": [],
+    "generation_mode": "local_llm",
+    "latency_ms": 474.2446670000007,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q15",
+    "product_id": "ACCEHZF9EDRGHXCF",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for any confusion, but as an INR 320.00-based product, I'm unable to provide information on the availability of a product within your INR 1000.00 budget. I recommend checking the official website or contacting the manufacturer directly for the most accurate information.",
+    "served_text": "This option is listed at INR 320.00 in Mobiles & Accessories. It is within your INR 1000.00 budget. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "unverified_words:accurate,any,but,checking,confusion,contacting,directly,information,m,manufacturer,most,official"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 1033.4544999999996,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q16",
+    "product_id": "CRTEB774JMYWBRMV",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "The option is listed at INR 1650.00 in Automotive. Stock availability is unknown.",
+    "served_text": "The option is listed at INR 1650.00 in Automotive. Stock availability is unknown.",
+    "source": "local_llm",
+    "claim_check_issues": [],
+    "generation_mode": "local_llm",
+    "latency_ms": 397.0487079999998,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q17",
+    "product_id": "WCKEGGYJPZ7MKAHQ",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for any confusion, but as an AI, I don't have the ability to access or view the stock availability of a product. I recommend checking the official website or contacting the manufacturer directly for the most accurate and up-to-date information.",
+    "served_text": "This option is listed at INR 750.00 in Home Decor & Festive Needs. It is within your INR 1000.00 budget. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "no_specific_catalogue_fact",
+      "unverified_words:ability,access,accurate,ai,any,but,checking,confusion,contacting,date,directly,don"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 828.3314170000011,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q18",
+    "product_id": "STFE9EQ8NNHPV9TC",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "This option is listed at INR 1039.00 in Toys & School Supplies. Stock availability is unknown.",
+    "served_text": "This option is listed at INR 1039.00 in Toys & School Supplies. Stock availability is unknown.",
+    "source": "local_llm",
+    "claim_check_issues": [],
+    "generation_mode": "local_llm",
+    "latency_ms": 440.05633400000124,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q19",
+    "product_id": "NKCEFXYQ3AZGTBWY",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for any confusion, but as an online retailer, I don't accept any payment in cash or credit cards. I recommend contacting the retailer directly for the most accurate and up-to-date information.",
+    "served_text": "This option is listed at INR 499.00 in Jewellery. It is within your INR 1000.00 budget. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "no_specific_catalogue_fact",
+      "unverified_words:accept,accurate,any,but,cards,cash,confusion,contacting,credit,date,directly,don"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 727.1744580000004,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q20",
+    "product_id": "SHOEJ5YSJMX2HXRF",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for the misunderstanding, but as an online retailer, I don't have the ability to provide information about the availability of specific products or services. I recommend checking the official website of the retailer for the most accurate and up-to-date information.",
+    "served_text": "This option is listed at INR 959.00 in Footwear. It is within your INR 1200.00 budget. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "no_specific_catalogue_fact",
+      "unverified_words:ability,about,accurate,but,checking,date,don,have,i,information,m,misunderstanding"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 825.6766669999997,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q21",
+    "product_id": "ACCEGYPGD9XH3RKR",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for any confusion, but as an AI, I don't have the ability to access or view financial information. I'm unable to provide financial information or make decisions based on that information. I recommend checking the stock availability for your computer before making any purchases.",
+    "served_text": "This option is listed at INR 399.00 in Computers. It is within your INR 1000.00 budget. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "no_specific_catalogue_fact",
+      "unverified_words:ability,access,ai,any,before,but,checking,computer,confusion,decisions,don,financial"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 858.5744579999996,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q22",
+    "product_id": "BOTEHZDGPGFHVQWJ",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for the misunderstanding, but as an online platform, I don't have the ability to provide real-time stock availability. I recommend checking the official website of the restaurant or their official website for the most accurate and up-to-date information.",
+    "served_text": "This option is listed at INR 399.00 in Kitchen & Dining. It is within your INR 500.00 budget. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "no_specific_catalogue_fact",
+      "unverified_words:ability,accurate,but,checking,date,don,have,i,information,m,misunderstanding,most"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 833.2149169999993,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q23",
+    "product_id": "GOGEJ88FJUGSVM4K",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "This option is listed at INR 450.00 in Sports & Fitness. Stock availability is unknown.",
+    "served_text": "This option is listed at INR 450.00 in Sports & Fitness. Stock availability is unknown.",
+    "source": "local_llm",
+    "claim_check_issues": [],
+    "generation_mode": "local_llm",
+    "latency_ms": 393.2494169999998,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q24",
+    "product_id": "BDSEJTHQJSEAEEJZ",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for the misunderstanding, but as an AI, I don't have the ability to access or view the INR 698.00 stock availability. I recommend checking the official website of the company for the most accurate and up-to-date information.",
+    "served_text": "This option is listed at INR 698.00 in Home Furnishing. It is within your INR 1000.00 budget. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "unverified_words:ability,access,accurate,ai,but,checking,company,date,don,have,i,information"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 881.7631659999989,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q25",
+    "product_id": "SNDECEHH8CFBFRGF",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for the misunderstanding, but as an online retailer, I don't have the ability to provide information about the availability of specific products or services. I recommend checking the official website of the retailer for the most accurate and up-to-date information.",
+    "served_text": "This option is listed at INR 697.00 in Footwear. It is within your INR 1000.00 budget. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "no_specific_catalogue_fact",
+      "unverified_words:ability,about,accurate,but,checking,date,don,have,i,information,m,misunderstanding"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 825.2946659999977,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q26",
+    "product_id": "PTPEDDXTMZKMNXHX",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for the misunderstanding, but as an AI, I don't have the ability to access or provide information about specific products or services. I'm designed to provide information and answer questions about products and services. I'm unable to provide information about specific products or services. If you have any specific products or services you'd like to discuss, feel free to ask, and I'll do my best to assist you.",
+    "served_text": "This option is listed at INR 1126.00 in Kitchen & Dining. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "unsupported_suitability_or_stock_claim",
+      "no_specific_catalogue_fact",
+      "unverified_words:ability,about,access,ai,answer,any,ask,assist,best,but,d,designed"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 1306.7844169999994,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q27",
+    "product_id": "CHDEJMNVGMKGNCHH",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "This option is listed at INR 499.00 in Bags, Wallets & Belts. It is within your INR 700.00 budget. Stock availability is unknown.",
+    "served_text": "This option is listed at INR 499.00 in Bags, Wallets & Belts. It is within your INR 700.00 budget. Stock availability is unknown.",
+    "source": "local_llm",
+    "claim_check_issues": [],
+    "generation_mode": "local_llm",
+    "latency_ms": 702.3864579999995,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q28",
+    "product_id": "BAGEEDYFGZHGQAVS",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "This option is listed at INR 300.00 in Bags, Wallets & Belts. It is within your INR 1500.00 budget. Stock availability is unknown.",
+    "served_text": "This option is listed at INR 300.00 in Bags, Wallets & Belts. It is within your INR 1500.00 budget. Stock availability is unknown.",
+    "source": "local_llm",
+    "claim_check_issues": [],
+    "generation_mode": "local_llm",
+    "latency_ms": 715.7297499999977,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q29",
+    "product_id": "CRNED63HNKF4ZHDN",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for the misunderstanding, but as an AI, I don't have the ability to access or provide information about specific products or services. I'm designed to provide information about products and services, not about stock availability. I recommend checking the official website or contacting the manufacturer directly for accurate information.",
+    "served_text": "This option is listed at INR 529.00 in Home Furnishing. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "no_specific_catalogue_fact",
+      "unverified_words:ability,about,access,accurate,ai,but,checking,contacting,designed,directly,don,have"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 933.3489999999997,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  },
+  {
+    "query_id": "q30",
+    "product_id": "ERGE72PVVKHBQAQM",
+    "provider": "local",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "raw_text": "I'm sorry for any confusion, but as an AI, I don't have the ability to access or view the stock information of a product. I recommend checking the official website of the retailer or contacting them directly for the most accurate and up-to-date information.",
+    "served_text": "This option is listed at INR 445.00 in Jewellery. It is within your INR 800.00 budget. Stock availability is unknown.",
+    "source": "fact_fallback",
+    "claim_check_issues": [
+      "no_specific_catalogue_fact",
+      "unverified_words:ability,access,accurate,ai,any,but,checking,confusion,contacting,date,directly,don"
+    ],
+    "generation_mode": "local_llm_guarded_fallback",
+    "latency_ms": 888.2047919999998,
+    "price_constraint_satisfied": true,
+    "category_constraint_satisfied": true
+  }
+]

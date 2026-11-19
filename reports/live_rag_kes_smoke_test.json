@@ -1,0 +1,52 @@
+{
+  "query": "table lamp under KSh 3000",
+  "constraints": {
+    "in_stock": false,
+    "max_price": 3000.0
+  },
+  "method": "hybrid",
+  "products": [
+    {
+      "id": "TLPECJY7GHNHFKMZ",
+      "name": "Tucasa LG-295 Table Lamp",
+      "brand": "Tucasa",
+      "category": "Home Decor & Festive Needs",
+      "price": 1590.57,
+      "currency": "KES",
+      "rating": null,
+      "availability": "unknown",
+      "url": "http://www.flipkart.com/tucasa-lg-295-table-lamp/p/itmecjy7ahdtw6g6?pid=TLPECJY7GHNHFKMZ",
+      "score": 0.46779927626511686,
+      "source_price": 1161.0,
+      "source_currency": "INR",
+      "price_is_estimate": true,
+      "conversion": {
+        "base": "INR",
+        "quote": "KES",
+        "rate": 1.37,
+        "valid_from": "2026-11-16",
+        "valid_to": "2026-11-22",
+        "source": "https://www.kra.go.ke/images/foreignexchange/EXCHANGE-RATE-RUNNING-FROM-16th-November-2026-to-22nd-November-2026.pdf",
+        "type": "KRA weekly reference rate; estimated conversion, not a current Kenyan retail price"
+      },
+      "image_url": "https://rukminim2.flixcart.com/image/table-lamp/k/m/z/lg-449-tucasa-lg-295-1100x1100-imaecrynbvqf9hnz.jpeg"
+    }
+  ],
+  "currency": "KES",
+  "latency_ms": 3857.922293998854,
+  "generation_mode": "local_llm",
+  "generation_provider": "local",
+  "generation_latency_ms": 8700.257878999764,
+  "generation_failure": null,
+  "explanations": [
+    {
+      "product_id": "TLPECJY7GHNHFKMZ",
+      "text": "This option is listed at KES 1590.57 in Home Decor & Festive Needs. It is within your KES 3000.00 budget. Stock availability is unknown.",
+      "source": "local_llm",
+      "raw_generated_text": "This option is listed at KES 1590.57 in Home Decor & Festive Needs. It is within your KES 3000.00 budget. Stock availability is unknown.",
+      "claim_check_issues": []
+    }
+  ],
+  "answer": "Tucasa LG-295 Table Lamp [TLPECJY7GHNHFKMZ]: This option is listed at KES 1590.57 in Home Decor & Festive Needs. It is within your KES 3000.00 budget. Stock availability is unknown.",
+  "notice": "Historical Indian catalogue. KES amounts are dated reference estimates, not Kenyan retail offers. Confirm prices and availability with the retailer. Claim checks are heuristic; human review remains necessary."
+}

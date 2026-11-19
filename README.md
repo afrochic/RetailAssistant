@@ -1,99 +1,109 @@
 # RetailAssist
 
-DSA 8401 Applied Machine Learning capstone, admission number 109419. A scripted, constraint-aware product retrieval service with a Jupyter walkthrough, optional guarded LLM reranking, API, web interface, Docker deployment and detailed report.
+DSA 8401 Applied Machine Learning capstone, admission 109419. An end-to-end conversational product recommendation system: semantic retrieval, hard preferences, actual grounded LLM explanations, evaluation, FastAPI, Docker, a shopping interface and an Insights dashboard.
 
 ## Architecture
 
 ```mermaid
 flowchart LR
- A[Versioned raw catalogue] --> B[Validation and cleaning]
- B --> C[TF-IDF + fitted SVD + MiniLM embeddings]
- C --> D[Serialized retrieval artifacts]
- Q[Query + explicit preferences] --> P[Budget and brand parser]
- P --> R[Score + hard constraints + top K]
- D --> R
- R --> L[Optional LLM selects valid IDs]
- L --> G[Catalogue-only fact rendering]
- G --> F[FastAPI and web interface]
+ A[Versioned raw catalogue] --> B[Cleaning and audit]
+ B --> C[TF-IDF and fitted SVD]
+ B --> D[MiniLM embeddings]
+ C --> I[Published serialized index]
+ D --> I
+ Q[Query and preferences] --> P[Currency and constraint parsing]
+ P --> R[Retrieval, hard filtering and ranking]
+ I --> R
+ R --> F[Evidence plan from catalogue facts]
+ F --> L[Local SmolLM2 or optional hosted LLM]
+ L --> V[Claim checks and factual fallback]
+ V --> API[FastAPI, chat and Insights]
 ```
 
-## Reproduce from scratch
+## Quick start from the public repository: no retraining
 
-Use Python 3.9 (Docker pins the same major/minor version). Network access is required for initial dependencies, source catalogue and pinned encoder download. Allow several minutes for CPU embeddings and roughly 1 GB disk including model caches.
+Use Python 3.9, matching the verified runtime. First setup needs internet access, several minutes and a few GB of free disk. No paid API key is required for local generation.
 
 ```bash
+git clone https://github.com/afrochic/AML_project.git
+cd AML_project
 python3.9 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements-dev.txt
 pip install -e . --no-deps
-python -m retailassist.pipeline
-python -m retailassist.evaluate
-pytest -q
-python scripts/build_deliverables.py
+python -m retailassist.bootstrap --with-generator
 uvicorn retailassist.api:app --host 127.0.0.1 --port 8000
 ```
 
-Visit http://127.0.0.1:8000 for the redesigned shopping interface, AI assistant and Insights dashboard and /docs for the API explorer. Notebook: `notebooks/RetailAssist_walkthrough.ipynb`. PDF: `reports/RetailAssist_Report.pdf`. Notebook cells call the same tested pipeline modules instead of duplicating an alternative implementation. Full raw-to-model rebuild is the CLI pipeline above. Notebook execution is optional using `python scripts/execute_notebook.py`.
+Open http://localhost:8000 and /docs. `bootstrap` checks the source SHA-256 and exact product-ID order, then binds the downloaded catalogue to the **published trained index and encoder**. It does not fit SVD, recompute TF-IDF or embed products. The local generator is downloaded from its pinned Apache-2.0 Hugging Face revision. It is too large for a normal GitHub file and is restored automatically by the documented command.
 
-Low-resource alternative: `python -m retailassist.pipeline --no-semantic` builds TF-IDF and SVD only. Select `method: tfidf` or `lsa` in API requests; the UI defaults to hybrid, which requires the semantic build. Do not call SVD a pretrained transformer or a fine-tuned LLM.
+Original scraped records remain outside Git because the dataset mirror's license is unknown. Published `artifacts/retriever_index.joblib` contains trained vectors/parameters and ordered IDs, not original product descriptions. `artifacts/encoder/` contains the licensed MiniLM checkpoint. See `artifacts/ARTIFACTS.md`. Never load an untrusted joblib file.
 
-## API example
+## Rebuild and reproduce every stage
 
 ```bash
-curl -X POST http://127.0.0.1:8000/recommend \
- -H 'Content-Type: application/json' \
- -d '{"query":"running shoes under INR 1500","k":5,"method":"hybrid","constraints":{"category":"Footwear"}}'
+python -m retailassist.pipeline
+python -m retailassist.evaluate
+python -m retailassist.evaluate_generation
+pytest -q
+python scripts/execute_notebook.py
+python scripts/build_deliverables.py
 ```
 
-The client should carry confirmed preferences in `constraints` on subsequent turns. This is a stateless conversational-style search interface, not an autonomous dialogue agent. Regex parses common upper/lower budget and brand mentions introduced by by/from/brand. Category, rating and availability constraints can be supplied explicitly. Complex negation, multiple budgets and implied suitability need clarification by a human/client. Budget is a hard ceiling, not a guessed currency conversion. KES/USD queries are rejected.
+The pipeline downloads the pinned raw catalogue, audits/cleans records, fits TF-IDF and SVD, computes MiniLM embeddings and serializes all artifacts. Seed 42 and the source/model revisions are recorded. `--no-semantic` is available for low-resource TF-IDF/SVD experiments. The frontend detects absent semantic embeddings and uses keyword search.
 
-Optional LLM: set `OPENAI_API_KEY`, optionally `OPENAI_MODEL`, and send `use_llm: true`. The LLM can select/reorder retrieved product IDs only. Invalid IDs, duplicate IDs, malformed responses and network failures fall back to deterministic results. All factual prose is rendered from catalogue records. This deliberately constrains generation; no free-form claim about gaming performance or medical suitability is allowed. Initial evaluation does not call the paid LLM or measure its quality.
+Notebook: `notebooks/RetailAssist_walkthrough.ipynb`. Report: `reports/RetailAssist_Report.pdf`. `PROJECT_COMPLIANCE.md` maps the brief and proposal to implementation and verification. Direct dependencies are pinned; `requirements-lock.txt` records the executed macOS environment and is not a cross-platform Linux lockfile.
+
+## Actual grounded LLM explanations
+
+The AI assistant uses MiniLM hybrid retrieval, then a **local SmolLM2-135M-Instruct LLM** to verbalize an evidence plan constructed only from retrieved prices, categories, availability and accepted constraints. The model generates text, not merely product IDs. Product identities remain attached by application code. Numeric, unsupported-word, stock and suitability checks reject questionable generated prose, falling back to explicit catalogue facts. These checks are conservative heuristics, not proof of entailment or human-verified factuality.
+
+The frozen test set was run through the actual local LLM: **24 outputs, 7 accepted and 17 flagged/fallback responses**. All 24 served results satisfied the benchmark price/category constraints. Raw outputs, served text and individual flags are in `reports/generation_evaluation.json`; the summary is also shown in Insights. The high fallback rate is an honest limitation of this small model and its strict checks, not an accuracy claim. Human review remains necessary. No hosted paid API evaluation is claimed.
+
+The assistant supports budget-only follow-ups to the last product intent and carries confirmed UI filters. This is limited client-side conversational context, not a general dialogue agent. Category and rating filters are explicit; the parser handles common budget expressions and brands introduced by by/from/brand. Complex negation or inferred technical suitability is not guaranteed.
+
+Optional hosted generation: set `OPENAI_API_KEY` securely, optionally `OPENAI_MODEL`, and send `use_llm: true, generation_provider: openai`. The provider uses structured explanations with catalogue product citations and the same claim checks. Do not put keys in Git or notebook cells. Queries and retrieved catalogue fields are sent externally only when this provider is selected.
+
+## INR and estimated KES
+
+Original prices remain INR. Select **KES estimate** to convert using the dated Kenya Revenue Authority reference **1 INR = 1.37 KES**, valid 16–22 November 2026. This is a reference conversion of historical Indian prices, **not Kenyan inventory, a live exchange quote or a current Kenyan retail offer**. Source INR values and conversion provenance remain in each product response. Hard budget filters operate in the selected currency, with Decimal rounding. Mixed/contradictory currencies and unsupported USD/EUR are rejected.
+
+Source: https://www.kra.go.ke/images/foreignexchange/EXCHANGE-RATE-RUNNING-FROM-16th-November-2026-to-22nd-November-2026.pdf . Refresh the documented reference before claiming current estimates beyond that period.
+
+```bash
+curl -X POST http://localhost:8000/recommend \
+ -H 'Content-Type: application/json' \
+ -d '{"query":"running shoes under KSh 2000","currency":"KES","method":"hybrid","use_llm":true,"generation_provider":"local","constraints":{"category":"Footwear"}}'
+```
+
+## API and interface
+
+- `/recommend`: constrained retrieval, optional actual LLM generation and transparent fallback status.
+- `/catalogue`, `/discover`, `/products/{id}`: catalogue metadata and original product details, with INR/KES display options.
+- `/insights`: actual catalogue statistics, retrieval metrics and local generation evaluation.
+- `/health`: readiness and semantic availability; `/docs`: OpenAPI explorer.
+
+The frontend includes category browsing, budget/rating filters, sorting, original listing photos, details, browser-local shortlists and AI chat. Editorial collection photos are inspiration; missing listing photos have a labelled fallback. There is no checkout or account. No sales, conversion or customer-usage figures are invented. Fonts and editorial photography are bundled with attribution/licenses.
 
 ## Docker
 
-Build model artifacts first, then:
+After `bootstrap --with-generator`:
 
 ```bash
 docker compose up --build -d
+python scripts/smoke_test.py
 curl http://localhost:8000/health
-docker compose logs --tail=50
 docker compose down
 ```
 
-Container exposes port 8000, mapped only to localhost by Compose. Run behind TLS/auth/rate limiting before any public deployment. No cloud deployment or spending is performed. Build is CPU-oriented and downloads dependencies. Encoder files generated locally are copied into the image; model cache is excluded. Do not send keys into a Docker build context; `.env` is excluded. A daemon must be running. Container build/run status is recorded in `reports/verification.json`.
+A clean clone can also build the image: the Dockerfile restores catalogue records around public indexes when the serving bundle is absent. For offline local LLM operation, run setup with `--with-generator` before building. The non-root service is mapped only to 127.0.0.1:8000. This is verified local deployment, not public cloud hosting. Public deployment would require appropriate TLS, authentication and rate limits. Keys are excluded from the build context.
 
-## Evaluation and interpretation
+## Evaluation and limitations
 
-30 silver-label queries, including six development and 24 test queries; see DATA_CARD.md. Frozen weights: 75% normalized semantic similarity + 25% TF-IDF cosine; no test tuning. Report P@5, R@5, MRR@5, NDCG@5 and bootstrap NDCG intervals. Zero-judgment queries are counted and excluded from summary means. Full qrels and per-query results are saved. Empty results count as zero on queries with positive labels. Macro recall is low for broad categories with many relevant products; do not confuse it with a bug. Latency includes cold model load on the first semantic call and is not a production benchmark.
+The 20,000-row historical Flipkart sample yields 19,920 usable records. Prices and stock are not current; 18,081 usable products lack numeric ratings. There are no reliable user interactions, purchases or demographic labels.
 
-`reports/data_audit.json` documents real missingness. No synthetic corruption is represented as real data. No interactions means collaborative filtering, purchase conversion and personalized rankings cannot be evaluated. Reviews/ratings are not relevance labels.
+Four methods are evaluated: TF-IDF, SVD/LSA, MiniLM and fixed 75% semantic / 25% lexical hybrid. Thirty AI-authored queries have rule-based silver judgments: six development and 24 test. Report Precision@5, Recall@5, MRR@5 and NDCG@5, with query-bootstrap intervals. Hybrid test NDCG@5 is approximately 0.813; this small weak-label benchmark does not establish real shopper satisfaction. Latency includes cold starts. See per-query results and DATA_CARD.md.
 
-## Repository and artifacts
+GitHub Actions pins Ubuntu 22.04/Python 3.9, installs CPU PyTorch, runs tests, restores artifacts from the original source and exercises the restored KES API. This directly tests the public-repository reproduction path. Browser visual/interaction QA remains blocked by a saved authoring-session permission setting; HTTP/API and code checks are recorded separately.
 
-- `src/retailassist/`: ingestion, cleaning, index fitting, inference, service and evaluation.
-- `tests/`: constraint, API, metric and LLM validation checks with isolated fixtures.
-- `data/queries.json`, `data/qrels_silver.json`: benchmark and explicit labels.
-- `artifacts/fitted_transformers.joblib`: fitted TF-IDF and SVD training artifacts included in Git.
-- `artifacts/manifest.json`: data SHA-256, model revision and seed.
-- `artifacts/retriever.joblib`, `artifacts/encoder/`: locally built serialized artifacts, excluded from public Git due to record-level data and source license uncertainty. Never load untrusted joblib files.
-- `reports/`: actual executed results, final PDF and verification record.
-- `scripts/`: report/notebook creation and execution.
-- `AI_USE.md`, `DATA_CARD.md`: authorship disclosure and provenance/limitations.
-
-A local submission ZIP includes trained artifacts so the marker can run the API immediately after dependency setup; Git reproduction regenerates those artifacts. Check source redistribution rights before sharing that ZIP publicly. See report for an explicit rubric mapping and a step-by-step demonstration guide.
-
-## Shopping interface and analytics
-
-The responsive frontend includes natural-language search, category browsing, budget/rating filters, sorting, catalogue product photos, product detail dialogs, an on-device shortlist, and an AI shopping-assistant drawer. Saved items stay in localStorage and there is no checkout or user account. Editorial collection photos are inspiration; product photos use the original listing's image path. Missing photos are explicitly labelled.
-
-The AI assistant calls the same MiniLM hybrid recommendation API as search. It provides deterministic, catalogue-grounded summaries and can carry the last product intent into a budget-only follow-up. This is semantic AI with constrained factual explanations, not an unrestricted generative chatbot. It preserves confirmed category filters. Optional hosted LLM reranking remains configured only through the backend.
-
-The Insights section reads `GET /insights`: catalogue size, known brands, rating coverage, stock unknowns, category counts, INR price distribution, and the actual offline model-comparison metrics. Metric tabs explain NDCG@5, Precision@5, Recall@5 and MRR@5. No sales, conversion, engagement or fabricated live-user statistics are displayed. `artifacts/evaluation_summary.json` stores the executed evaluation summary for the container; `evaluate.py` refreshes it.
-
-`GET /catalogue` supplies real category options, `GET /discover` supplies initial catalogue picks, and `GET /products/{id}` supplies original product details. `presentation.py` builds optional image metadata during the pipeline; regenerate it without retraining using:
-
-```bash
-python -c "import pandas as pd; from retailassist.core import ROOT; from retailassist.presentation import save_images; save_images(pd.read_csv(ROOT/'data/raw/catalogue.csv'))"
-```
-
-Fonts and editorial imagery are bundled under `web/assets/`; attribution and font licenses are included. Visual QA was blocked by a saved browser-permission setting in the authoring session; HTTP/API, JavaScript syntax and automated tests are verified separately.
+Read AI_USE.md and the course individual-work policy before submitting or claiming authorship.

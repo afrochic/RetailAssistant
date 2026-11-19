@@ -1,0 +1,12 @@
+{
+  "test_queries": 24,
+  "responses": 24,
+  "actual_llm_outputs": 24,
+  "accepted_llm_explanations": 7,
+  "flagged_raw_outputs": 17,
+  "raw_flag_rate": 0.7083333333333334,
+  "fallback_responses": 17,
+  "price_constraint_violations": 0,
+  "category_constraint_violations": 0,
+  "assessment": "Real local model calls. Claim flags are automated heuristics, not human-grounded hallucination measurements. Evidence planning precedes LLM verbalization; no free-form suitability advice is claimed."
+}

@@ -87,7 +87,7 @@
         "image_url": "https://rukminim2.flixcart.com/image/shoe/v/e/y/24-blue-zoom2sports-xpert-34-1000x1000-imaeg85hfucttfng.jpeg"
       }
     ],
-    "latency_ms": 1925.802293000288,
+    "latency_ms": 224.43299999986266,
     "generation_mode": "deterministic",
     "answer": "CANMP Running Shoes [SHOEJ9KH22WQXKU2]: INR 299.00; brand: CANMP; category: Footwear; availability: unknown.\nN Five Running Shoes [SHOEJ5YSJMX2HXRF]: INR 959.00; brand: N Five; category: Footwear; availability: unknown.\nBostan Running Shoes [SHOECEHRSPNUVTHH]: INR 499.00; brand: Unknown; category: Footwear; availability: unknown.\nWorldWearFootwear Running Shoes, Walking Shoes [SHOEG7FXJFJDFPBD]: INR 380.00; brand: WorldWearFootwear; category: Footwear; availability: unknown.\nxpert Running Shoes [SHOEG8BM8ZFYGPTP]: INR 499.00; brand: xpert; category: Footwear; availability: unknown.",
     "notice": "Historical Indian catalogue. Prices and availability require retailer confirmation. No performance or suitability claims are inferred."
