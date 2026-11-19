@@ -1,9 +1,9 @@
 # RetailAssist: A Conversational Product Recommendation System for Healthy Retail Using Retrieval-Augmented Generation
 
-**DSA 8401 - Applied Machine Learning**  
-**MSc Data Science & Analytics | Admission number: 109419**  
-**Evidence cut-off: 20 November 2026**  
-**Repository:** https://github.com/afrochic/RetailAssistant  
+**DSA 8401 - Applied Machine Learning**
+**MSc Data Science & Analytics | Admission number: 109419**
+**Evidence cut-off: 20 November 2026**
+**Repository:** https://github.com/afrochic/RetailAssistant
 **Baseline inspected:** commit `7be14a9`; subsequent local audit changes are identified separately.
 
 ## Abstract

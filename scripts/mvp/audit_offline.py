@@ -25,7 +25,7 @@ SOURCE = ROOT.parent / 'rag_pipeline/data/Enhanced_Product_List.json'
 
 def write_csv(name, rows):
     with (OUT / name).open('w', newline='') as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator='\n')
         writer.writeheader()
         writer.writerows(rows)
 

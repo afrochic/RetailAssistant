@@ -1,7 +1,7 @@
 # RetailAssist - capstone defense slide source
 
-DSA 8401 Applied Machine Learning | MSc Data Science & Analytics | Admission 109419  
-Evidence cut-off: 20 November 2026. Twelve editable slides with speaker notes.  
+DSA 8401 Applied Machine Learning | MSc Data Science & Analytics | Admission 109419
+Evidence cut-off: 20 November 2026. Twelve editable slides with speaker notes.
 This is complete presentation content, not a PPTX export. Final presentation-MVP verdict: READY WITH LIMITATIONS.
 
 ---
@@ -51,7 +51,7 @@ Admission 109419 | DSA 8401 | 20 November 2026
 - Price range: KES 35 to KES 19,999; 133 overlapping category labels.
 - Structured ingredients, verified dietary labels, stock and snapshot date are unavailable.
 
-**Figure:** `evaluation/category_distribution.png`  
+**Figure:** `evaluation/category_distribution.png`
 **Supporting table:** `evaluation/missing_data.csv`
 
 **Speaker notes:** Permission and KES RRP were confirmed by the user. The source hash is recorded in the report and manifest. Category labels overlap, so the chart is not a mutually exclusive class distribution. Name-uniqueness checks do not prove that no near-duplicate products exist. No customer data is part of the pipeline.
@@ -134,7 +134,7 @@ Response -> verified product references, KES prices and generation mode
 
 ## Slide 10 - Public application after authorized repair
 
-Frontend: https://retail-assistant-tau.vercel.app/  
+Frontend: https://retail-assistant-tau.vercel.app/
 Backend: https://retail-assist-api.vercel.app/
 
 - Public API ready=true; 5,512 records; KES; fitted TF-IDF.
