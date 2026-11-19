@@ -41,5 +41,6 @@ def main():
             item['ndcg_ci_low'],item['ndcg_ci_high']=map(float,np.quantile(samples,[.025,.975]))
         summary.append(item)
     pd.DataFrame(summary).to_csv(ROOT/'reports/metrics.csv',index=False)
+    (ROOT/'artifacts/evaluation_summary.json').write_text(json.dumps(summary,indent=2))
     print(pd.DataFrame(summary).to_string(index=False))
 if __name__=='__main__':main()

@@ -65,3 +65,49 @@ def test_plain_brand_word_does_not_overfilter(engine):
     # A catalogue brand token in prose is not always an intended brand constraint.
     assert 'brand' not in engine.parse('Acme running shoe')
     assert engine.parse('running shoe by Acme')['brand']=='Acme'
+
+def test_catalogue_discovery_details_and_assets(engine,monkeypatch):
+    from fastapi.testclient import TestClient
+    import retailassist.api as api
+    monkeypatch.setattr(api,'Engine',lambda:engine)
+    with TestClient(api.app) as client:
+        catalogue=client.get('/catalogue').json()
+        assert catalogue['total']==2 and catalogue['currency']=='INR'
+        assert catalogue['semantic_available'] is False
+        assert catalogue['categories']==[{'name':'Footwear','count':2}]
+        products=client.get('/discover').json()['products']
+        assert len({p['id'] for p in products})==len(products)
+        assert all('image_url' in p for p in products)
+        details=client.get('/products/a').json()
+        assert details['name']=='Running shoe' and details['price']==500.
+        assert details['availability']=='unknown' and details['description']==''
+        assert client.get('/products/does-not-exist').status_code==404
+        assert client.get('/assets/style.css').status_code==200
+        assert client.get('/assets/app.js').status_code==200
+
+def test_listing_image_provenance_and_host_validation():
+    from retailassist.presentation import image_lookup
+    raw=pd.DataFrame([
+        {'pid':'a','image':'["http://img5a.flixcart.com/image/shoe/original.jpeg"]'},
+        {'pid':'b','image':'["https://attacker.example/image/fake.jpeg"]'},
+        {'pid':'c','image':'not json'},
+        {'pid':'d','image':'["https://flixcart.com.attacker.example/image/fake.jpeg"]'},
+        {'pid':'e','image':'"https://img5a.flixcart.com/image/string-not-list.jpeg"'},
+    ])
+    assert image_lookup(raw)=={'a':'https://rukminim2.flixcart.com/image/shoe/original.jpeg'}
+
+def test_insights_uses_real_catalogue_counts(engine,monkeypatch):
+    from fastapi.testclient import TestClient
+    import retailassist.api as api
+    monkeypatch.setattr(api,'Engine',lambda:engine)
+    with TestClient(api.app) as client:
+        data=client.get('/insights').json()
+        catalogue=data['catalogue']
+        assert catalogue['total_products']==2
+        assert catalogue['brands']==2 and catalogue['unknown_brands']==0
+        assert catalogue['rated_products']==1 and catalogue['unknown_stock']==2
+        assert catalogue['median_price']==2750.
+        assert sum(bucket['count'] for bucket in catalogue['price_distribution'])==2
+        assert sum(c['count'] for c in catalogue['top_categories'])==2
+        assert data['model']['semantic_available'] is False
+        assert 'silver' in data['evaluation_note']

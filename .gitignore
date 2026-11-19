@@ -14,3 +14,4 @@ artifacts/model_cache/
 artifacts/jupyter/
 artifacts/ipython/
 artifacts/matplotlib/
+artifacts/product_images.json

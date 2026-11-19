@@ -31,7 +31,8 @@
         "rating": null,
         "availability": "unknown",
         "url": "http://www.flipkart.com/canmp-running-shoes/p/itmej9kh33nxzm7p?pid=SHOEJ9KH22WQXKU2",
-        "score": 0.526286062879971
+        "score": 0.526286062879971,
+        "image_url": "https://rukminim2.flixcart.com/image/shoe/d/q/8/grey-note-2-canmp-12-original-imaej5x2hagyrhtp.jpeg"
       },
       {
         "id": "SHOEJ5YSJMX2HXRF",
@@ -43,7 +44,8 @@
         "rating": null,
         "availability": "unknown",
         "url": "http://www.flipkart.com/n-five-running-shoes/p/itmej5ysq5mwdgmh?pid=SHOEJ5YSJMX2HXRF",
-        "score": 0.515426522023559
+        "score": 0.515426522023559,
+        "image_url": "https://rukminim2.flixcart.com/image/shoe/e/z/r/blue-nfa31-n-five-33-1000x1000-imaegadzpkuakrsj.jpeg"
       },
       {
         "id": "SHOECEHRSPNUVTHH",
@@ -55,7 +57,8 @@
         "rating": null,
         "availability": "unknown",
         "url": "http://www.flipkart.com/bostan-running-shoes/p/itmecehrzvzvtryz?pid=SHOECEHRSPNUVTHH",
-        "score": 0.5066194316776954
+        "score": 0.5066194316776954,
+        "image_url": "https://rukminim2.flixcart.com/image/shoe/a/n/8/orange-pixel-709-bostan-8-original-imaecechksthpgat.jpeg"
       },
       {
         "id": "SHOEG7FXJFJDFPBD",
@@ -67,7 +70,8 @@
         "rating": null,
         "availability": "unknown",
         "url": "http://www.flipkart.com/worldwearfootwear-running-shoes-walking-shoes/p/itmeg7fxh6rgsnyz?pid=SHOEG7FXJFJDFPBD",
-        "score": 0.5024451793577676
+        "score": 0.5024451793577676,
+        "image_url": "https://rukminim2.flixcart.com/image/shoe/s/3/p/white-ast-212-worldwearfootwear-8-original-imaeg7fsg67hxgss.jpeg"
       },
       {
         "id": "SHOEG8BM8ZFYGPTP",
@@ -79,10 +83,11 @@
         "rating": null,
         "availability": "unknown",
         "url": "http://www.flipkart.com/xpert-running-shoes/p/itmeg8bhvcbgvape?pid=SHOEG8BM8ZFYGPTP",
-        "score": 0.48465926188415837
+        "score": 0.48465926188415837,
+        "image_url": "https://rukminim2.flixcart.com/image/shoe/v/e/y/24-blue-zoom2sports-xpert-34-1000x1000-imaeg85hfucttfng.jpeg"
       }
     ],
-    "latency_ms": 1846.5219590000288,
+    "latency_ms": 1925.802293000288,
     "generation_mode": "deterministic",
     "answer": "CANMP Running Shoes [SHOEJ9KH22WQXKU2]: INR 299.00; brand: CANMP; category: Footwear; availability: unknown.\nN Five Running Shoes [SHOEJ5YSJMX2HXRF]: INR 959.00; brand: N Five; category: Footwear; availability: unknown.\nBostan Running Shoes [SHOECEHRSPNUVTHH]: INR 499.00; brand: Unknown; category: Footwear; availability: unknown.\nWorldWearFootwear Running Shoes, Walking Shoes [SHOEG7FXJFJDFPBD]: INR 380.00; brand: WorldWearFootwear; category: Footwear; availability: unknown.\nxpert Running Shoes [SHOEG8BM8ZFYGPTP]: INR 499.00; brand: xpert; category: Footwear; availability: unknown.",
     "notice": "Historical Indian catalogue. Prices and availability require retailer confirmation. No performance or suitability claims are inferred."

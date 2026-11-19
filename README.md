@@ -33,7 +33,7 @@ python scripts/build_deliverables.py
 uvicorn retailassist.api:app --host 127.0.0.1 --port 8000
 ```
 
-Visit http://127.0.0.1:8000 for the UI and /docs for the API explorer. Notebook: `notebooks/RetailAssist_walkthrough.ipynb`. PDF: `reports/RetailAssist_Report.pdf`. Notebook cells call the same tested pipeline modules instead of duplicating an alternative implementation. Full raw-to-model rebuild is the CLI pipeline above. Notebook execution is optional using `python scripts/execute_notebook.py`.
+Visit http://127.0.0.1:8000 for the redesigned shopping interface, AI assistant and Insights dashboard and /docs for the API explorer. Notebook: `notebooks/RetailAssist_walkthrough.ipynb`. PDF: `reports/RetailAssist_Report.pdf`. Notebook cells call the same tested pipeline modules instead of duplicating an alternative implementation. Full raw-to-model rebuild is the CLI pipeline above. Notebook execution is optional using `python scripts/execute_notebook.py`.
 
 Low-resource alternative: `python -m retailassist.pipeline --no-semantic` builds TF-IDF and SVD only. Select `method: tfidf` or `lsa` in API requests; the UI defaults to hybrid, which requires the semantic build. Do not call SVD a pretrained transformer or a fine-tuned LLM.
 
@@ -81,3 +81,19 @@ Container exposes port 8000, mapped only to localhost by Compose. Run behind TLS
 - `AI_USE.md`, `DATA_CARD.md`: authorship disclosure and provenance/limitations.
 
 A local submission ZIP includes trained artifacts so the marker can run the API immediately after dependency setup; Git reproduction regenerates those artifacts. Check source redistribution rights before sharing that ZIP publicly. See report for an explicit rubric mapping and a step-by-step demonstration guide.
+
+## Shopping interface and analytics
+
+The responsive frontend includes natural-language search, category browsing, budget/rating filters, sorting, catalogue product photos, product detail dialogs, an on-device shortlist, and an AI shopping-assistant drawer. Saved items stay in localStorage and there is no checkout or user account. Editorial collection photos are inspiration; product photos use the original listing's image path. Missing photos are explicitly labelled.
+
+The AI assistant calls the same MiniLM hybrid recommendation API as search. It provides deterministic, catalogue-grounded summaries and can carry the last product intent into a budget-only follow-up. This is semantic AI with constrained factual explanations, not an unrestricted generative chatbot. It preserves confirmed category filters. Optional hosted LLM reranking remains configured only through the backend.
+
+The Insights section reads `GET /insights`: catalogue size, known brands, rating coverage, stock unknowns, category counts, INR price distribution, and the actual offline model-comparison metrics. Metric tabs explain NDCG@5, Precision@5, Recall@5 and MRR@5. No sales, conversion, engagement or fabricated live-user statistics are displayed. `artifacts/evaluation_summary.json` stores the executed evaluation summary for the container; `evaluate.py` refreshes it.
+
+`GET /catalogue` supplies real category options, `GET /discover` supplies initial catalogue picks, and `GET /products/{id}` supplies original product details. `presentation.py` builds optional image metadata during the pipeline; regenerate it without retraining using:
+
+```bash
+python -c "import pandas as pd; from retailassist.core import ROOT; from retailassist.presentation import save_images; save_images(pd.read_csv(ROOT/'data/raw/catalogue.csv'))"
+```
+
+Fonts and editorial imagery are bundled under `web/assets/`; attribution and font licenses are included. Visual QA was blocked by a saved browser-permission setting in the authoring session; HTTP/API, JavaScript syntax and automated tests are verified separately.

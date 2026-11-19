@@ -3,6 +3,7 @@ import argparse, hashlib, json
 from datetime import datetime, timezone
 import requests
 import pandas as pd
+from .presentation import save_images
 from .core import ROOT, prepare, fit, MODEL, REVISION
 URL='https://huggingface.co/datasets/jason1966/PromptCloudHQ_flipkart-products/resolve/ac16731c75907ab9f212c372ec637c00f257c36a/flipkart_com-ecommerce_sample.csv'
 def main():
@@ -12,6 +13,7 @@ def main():
     if not path.exists() or a.refresh:
         r=requests.get(URL,timeout=600);r.raise_for_status();path.write_bytes(r.content)
     raw=pd.read_csv(path); df,audit=prepare(raw)
+    save_images(raw)
     df.to_json(ROOT/'data/processed/products.jsonl',orient='records',lines=True)
     (ROOT/'reports/data_audit.json').write_text(json.dumps(audit,indent=2))
     fit(df,semantic=not a.no_semantic)

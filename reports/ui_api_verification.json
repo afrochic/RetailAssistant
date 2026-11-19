@@ -1,0 +1,15 @@
+{
+  "health": {
+    "status": "ok",
+    "products": 19920,
+    "currency": "INR",
+    "semantic_available": true
+  },
+  "catalogue_categories": 14,
+  "discovery_products": 8,
+  "actual_product_image_urls": 8,
+  "insights_total_products": 19920,
+  "evaluated_test_methods": 4,
+  "static_assets_checked": 8,
+  "browser_visual_qa": "Blocked by saved browser permission setting; not claimed."
+}
