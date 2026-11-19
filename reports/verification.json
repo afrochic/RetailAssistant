@@ -1,7 +1,7 @@
 {
   "pipeline": "Executed successfully on 20,000 raw rows, 19,920 retained; TF-IDF, SVD and pinned MiniLM artifacts saved.",
   "evaluation": "All 30 queries evaluated across four methods; 24 test queries have positive silver judgments.",
-  "unit_tests": "20 passed, including KES rounding/budget/provenance, local/hosted generation boundaries, claim rejection, catalogue/API checks and metric sanity.",
+  "unit_tests": "21 passed, including KES rounding/budget/provenance, local/hosted generation boundaries, claim rejection, catalogue/API checks and metric sanity.",
   "notebook": "All 14 executable code cells completed, including an actual local LLM call and a KES conversion/budget demonstration.",
   "api": "Real Docker HTTP request returned a local_llm explanation for a table lamp under KSh 3000. KES amount, source INR price and conversion provenance were verified.",
   "llm": "24 actual local SmolLM2 generations evaluated: 7 accepted, 17 flagged and replaced with factual fallbacks. Raw/served explanations are saved; automated flags are heuristic, not human factuality labels. Hosted paid API calls remain untested.",
@@ -10,5 +10,5 @@
   "ui": "Redesigned responsive discovery page, product details, browser-local shortlist, semantic shopping assistant and actual offline Insights dashboard. HTTP endpoints and assets verified. Desktop/mobile visual QA remains blocked by a saved browser permission setting.",
   "artifacts": "Trained retrieval index and licensed MiniLM encoder are published in Git. Bootstrap restores source records by SHA-256 and exact product-ID alignment without retraining. Local generator is restored from a pinned Hugging Face revision.",
   "currency": "Original INR plus estimated KES using the KRA reference 1.37 for 16-22 November 2026. This does not establish current Kenyan retail prices or stock.",
-  "ci": "Workflow pins Ubuntu 22.04 / Python 3.9, CPU PyTorch, 20 tests, public-index restoration and a restored KES API check. GitHub Actions is the authoritative final run record."
+  "ci": "Workflow pins Ubuntu 22.04 / Python 3.9, CPU PyTorch, 21 tests, public-index restoration and a restored KES API check. GitHub Actions is the authoritative final run record."
 }

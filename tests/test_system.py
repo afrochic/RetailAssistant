@@ -141,3 +141,13 @@ def test_actual_local_generation_boundary(engine,monkeypatch):
     r=explain(engine.search('running shoe under INR 1000',method='tfidf'),True)
     assert r['generation_mode']=='local_llm_guarded_fallback'
     assert 'gaming' not in r['answer'] and r['explanations'][0]['raw_generated_text']
+
+def test_smoke_script_import_has_no_network(monkeypatch):
+    import importlib.util,urllib.request
+    from retailassist.core import ROOT
+    def unexpected_network(*args,**kwargs):
+        raise AssertionError('Importing a manual smoke script must not make HTTP requests')
+    monkeypatch.setattr(urllib.request,'urlopen',unexpected_network)
+    spec=importlib.util.spec_from_file_location('retailassist_smoke_import_check',ROOT/'scripts/smoke_test.py')
+    module=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
