@@ -28,7 +28,7 @@ def preflight():
         if not (API / 'catalogue' / name).exists(): findings.append('Missing ' + name + ': run manual ingestion/index fitting.')
     if manifest.exists():
         data = json.loads(manifest.read_text())
-        if data.get('source_kind') != 'healthyu_export' or not data.get('permission_approved') or data.get('currency') != 'KES': findings.append('Source provenance or currency is not approved.')
+        if data.get('source_kind') != 'client_x_export' or not data.get('permission_approved') or data.get('currency') != 'KES': findings.append('Source provenance or currency is not approved.')
     if manifest.exists() and all((API / 'catalogue' / name).exists() for name in ['products.json', 'lexical.json']):
         sys.path.insert(0, str(API))
         try:

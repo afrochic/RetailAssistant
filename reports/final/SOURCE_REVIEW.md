@@ -1,6 +1,8 @@
+> HISTORICAL: pre-cleanup evidence; identifying raw payloads were withdrawn. This is not a validation of the Client X snapshot or a new deployment.
+
 # Final focused source review
 
-Date: 20 November 2026 (Africa/Nairobi). Review scope: local changes to `apps/api/retail_mvp/safety.py`, its regression tests, `apps/web/components/Chat.tsx`, `apps/web/postcss.config.mjs`, and `scripts/mvp/audit_offline.py` / `plot_offline.R`. This is a read-only review, not proof of production deployment. The domain decisions and container amendment in `docs/adr/0001-healthyu-vercel-groq-mvp.md` informed the review.
+Date: 20 November 2026 (Africa/Nairobi). Review scope: local changes to `apps/api/retail_mvp/safety.py`, its regression tests, `apps/web/components/Chat.tsx`, `apps/web/postcss.config.mjs`, and `scripts/mvp/audit_offline.py` / `plot_offline.R`. This is a read-only review, not proof of production deployment. The domain decisions and container amendment in `docs/adr/0001-client-x-vercel-groq-mvp.md` informed the review.
 
 ## Findings
 

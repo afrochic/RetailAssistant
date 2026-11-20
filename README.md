@@ -1,94 +1,85 @@
-# RetailAssist — Healthy U conversational recommendations
+# RetailAssist — Client X conversational recommendations
 
-DSA 8401 Applied Machine Learning · MSc Data Science & Analytics · Admission 109419.
+**DSA 8401 · Applied Machine Learning · MSc Data Science & Analytics · Admission 109419**
 
-**Final audit (20 November 2026): READY WITH LIMITATIONS.** The existing public [chat application](https://retail-assistant-tau.vercel.app/) and [API](https://retail-assist-api.vercel.app/health) are working after an explicitly authorized repair. Both production projects run verified source `7d46aea`. API readiness reports 5,512 records; five controlled public chat cases passed, including two actual Groq generations. The live browser rendered grounded product references and KES prices. See [final handoff](reports/final/FINAL_HANDOFF.md) and [before/after evidence](reports/final/production/PRODUCTION_VERIFICATION.md). Human-labelled retrieval-quality evaluation and optional semantic experiments remain outstanding.
+Start with **[SUBMISSION_GUIDE.md](SUBMISSION_GUIDE.md)** for direct links to every assessed deliverable. The **[final report is one page](reports/final/RETAILASSIST_FINAL_REPORT.pdf)**; [editable report source](reports/final/RETAILASSIST_FINAL_REPORT.md) and [12-slide presentation content](reports/final/PRESENTATION.md) are included.
 
 ## Problem and objectives
 
-A shopper should be able to describe a product interest and KES budget, compare real catalogue matches and narrow a conversation without scanning a storefront. The project combines fitted retrieval, hard constraints and controlled language generation. Objectives are reproducible data preparation; factual recommendations with traceable product IDs; explicit handling of unknown attributes; and a safe anonymous chat service.
+RetailAssist accepts a natural-language product interest and KES budget, retrieves actual catalogue records and provides grounded explanations. Follow-up requests maintain preferences. The research objectives are reproducible retrieval, hard-constraint compliance, traceable source records and transparent refusal when evidence is missing. It is an anonymous chat application, without authentication, accounts, a storefront, cart or checkout.
 
-## Data and provenance
+## Data and privacy
 
-The user approved the existing Healthy U product export for this public presentation MVP and confirmed RRP currency as KES. Executed ingestion retained **5,512 records**, rejected zero, and fitted **12,000 TF-IDF features**. The source SHA-256, normalization details and artifact checksums are in `apps/api/catalogue/manifest.json` and [evaluation evidence](reports/final/evaluation/). Compact allowlisted inference artifacts accompany the application; the raw enclosing HU export and all customer/order records are excluded.
+Client X is the pseudonym for the approving retail client. The [distributable source](data/client_x_catalogue.json) contains **5,512 approved product records**: ID, SKU, name, description, categories and RRP in KES. It excludes customer/order information, retailer URLs and the client's name. Text was converted to plain text and configured client aliases were redacted from the private export. The private original is unchanged and is not required to run the published pipeline. See [DATA_CARD.md](DATA_CARD.md).
 
-The snapshot has no verified current stock, structured ingredients, dietary labels or snapshot date. No ingredient suitability, clinical efficacy or availability claims may be inferred from marketing text. Current prices must be confirmed with the retailer. The source HU application is unchanged.
+Product names and IDs remain source records; client-name redaction is not a guarantee against reidentification using external catalogues. Ingredients, verified dietary labels, current stock and snapshot date are unavailable. Unknown fields fail required constraints instead of being guessed. Earlier Git revisions, external CI history and the previously deployed application are outside this current-snapshot cleanup; no history rewrite or new deployment has been performed.
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-    HU[Approved Healthy U export] --> PRE[Offline cleaning and feature fitting]
-    PRE --> ART[Products + TF-IDF + integrity manifest]
-    WEB[Anonymous Next.js chat] --> API[FastAPI]
-    API --> LIMIT[Shared anonymous quota counters]
-    API --> SAFE[Validation and safety checks]
-    SAFE --> RET[Constraint-filtered retrieval]
-    ART --> RET
-    RET --> GROQ[Groq GPT-OSS structured composition]
-    GROQ --> CHECK[Validate IDs and supported reasons]
-    CHECK --> WEB
-    RET --> FALL[Transparent catalogue fallback]
-    FALL --> WEB
+  DATA[Approved Client X distribution source] --> FIT[Offline preprocessing and TF-IDF fitting]
+  FIT --> ART[Products, index and integrity manifest]
+  WEB[Next.js chat] --> API[FastAPI validation and safety]
+  API --> QUOTA[Shared anonymous quota counters]
+  API --> RET[Constraint-filtered retrieval]
+  ART --> RET
+  RET --> GROQ[Groq GPT-OSS structured response]
+  GROQ --> VALIDATE[Validate IDs and supported explanations]
+  VALIDATE --> WEB
+  RET --> FALLBACK[Transparent factual fallback]
+  FALLBACK --> WEB
 ```
 
-Both services have multi-stage production containers and Vercel Container configurations. Training/index fitting stays offline. No auth, account database, cart, checkout or product-browsing interface is included. Redis stores expiring anonymous quota counters only; browser session storage retains recent chat locally. Requests submitted to Groq may leave the device as explained in the app.
+## Machine learning approach
 
-## Machine learning methodology
+The fitted baseline learns vocabulary and IDF from product text, stores normalized sparse vectors and ranks query matches. Parsed budgets are filters rather than relevance terms. Groq's environment-selected `openai/gpt-oss-120b` composes structured responses from the retrieved records; it was **not trained or fine-tuned here**. Invalid identifiers, unsupported reasons, quota failures and provider errors trigger labelled factual fallback.
 
-The deployed source supports a genuine fitted TF-IDF baseline: cleaned text, tokenization, learned IDF, normalized sparse product vectors and query ranking. Budgets and supported metadata constraints filter candidates; unknown attributes fail required constraints. Offline optional MiniLM teacher embeddings, PCA and a ridge query projection plus reciprocal rank fusion are implemented but **not fitted/evaluated for this final audit**. It is an approximate projected query encoder, not a transformer query model running online.
+Optional offline MiniLM teacher embeddings, PCA, a lightweight query projection and reciprocal rank fusion are implemented but not fitted/evaluated in this submission. No native query transformer runs in production. Collaborative/supervised ranking is excluded because interaction data and reviewed relevance labels are absent. See the [methodology](docs/METHODOLOGY.md) and [evaluation summary](reports/final/evaluation/EVALUATION_SUMMARY.md).
 
-Groq uses environment-selected `openai/gpt-oss-120b` through its compatible HTTP API. GPT-OSS is neither trained nor fine-tuned here. Generation chooses catalogue IDs and record-specific supported explanations; fabricated IDs/unsupported reasons fail validation. Missing key, quota exhaustion or provider errors return labelled factual fallbacks. Medical questions bypass recommendations. Public requests fail closed without shared rate limiting.
+## Current verification and limits
 
-## Actual verification and evaluation
+The name-redacted source was ingested and refitted; all 5,512 records were retained with 12,000 features. Current local tests and build evidence are in [cleanup validation](reports/final/CLEANUP_VALIDATION.md). Current warm retrieval diagnostics measured 260 calls: mean **1.134 ms**, p95 **2.265 ms**, with no invalid IDs or exercised hard-constraint violations. These are software diagnostics, not relevance accuracy.
 
-- 23 backend tests passed after the urgent visual-symptom regression fix; Ruff passed.
-- Frontend Node 22 type-check, lint and production build passed after the navigation fix. Backend, frontend and Docker GitHub Actions all passed at source 7d46aea.
-- Both Docker images built; disposable-container probes verified health, readiness and fallback. See current audit for build revision scope.
-- Local ASGI requests with real data made **two successful Groq generations**. Suitability clarification, urgent safety and no-match abstention were also observed. Post-release public checks separately established two successful Groq generations and correct clarification/safety/no-match modes.
-- 260 warm local retrieval diagnostics across 13 scripted cases: mean 1.332 ms, p95 2.528 ms. 640 returned reference occurrences had zero invalid IDs or evaluated hard-constraint violations; five expected abstention scenarios passed. These diagnostics are not relevance accuracy or general safety estimates.
-- Precision@K, Recall@K, MRR and NDCG are **BLOCKED** until a defensible human-reviewed Healthy U relevance set exists. No comparative semantic/hybrid accuracy is claimed.
+Historical backend, frontend and Docker CI passed at source `7d46aea`; five historical public acceptance cases passed, including two actual Groq generations. Original identifying screenshots/raw payloads have been withdrawn from the current snapshot. The Client X changes require their own reviewed release before they appear publicly. **Precision@K, Recall@K, MRR and NDCG remain blocked by missing independently reviewed labels.**
 
-Read [evaluation summary](reports/final/evaluation/EVALUATION_SUMMARY.md), raw JSON/CSV and measured plots. Legacy Flipkart results are not Healthy U evidence.
+## Run from a clean checkout
 
-## Reproduce locally
-
-Python 3.12, Node 22 and Docker Desktop/Compose v2 are required. See [QUICKSTART](QUICKSTART.md), [container runbook](CONTAINERS.md) and [deployment instructions](VERCEL_DEPLOYMENT.md).
+Requires Python 3.12, Node.js 22 and Docker/Compose v2. No private original dataset is needed.
 
 ```bash
 python3.12 -m venv .venv-mvp
 source .venv-mvp/bin/activate
-pip install -r apps/api/requirements-dev.txt
+pip install -r requirements-dev.txt
 python scripts/mvp/manage.py env --execute
-# Supply approved original export at this local path; it is not a public raw-data download.
-python scripts/mvp/prepare.py ingest --source ../rag_pipeline/data/Enhanced_Product_List.json --currency KES --approved
+python scripts/mvp/prepare.py ingest --source data/client_x_catalogue.json --currency KES --approved
 python scripts/mvp/prepare.py index
-(cd apps/web && npm ci)
-(cd apps/api && ../../.venv-mvp/bin/python -m pytest -q)
+python -m pytest -q
+(cd apps/web && npm ci && npm run build)
 python scripts/mvp/audit_offline.py
-# Edit private local backend key/settings before starting; no key belongs in source.
 docker compose up --build -d
 ```
 
-Open http://localhost:3000; API port 8001. `/health` is liveness; `/ready` checks prepared catalogue and configured controls. Frontend `/api/runtime-config` exposes the public API origin only. POST `/api/chat` and `/api/recommend` accept message/history/preferences/k; GET `/api/system-info` reports actual catalogue and retrieval mode. `/docs` and `/openapi.json` document the API.
+Keep credentials only in ignored `apps/api/.env`. Groq is optional locally; absent/failed credentials yield an explicit fallback. Frontend http://localhost:3000; API http://localhost:8001. Public deployments require shared Redis rate limits, a private salt and exact CORS configuration. See [QUICKSTART.md](QUICKSTART.md), [CONTAINERS.md](CONTAINERS.md) and [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md).
 
-The authorized production repair set API_BASE_URL on the web project, exact ALLOWED_ORIGINS on the API and a private rate-limit salt alongside existing shared Redis settings. Both projects were rebuilt/promoted from 7d46aea without merging or rewriting main. Preserve these settings and PORT=8080 for future approved releases.
+## API and containers
 
-## Academic submission and repository map
+`apps/api/app.py` exposes GET `/health`, `/ready`, `/api/system-info`, `/openapi.json`, and POST `/api/chat` plus `/api/recommend`. Requests contain message/history/preferences/k. Citations use `CX:` product IDs. Public distribution records have `url=null`; no identifying retailer links are displayed. Any future private source-link configuration requires an explicit backend host allowlist.
 
-- [Compliance evidence](PROJECT_COMPLIANCE.md)
-- [Final report source](reports/final/RETAILASSIST_FINAL_REPORT.md) and report PDF when generated
-- [Presentation content](reports/final/PRESENTATION.md)
-- [AI assistance disclosure](AI_USE.md)
-- `apps/api`, `apps/web`: current implementation and containers
-- `scripts/mvp`, `research/mvp`: reproducible preparation, evaluation and notebook
-- `reports/final`: current audit, measured evidence and academic deliverables
-- `.github/workflows/mvp-*.yml`: validation and guarded manual production deployment
+Both app roots contain multi-stage `Dockerfile` and `Dockerfile.vercel` files. Root `Dockerfile` builds the current API from the repository root; root `docker-compose.yml` builds both apps. Next.js uses standalone output, non-root containers listen on PORT=8080, and ML fitting remains offline.
 
-## Limitations and future work
+## Repository map
 
-The public application passed the recorded smoke checks; continued provider quota and snapshot freshness remain operational limitations. Human relevance annotation and semantic/hybrid comparisons remain outstanding. The diagnostic suite is small, warm-process and not representative of production network latency; conservative regex safety is not clinical validation. Obtain maintained manufacturer ingredient/allergen metadata and current stock, broaden independently reviewed evaluations, and test multilingual/accessibility behaviour before expanding scope.
+| Directory/file | Purpose |
+| --- | --- |
+| [SUBMISSION_GUIDE.md](SUBMISSION_GUIDE.md) | Seven-item examiner navigation |
+| [AI_USE.md](AI_USE.md) | Student-provided disclosure, preserved exactly |
+| `apps/api/`, `apps/web/` | Current FastAPI and Next.js apps |
+| `data/client_x_catalogue.json` | Approved name-redacted reproduction source |
+| `scripts/mvp/` | Export, ingestion, fitting, evaluation and manual operations |
+| `research/mvp/` | Current notebook and honest relevance-label template |
+| `reports/final/` | One-page report, slides, current measurements and audits |
+| `docs/` | Methods, architecture decisions and privacy notes |
+| `legacy/flipkart/`, `legacy/planning/` | Clearly separated historical experiments/planning |
 
-## Historical material
-
-`src/retailassist`, `web`, `artifacts`, old notebooks and older top-level report results are retained as explicitly **legacy Flipkart/SmolLM experiments**. They are excluded from the two app build contexts. `docker-compose.legacy.yml` preserves the previous stack; root Compose is canonical and `docker-compose.mvp.yml` is a compatibility copy. No historical results are reused as Healthy U metrics. See [cleanup inventory](reports/final/REPOSITORY_CLEANUP.md).
+Older experiments and their scores are not Client X results. Read [PROJECT_COMPLIANCE.md](PROJECT_COMPLIANCE.md) for evidence, limitations and status rather than equating file existence with completed research.

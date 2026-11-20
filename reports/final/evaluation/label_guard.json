@@ -1,0 +1,5 @@
+{
+  "scope": "Current relevance evaluator rejects unreviewed template; intentional refusal, not failed model benchmark",
+  "exit_code": 1,
+  "refused_unreviewed_template": true
+}

@@ -1,1 +1,1 @@
-"""Healthy U presentation MVP: no legacy dataset or heavyweight runtime imports."""
+"""Client X presentation MVP: no legacy dataset or heavyweight runtime imports."""

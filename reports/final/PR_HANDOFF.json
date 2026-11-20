@@ -1,7 +1,1 @@
-{
-  "existing": false,
-  "number": 2,
-  "url": "https://github.com/afrochic/RetailAssistant/pull/2",
-  "draft": true,
-  "head_sha": "b3255ddaafd633b7674158dcb91fe270034161f0"
-}
+{"historical_pr_url":"https://github.com/afrochic/RetailAssistant/pull/2","state":"merged","scope":"Prior release; not the current Client X cleanup review"}

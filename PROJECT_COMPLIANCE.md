@@ -1,30 +1,19 @@
-# DSA 8401 submission compliance — 20 November 2026
+# DSA 8401 submission compliance — Client X
 
-Source of requirements: uploaded DSA8401 Capstone Project.pdf, sections3–5 and the user's public-repository checklist. Statuses below reflect actual evidence, not file existence alone. Current final evidence supersedes historical reports/mvp source-only status. Production deployment remains separate from verified local execution.
+Official capstone checklist and the student's instructions are mapped below. The final report is exactly one page. File presence is distinguished from execution evidence.
 
-| Requirement | Files | Actual evidence | Verification command | Status | Outstanding issue |
-| --- | --- | --- | --- | --- | --- |
-| Public existing Git repository/history | afrochic/RetailAssistant; audit branch | Public repo, canonical origin, fetched baseline7be14a9; safe branch commits | git remote -v; git log --oneline -4 | PASS | Final branch needs normal review/merge for main submission |
-| README overview/setup/architecture/reproduce | README.md; QUICKSTART.md; CONTAINERS.md | Reproduction exercised via local pipeline, test/build and disposable containers; architecture documented | Follow README; docker compose config --quiet | PASS | From-scratch setup still requires approved raw export or included inference artifacts |
-| Honest AI disclosure | AI_USE.md | Explicit code/debug/docs/report assistance; student review responsibility | Read AI_USE.md | PASS | Student must understand and defend the work |
-| Semi-raw real-world data and provenance | scripts/mvp/prepare.py; DATA_CARD.md; catalogue/manifest.json | Source hash verified; 5512 retained; HTML normalization; missing labels/stock documented | python scripts/mvp/audit_offline.py | PASS | Snapshot date, verified ingredients and current stock unavailable |
-| Scripted ingestion→preprocess→fit→predict | scripts/mvp/prepare.py; apps/api/retail_mvp/catalogue.py | Approved ingestion/fitting executed; identical lexical checksum on refit; local predictions | python scripts/mvp/prepare.py index; python scripts/mvp/audit_offline.py | PASS | Independent reviewer needs approved export for ingestion from scratch |
-| Model fitting code and serialized artifacts | prepare.py; products.json; lexical.json; manifest.json | 12000 TF-IDF features, checksums, real inference; GPT-OSS not fine-tuned | python scripts/mvp/manage.py preflight --execute | PASS | Optional semantic artifacts not fitted |
-| FastAPI service | apps/api/app.py; tests/test_contract.py | 23 tests passed, ready200 locally; real provider output observed | cd apps/api && ../../.venv-mvp/bin/python -m pytest -q | PASS | Production ready=true and five public chat cases passed after authorized release |
-| Docker + Compose | apps/api and apps/web Dockerfile/Dockerfile.vercel; docker-compose.yml | Both images built; disposable health/readiness/fallback and final urgent guard checked | docker compose build; follow CONTAINERS.md | PASS | Cloud runtime and local Compose resource sizing not load-tested |
-| Served end-to-end deployment | apps/*/vercel.json; supplied URLs | Initial failures repaired; ready/runtimeconfig200, trusted CORS200, five chat200 with correct modes | curl --fail https://retail-assist-api.vercel.app/ready | PASS | Broader browser/mobile, load and long-term operations remain unverified |
-| Honest evaluation and interpretation | reports/final/evaluation; scripts/mvp/audit_offline.py | 260 diagnostic calls; mean1.332ms/p952.528ms; repeated-reference constraints checked | python scripts/mvp/audit_offline.py | PASS | Diagnostic correctness is not rigorous ranking relevance evaluation |
-| Proposal Precision/Recall/MRR/NDCG | scripts/mvp/evaluate.py; research/mvp/queries.template.json | Evaluator correctly rejected unreviewed labels; no human ground truth exists | python scripts/mvp/evaluate.py --queries research/mvp/queries.template.json --confirm-human-labels | BLOCKED | Independently annotate/review Healthy U relevance labels, then evaluate held-out queries |
-| Proposal semantic/hybrid retrieval | prepare.py --semantic; catalogue.py | Optional projected semantic code only; no fitted artifact or results | Offline semantic fitting followed by labelled evaluation | PENDING | Baseline only demonstrated; proposal only partially fulfilled |
-| Technique justification | final report methodology and exclusions | TF-IDF/RAG justification and semantic/supervised/collaborative exclusions documented | Review report sections | PASS | Semantic comparison still outstanding |
-| Final report or slide deck | reports/final/RETAILASSIST_FINAL_REPORT.md/.pdf; PRESENTATION.md | Editable report and PDF with actual plots; complete 12-slide editable content | Open report and slide source | PASS | PPTX unavailable; slide content requires importing/formatting if PowerPoint needed |
-| GitHub validation | reports/final/GITHUB_ACTIONS_AUDIT.md | Actual run URLs/outcomes recorded, local fixes tested | Inspect linked exact-revision runs | PASS | Backend/frontend/Docker passed at7d46aea; relevance evaluation still blocked |
-| Security and provenance | reports/final/SECURITY_AND_REPOSITORY_AUDIT.md | Bounded tracked/staged scans found no secret patterns; approved product-only fields | Inspect scans and artifact manifest | PASS | Key rotation, full-history scan and GitHub reviewer protection UNVERIFIED; deployed source SHA verified in dashboard |
+| Required item | Location | Evidence/status |
+| --- | --- | --- |
+| README overview/setup/architecture/reproduction | README.md; SUBMISSION_GUIDE.md; QUICKSTART.md | PASS: linked architecture and reproducible public-source commands |
+| AI disclosure | AI_USE.md | PASS: exact text supplied by the student |
+| Scripted pipeline | scripts/mvp/export_client_x.py; prepare.py; data/client_x_catalogue.json | PASS: approved distribution source ingested;5512 retained |
+| Model fitting/artifacts | prepare.py index; apps/api/catalogue/products.json, lexical.json, manifest.json | PASS:12000-feature TF-IDF fitted with integrity checks; no GPT-OSS fine-tuning claim |
+| Docker and Compose | Dockerfile; docker-compose.yml; apps/api and apps/web Dockerfiles | See CLEANUP_VALIDATION.md for current build outcome; legacy config isolated |
+| API service | apps/api/app.py; apps/api/tests | PASS: current API tests exercised; Client X URL-redaction contract enforced |
+| Final report or slides | reports/final/RETAILASSIST_FINAL_REPORT.pdf; PRESENTATION.md | PASS: one-page PDF verified, editable report and12-slide content included |
 
-## Proposal alignment
+## Research and operational limitations
 
-The submitted 109419 proposal's conversational retail problem, real catalogue, scripted baseline, preferences, filtering, grounded LLM, API and Docker are implemented and exercised locally. Healthy U selection is consistent with the proposal's dataset-selection flexibility. Semantic embeddings/hybrid results and labelled ranking evaluation were explicitly planned and remain outstanding. No customer interaction data was supplied (optional in the proposal). Missing ingredient/brand/availability evidence is handled through abstention, not invented metadata. The revised system must not be described as fully meeting every proposed experiment.
+Current diagnostic measurements are real but not relevance ground truth. Precision/Recall/MRR/NDCG are BLOCKED pending independently reviewed Client X labels. Semantic/hybrid execution is PENDING. The original proposal's conversational baseline, grounded LLM, constraints and API/Docker are implemented; full semantic/ranking experiments remain incomplete.
 
-## Overall recommendation
-
-READY WITH LIMITATIONS for a scoped presentation demo: both existing public apps were rebuilt/promoted from7d46aea after explicit user approval, and actual public/API and browser outputs were observed. Formal relevance labels, optional semantic comparison and mobile/accessibility validation remain outstanding.
+Historical live and CI checks at7d46aea remain historical. New Client X changes are not deployed and require a separately approved release. Current cleanup validation, privacy scanning, artifact checks and frontend/build outcomes are recorded in reports/final/CLEANUP_VALIDATION.md. No history rewrite is claimed.

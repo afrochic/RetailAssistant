@@ -4,6 +4,7 @@ from functools import lru_cache
 import hashlib
 import json
 import math
+import os
 from pathlib import Path
 import re
 import unicodedata
@@ -21,7 +22,8 @@ def safe_url(url: str | None) -> str | None:
     if not url:
         return None
     parsed = urlparse(url)
-    if parsed.scheme not in {'http', 'https'} or parsed.hostname not in {'healthyu.co.ke', 'www.healthyu.co.ke'} or parsed.username or parsed.password:
+    allowed = {host.strip().casefold() for host in os.getenv('RETAILER_ALLOWED_HOSTS', '').split(',') if host.strip()}
+    if parsed.scheme not in {'http', 'https'} or parsed.hostname not in allowed or parsed.username or parsed.password:
         return None
     return parsed._replace(scheme='https', query='', fragment='').geturl()
 
@@ -34,7 +36,7 @@ class Catalogue:
             manifest = json.loads((directory / 'manifest.json').read_text())
             raw = (directory / 'products.json').read_bytes()
             lexical_raw = (directory / 'lexical.json').read_bytes()
-            if manifest.get('source_kind') != 'healthyu_export' or not manifest.get('permission_approved') or manifest.get('currency') != 'KES':
+            if manifest.get('source_kind') != 'client_x_export' or not manifest.get('permission_approved') or manifest.get('currency') != 'KES':
                 raise NotReady('unapproved_catalogue')
             if hashlib.sha256(raw).hexdigest() != manifest['products_sha256'] or hashlib.sha256(lexical_raw).hexdigest() != manifest['lexical_sha256']:
                 raise NotReady('artifact_integrity_mismatch')
@@ -44,7 +46,9 @@ class Catalogue:
                 raise NotReady('artifact_alignment_mismatch')
             if len(self.products) > 20000 or len({p['id'] for p in self.products}) != len(self.products):
                 raise NotReady('invalid_catalogue_size_or_ids')
-            if any(p.get('currency') != 'KES' or not safe_url(p.get('url')) for p in self.products):
+            redacted = manifest.get('client_label') == 'Client X' and manifest.get('retailer_links_redacted') is True
+            if any(p.get('currency') != 'KES' or (p.get('url') is None and not redacted)
+                   or (p.get('url') is not None and not safe_url(p.get('url'))) for p in self.products):
                 raise NotReady('invalid_product_provenance')
             self.manifest = manifest
             self.semantic = None

@@ -1,2 +1,0 @@
-There has been no change in the accessibility tree for Window: "retail-assistant – Deployment Overview".
-The focused UI element is 139 HTML content retail-assistant – Deployment Overview, URL: vercel.com/dianamusee-5113/retail-assistant/Cmwahs6c9mKX89EXM8hfuDtpcvjx

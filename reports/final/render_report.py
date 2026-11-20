@@ -12,9 +12,9 @@ ROOT=Path(__file__).resolve().parent
 SOURCE=ROOT/'RETAILASSIST_FINAL_REPORT.md'
 OUTPUT=ROOT/'RETAILASSIST_FINAL_REPORT.pdf'
 styles=getSampleStyleSheet()
-styles.add(ParagraphStyle(name='ReportBody',fontName='Helvetica',fontSize=9.3,leading=14,spaceAfter=7,textColor=colors.HexColor('#23352E')))
-styles.add(ParagraphStyle(name='ReportTitle',fontName='Helvetica-Bold',fontSize=22,leading=27,spaceAfter=17,textColor=colors.HexColor('#214D3D')))
-styles.add(ParagraphStyle(name='ReportH1',fontName='Helvetica-Bold',fontSize=15,leading=19,spaceBefore=16,spaceAfter=9,textColor=colors.HexColor('#214D3D'),keepWithNext=True))
+styles.add(ParagraphStyle(name='ReportBody',fontName='Helvetica',fontSize=9,leading=12,spaceAfter=5,textColor=colors.HexColor('#23352E')))
+styles.add(ParagraphStyle(name='ReportTitle',fontName='Helvetica-Bold',fontSize=18,leading=21,spaceAfter=10,textColor=colors.HexColor('#214D3D')))
+styles.add(ParagraphStyle(name='ReportH1',fontName='Helvetica-Bold',fontSize=10.5,leading=13,spaceBefore=8,spaceAfter=4,textColor=colors.HexColor('#214D3D'),keepWithNext=True))
 styles.add(ParagraphStyle(name='ReportH2',fontName='Helvetica-Bold',fontSize=11,leading=15,spaceBefore=10,spaceAfter=7,textColor=colors.HexColor('#214D3D'),keepWithNext=True))
 styles.add(ParagraphStyle(name='CellSmall',fontName='Helvetica',fontSize=8,leading=11,textColor=colors.HexColor('#23352E')))
 styles.add(ParagraphStyle(name='Caption',fontName='Helvetica-Oblique',fontSize=8,leading=11,spaceAfter=12,textColor=colors.HexColor('#52675D')))
@@ -75,6 +75,10 @@ def page(canvas,doc):
  canvas.drawString(42,25,'Evidence cut-off: 20 November 2026 | Controlled local and public production evidence; limitations stated explicitly')
  canvas.drawRightString(w-42,25,str(doc.page));canvas.restoreState()
 
-doc=SimpleDocTemplate(str(OUTPUT),pagesize=A4,rightMargin=42,leftMargin=42,topMargin=48,bottomMargin=44,title='RetailAssist - Final Applied Machine Learning Report',author='Admission 109419',allowSplitting=True)
+doc=SimpleDocTemplate(str(OUTPUT),pagesize=A4,rightMargin=42,leftMargin=42,topMargin=43,bottomMargin=40,title='RetailAssist - Final Applied Machine Learning Report',author='Admission 109419',allowSplitting=True)
 doc.build(story,onFirstPage=page,onLaterPages=page)
+from pypdf import PdfReader
+page_count = len(PdfReader(OUTPUT).pages)
+if page_count != 1:
+    raise RuntimeError(f'Final report must be exactly one page; rendered {page_count}.')
 print(OUTPUT)

@@ -1,15 +1,19 @@
-> Final audit update (20 November 2026): ingestion, fitting, local tests/builds, Docker probes, CI and an explicitly authorized production repair have now been executed. Both existing projects run tested source7d46aea. See reports/final/FINAL_HANDOFF.md for actual outcomes; earlier source-only/unexecuted statements below describe the prior preparation phase.
+# Client X product data card
 
-# Healthy U presentation-MVP data card
+**Purpose:** reproducible retail retrieval and grounded response generation; not clinical advice or customer profiling.
 
-Source: the existing HU-NutritionistsVA product export at `rag_pipeline/data/Enhanced_Product_List.json`. Phase 0 read-only observation: 5,512 records, SHA-256 `6d33c9d54279076aeb6105d675e327caf308c9590a47bf7cbe8c4382ed15840d`. This is actual accessible product data, not a synthetic or Flipkart substitute.
+**Distribution source:** data/client_x_catalogue.json, 5,512 real product records. The client approved product-field use for the presentation and confirmed RRP currency KES. Only ID, SKU, name, description, categories and RRP are distributed. No customer/order records, original retailer URLs, imagery or client name are copied. The private original is unchanged.
 
-The user confirmed permission for public presentation-MVP use and that RRP is KES. This is a user-confirmed use basis, not a claim that a general open-data licence exists. Re-confirm other uses separately.
+The distribution exporter converts text to plain text, replaces configured private client aliases with Client X and removes URLs. This is a transformed product-only distribution copy, not the untouched private export. Product IDs, product facts and prices are retained rather than fabricated. Product text may still permit external reidentification; no irreversible anonymization is claimed.
 
-Allowlisted fields: original ID/SKU, product name, stripped description, categories, listed price, KES currency, approved retailer link and source record ID. Customer accounts, orders, loyalty records, health histories and private infrastructure are excluded. The export is read-only; actual extraction/cleaning/fitting remain manual and unexecuted by the agent.
+The serving pipeline normalizes fields, handles invalid/missing values, enforces unique IDs and fits TF-IDF. Missing structured brand, ingredients, verified dietary labels, current stock and snapshot date remain explicitly unknown. Categories overlap. No absence of an ingredient word establishes allergen safety. Marketing descriptions are not clinical evidence.
 
-Unknown: export timestamp, current stock, structured brand, ingredients/allergen list and verified dietary labels. A word absent from a description is not evidence of allergen freedom. Marketing claims are not clinical evidence. Requested constraints that require unknown fields produce abstention/clarification.
+The current manifest includes source and artifact SHA-256 hashes, client_label=Client X, source_kind=client_x_export and retailer_links_redacted=true. Public product URLs are null. Exact data quality and price summaries are under reports/final/evaluation. TF-IDF is fitted offline; optional semantic fitting and independently reviewed relevance labels remain outstanding.
 
-Generated artifacts record actual extraction time, input/output SHA-256, accepted/rejected counts, model revision, optional semantic method, fitting timestamp and limitations. Only after student execution can accepted catalogue counts, data-quality summaries or model results be reported.
+Reproduce from the included source:
 
-The old Flipkart card is preserved in docs/LEGACY_FLIPKART_DATA_CARD.md. Historical results are not current Healthy U/Groq evidence.
+```bash
+python scripts/mvp/prepare.py ingest --source data/client_x_catalogue.json --currency KES --approved
+python scripts/mvp/prepare.py index
+python scripts/mvp/audit_offline.py
+```

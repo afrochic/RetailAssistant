@@ -1,0 +1,13 @@
+{
+  "scope": "Disposable current root API container, no credentials/provider call",
+  "ready": {
+    "ready": true,
+    "reason": null,
+    "catalogue_available": true,
+    "generation_configured": false
+  },
+  "mode": "fallback_missing_key",
+  "reference_count": 3,
+  "all_urls_null": true,
+  "removed_after_check": true
+}

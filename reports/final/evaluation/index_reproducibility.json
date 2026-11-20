@@ -1,6 +1,7 @@
 {
-  "before_sha256": "1e3e3c038155e49e1835cb731ba778e4756f2d4cf5db1b53050a785b80508678",
-  "after_sha256": "1e3e3c038155e49e1835cb731ba778e4756f2d4cf5db1b53050a785b80508678",
-  "identical": true,
-  "scope": "Same approved products, parameters and environment; lexical artifact bytes stable across two fits. Manifest timestamps intentionally differ."
+  "scope": "Current Client X source, repeated fitting",
+  "before_sha256": "6ea527299bc09f9ec68d7f0d9a56b30d692e1ae253db702e8491a8a49b28dd63",
+  "after_sha256": "6ea527299bc09f9ec68d7f0d9a56b30d692e1ae253db702e8491a8a49b28dd63",
+  "byte_identical": true,
+  "source_sha256": "d8e772051956bbc84809c4a48dc6f15bb412c468873a6f5e096d913f8995f030"
 }

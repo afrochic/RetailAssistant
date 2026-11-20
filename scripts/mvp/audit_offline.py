@@ -20,7 +20,7 @@ from retail_mvp.catalogue import Catalogue  # noqa: E402
 from retail_mvp.models import Preferences  # noqa: E402
 
 OUT = ROOT / 'reports/final/evaluation'
-SOURCE = ROOT.parent / 'rag_pipeline/data/Enhanced_Product_List.json'
+SOURCE = ROOT / 'data/client_x_catalogue.json'
 
 
 def write_csv(name, rows):
@@ -130,7 +130,7 @@ def run():
         'all_repeated_results_identical': all(r['deterministic_repeat'] for r in rows),
         'human_reviewed_relevance_labels_available': False,
         'precision_at_k': None, 'recall_at_k': None, 'mrr': None, 'ndcg_at_k': None,
-        'ranking_quality_status': 'BLOCKED: independent human-reviewed Healthy U relevance labels are unavailable. Legacy INR/Flipkart query labels excluded.',
+        'ranking_quality_status': 'BLOCKED: independent human-reviewed Client X relevance labels are unavailable. Legacy INR/Flipkart query labels excluded.',
         'latency_scope': 'Single local Python process; warm per-query pure retrieval only, excluding network, Groq, startup and UI. Diagnostic cases are not independent sampled research judgments.',
         'no_training_claim': 'Only lexical corpus statistics fitted; GPT-OSS was neither trained nor fine-tuned. Semantic/hybrid optional code not executed.',
     }

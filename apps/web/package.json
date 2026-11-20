@@ -1,5 +1,5 @@
 {
-  "name": "retailassist-healthyu-web",
+  "name": "retailassist-client-x-web",
   "version": "0.1.0",
   "private": true,
   "engines": {"node": "22.x"},

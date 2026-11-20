@@ -1,4 +1,0 @@
-{
-  "status": 422,
-  "body": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"Check the message length, history and preference values.\"}}"
-}

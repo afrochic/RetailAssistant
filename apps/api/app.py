@@ -15,7 +15,7 @@ from retail_mvp.safety import InvalidPreference, boundary, resolve_request, safe
 
 settings = Settings.read()
 logger = logging.getLogger('retailassist.mvp')
-app = FastAPI(title='RetailAssist Healthy U MVP', version='0.1.0', description='Anonymous catalogue-grounded retail chat. Not medical advice.')
+app = FastAPI(title='RetailAssist Client X MVP', version='0.1.0', description='Anonymous catalogue-grounded retail chat. Not medical advice.')
 
 class BodyLimit:
     def __init__(self, app, maximum=24576):
@@ -85,7 +85,7 @@ def ready():
 @app.get('/api/system-info')
 def system_info():
     catalogue, reason = availability()
-    return {'ready': reason is None, 'reason': reason, 'model': settings.model, 'generation_configured': bool(settings.api_key), 'catalogue_count': len(catalogue.products) if catalogue else 0, 'currency': 'KES', 'retrieval': catalogue.method if catalogue else 'unavailable', 'source_snapshot_date': catalogue.manifest.get('source_snapshot_date') if catalogue else None, 'permission': 'user_approved_presentation_mvp', 'limitations': ['Not an official Healthy U service.', 'Historical snapshot; confirm prices and stock.', 'No clinical advice or efficacy claims.']}
+    return {'ready': reason is None, 'reason': reason, 'model': settings.model, 'generation_configured': bool(settings.api_key), 'catalogue_count': len(catalogue.products) if catalogue else 0, 'currency': 'KES', 'retrieval': catalogue.method if catalogue else 'unavailable', 'source_snapshot_date': catalogue.manifest.get('source_snapshot_date') if catalogue else None, 'permission': 'user_approved_presentation_mvp', 'limitations': ['Not an official Client X service.', 'Historical snapshot; confirm prices and stock.', 'No clinical advice or efficacy claims.']}
 
 @app.post('/api/chat', response_model=ChatResponse)
 @app.post('/api/recommend', response_model=ChatResponse)
@@ -125,7 +125,7 @@ async def chat(body: ChatRequest, request: Request):
     for p in products:
         reason = generated.reasons.get(p['id']) or factual_reason(p, preferences)
         references.append(Reference(id=p['id'], name=p['name'], description=safe_excerpt(p['description'], 260) or 'Listing text is omitted where it contains health or efficacy claims.', price=p['price'], currency='KES', url=safe_url(p['url']), category=p['category'], stock=p['stock'], source_record_id=p['source_record_id'], reason=reason))
-    answer = generated.opening + '\n\n' + '\n\n'.join(f"**{p.name}** [HU:{p.id}]\n\n{p.reason}" for p in references)
+    answer = generated.opening + '\n\n' + '\n\n'.join(f"**{p.name}** [CX:{p.id}]\n\n{p.reason}" for p in references)
     if generated.follow_up:
         answer += '\n\n' + generated.follow_up
     if generated.notice:
