@@ -10,7 +10,7 @@ Official capstone checklist and the student's instructions are mapped below. The
 | Model fitting/artifacts | prepare.py index; apps/api/catalogue/products.json, lexical.json, manifest.json | PASS:12000-feature TF-IDF fitted with integrity checks; no GPT-OSS fine-tuning claim |
 | Docker and Compose | Dockerfile; docker-compose.yml; apps/api and apps/web Dockerfiles | See CLEANUP_VALIDATION.md for current build outcome; legacy config isolated |
 | API service | apps/api/app.py; apps/api/tests | PASS: current API tests exercised; Client X URL-redaction contract enforced |
-| Final report or slides | reports/final/RETAILASSIST_FINAL_REPORT.pdf; PRESENTATION.md | PASS: one-page PDF verified, editable report and12-slide content included |
+| Final report or slides | reports/final/RETAILASSIST_FINAL_REPORT.pdf; RETAILASSIST_PRESENTATION.pdf | PASS: one-page PDF verified, editable report and 12-slide PDF included |
 
 ## Research and operational limitations
 

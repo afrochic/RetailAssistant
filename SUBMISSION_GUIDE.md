@@ -10,9 +10,9 @@ DSA 8401 Applied Machine Learning · Admission 109419 · Client X.
 | Model fitting and artifacts | [prepare.py index](scripts/mvp/prepare.py), [catalogue folder](apps/api/catalogue/), [methodology](docs/METHODOLOGY.md) | Fitted TF-IDF products/index/checksum manifest; not GPT-OSS fine-tuning |
 | Docker | [root Dockerfile](Dockerfile), [Compose](docker-compose.yml), [API image](apps/api/Dockerfile), [web image](apps/web/Dockerfile) | Current API and frontend runtime images |
 | API | [FastAPI entry point](apps/api/app.py), [tests](apps/api/tests/), [run instructions](QUICKSTART.md) | Prediction, validation, safety, health and readiness |
-| Final report or slides | **[One-page PDF report](reports/final/RETAILASSIST_FINAL_REPORT.pdf)**, [editable source](reports/final/RETAILASSIST_FINAL_REPORT.md), [presentation](reports/final/PRESENTATION.md) | Problem, justification, actual results and limits |
+| Final report or slides | **[One-page PDF report](reports/final/RETAILASSIST_FINAL_REPORT.pdf)**, [editable source](reports/final/RETAILASSIST_FINAL_REPORT.md), [presentation](reports/final/RETAILASSIST_PRESENTATION.pdf) | Problem, justification, actual results and limits |
 
-The presentation is complete editable slide content; no PPTX export is claimed. The report PDF must contain exactly one page. Detailed evidence is supporting material, not additional report pages.
+The presentation is a 12-slide landscape PDF. The editable authoring source is reports/final/render_slides.py; no PPTX export is claimed. The report PDF must contain exactly one page. Detailed evidence is supporting material, not additional report pages.
 
 ## Supporting material
 

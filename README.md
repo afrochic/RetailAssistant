@@ -2,7 +2,7 @@
 
 **DSA 8401 · Applied Machine Learning · MSc Data Science & Analytics · Admission 109419**
 
-Start with **[SUBMISSION_GUIDE.md](SUBMISSION_GUIDE.md)** for direct links to every assessed deliverable. The **[final report is one page](reports/final/RETAILASSIST_FINAL_REPORT.pdf)**; [editable report source](reports/final/RETAILASSIST_FINAL_REPORT.md) and [12-slide presentation content](reports/final/PRESENTATION.md) are included.
+Start with **[SUBMISSION_GUIDE.md](SUBMISSION_GUIDE.md)** for direct links to every assessed deliverable. The **[final report is one page](reports/final/RETAILASSIST_FINAL_REPORT.pdf)**; [editable report source](reports/final/RETAILASSIST_FINAL_REPORT.md) and [12-slide PDF presentation](reports/final/RETAILASSIST_PRESENTATION.pdf) are included.
 
 ## Problem and objectives
 

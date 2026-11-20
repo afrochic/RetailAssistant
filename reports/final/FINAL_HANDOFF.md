@@ -1,6 +1,6 @@
 # Final submission handoff — Client X
 
-Start with [SUBMISSION_GUIDE.md](../../SUBMISSION_GUIDE.md). Canonical report: [one-page PDF](RETAILASSIST_FINAL_REPORT.pdf); [editable report](RETAILASSIST_FINAL_REPORT.md); [presentation content](PRESENTATION.md). The exact student-supplied AI disclosure is at [AI_USE.md](../../AI_USE.md).
+Start with [SUBMISSION_GUIDE.md](../../SUBMISSION_GUIDE.md). Canonical report: [one-page PDF](RETAILASSIST_FINAL_REPORT.pdf); [editable report](RETAILASSIST_FINAL_REPORT.md); [presentation content](RETAILASSIST_PRESENTATION.pdf). The exact student-supplied AI disclosure is at [AI_USE.md](../../AI_USE.md).
 
 ## Current cleanup
 
@@ -16,4 +16,4 @@ Historical source7d46aea passed backend/frontend/Docker CI and five public chat 
 
 ## Remaining work
 
-Independently review relevance labels, run semantic comparison if required, complete mobile/accessibility/load validation, and review/approve any new release. Existing Git/CI/cloud history may retain the original name because this task does not rewrite history or update production. Public product text may still allow external reidentification. The presentation is editable slide content, not a PPTX.
+Independently review relevance labels, run semantic comparison if required, complete mobile/accessibility/load validation, and review/approve any new release. Existing Git/CI/cloud history may retain the original name because this task does not rewrite history or update production. Public product text may still allow external reidentification. The presentation is a 12-slide PDF, with editable authoring source in render_slides.py.
