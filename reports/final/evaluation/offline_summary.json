@@ -1,7 +1,7 @@
 {
-  "measured_at_utc": "2026-11-19T22:34:04.766342+00:00",
+  "measured_at_utc": "2026-11-19T23:16:46.690347+00:00",
   "python_version": "3.12.16",
-  "source_sha256": "6d33c9d54279076aeb6105d675e327caf308c9590a47bf7cbe8c4382ed15840d",
+  "source_sha256": "d8e772051956bbc84809c4a48dc6f15bb412c468873a6f5e096d913f8995f030",
   "source_hash_matches_manifest": true,
   "raw_records": 5512,
   "accepted_records": 5512,
@@ -24,17 +24,17 @@
   "semantic_artifact_available": false,
   "tfidf_features": 12000,
   "artifact_sizes_bytes": {
-    "products.json": 3950322,
-    "lexical.json": 4830002,
-    "manifest.json": 956
+    "products.json": 3530991,
+    "lexical.json": 4830069,
+    "manifest.json": 1010
   },
-  "cold_artifact_load_ms": 102.38316599861719,
+  "cold_artifact_load_ms": 55.902208005136345,
   "diagnostic_cases": 13,
   "timed_repetitions_per_case": 20,
   "timed_requests": 260,
-  "latency_mean_ms": 1.3321622000288558,
-  "latency_p50_ms": 1.2525205020210706,
-  "latency_p95_ms": 2.5276955017034197,
+  "latency_mean_ms": 1.1338867037501097,
+  "latency_p50_ms": 1.174187502329005,
+  "latency_p95_ms": 2.264975000798586,
   "returned_reference_occurrences": 640,
   "invalid_reference_occurrences": 0,
   "constraint_violation_occurrences": 0,
@@ -47,7 +47,7 @@
   "recall_at_k": null,
   "mrr": null,
   "ndcg_at_k": null,
-  "ranking_quality_status": "BLOCKED: independent human-reviewed Healthy U relevance labels are unavailable. Legacy INR/Flipkart query labels excluded.",
+  "ranking_quality_status": "BLOCKED: independent human-reviewed Client X relevance labels are unavailable. Legacy INR/Flipkart query labels excluded.",
   "latency_scope": "Single local Python process; warm per-query pure retrieval only, excluding network, Groq, startup and UI. Diagnostic cases are not independent sampled research judgments.",
   "no_training_claim": "Only lexical corpus statistics fitted; GPT-OSS was neither trained nor fine-tuned. Semantic/hybrid optional code not executed."
 }

@@ -1,0 +1,75 @@
+{
+  "scope": "Current anonymized local ASGI; no provider call or production deployment",
+  "ready": {
+    "ready": true,
+    "reason": null,
+    "catalogue_available": true,
+    "generation_configured": false
+  },
+  "status": 200,
+  "response": {
+    "answer": "Here are catalogue matches for your request.\n\n**Vp Jumbo Oats 500G** [CX:153038]\n\nListed at KES 195.00. Within your KES 1,000.00 budget. Current stock is unknown.\n\n**Vp Jumbo Oats 1Kg** [CX:153037]\n\nListed at KES 390.00. Within your KES 1,000.00 budget. Current stock is unknown.\n\n**Vp Porridge Oats 500G** [CX:153217]\n\nListed at KES 195.00. Within your KES 1,000.00 budget. Current stock is unknown.",
+    "references": [
+      {
+        "id": "153038",
+        "name": "Vp Jumbo Oats 500G",
+        "description": "Jumbo oats are whole grain oats that offer a hearty texture and are rich in fiber, vitamins, and minerals.",
+        "price": 195.0,
+        "currency": "KES",
+        "url": null,
+        "category": [
+          "Foods > Dried foods"
+        ],
+        "stock": "unknown",
+        "source_record_id": "153038",
+        "reason": "Listed at KES 195.00. Within your KES 1,000.00 budget. Current stock is unknown."
+      },
+      {
+        "id": "153037",
+        "name": "Vp Jumbo Oats 1Kg",
+        "description": "Jumbo oats are whole grain oats that offer a hearty texture and are rich in fiber, vitamins, and minerals.",
+        "price": 390.0,
+        "currency": "KES",
+        "url": null,
+        "category": [
+          "Foods > Dried foods"
+        ],
+        "stock": "unknown",
+        "source_record_id": "153037",
+        "reason": "Listed at KES 390.00. Within your KES 1,000.00 budget. Current stock is unknown."
+      },
+      {
+        "id": "153217",
+        "name": "Vp Porridge Oats 500G",
+        "description": "These oats are a wholesome breakfast staple, rich in fiber and essential nutrients.",
+        "price": 195.0,
+        "currency": "KES",
+        "url": null,
+        "category": [
+          "Foods > Dried foods"
+        ],
+        "stock": "unknown",
+        "source_record_id": "153217",
+        "reason": "Listed at KES 195.00. Within your KES 1,000.00 budget. Current stock is unknown."
+      }
+    ],
+    "mode": "fallback_missing_key",
+    "retrieval": "fitted_tfidf",
+    "preferences": {
+      "max_price": 1000.0,
+      "min_price": null,
+      "currency": "KES",
+      "category": null,
+      "brand": null,
+      "required_labels": [],
+      "excluded_ingredients": [],
+      "in_stock": false
+    },
+    "notices": [
+      "Listed prices are KES from the approved source snapshot. Current stock and price changes are not confirmed.",
+      "Groq is not configured. Showing catalogue facts without generated advice."
+    ],
+    "retry_after": null,
+    "request_id": "283e342ca592493a821c7a91478bb68e"
+  }
+}

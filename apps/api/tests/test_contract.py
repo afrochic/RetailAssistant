@@ -11,11 +11,11 @@ from retail_mvp.safety import boundary, resolve_request
 
 @pytest.fixture
 def catalogue(tmp_path):
-    products = [{'id': 'UNIT_FIXTURE', 'sku': 'NOT_REAL', 'name': 'UNIT FIXTURE oats', 'description': 'Synthetic test fixture, not a Healthy U record.', 'category': ['Foods'], 'brand': None, 'price': 500.0, 'currency': 'KES', 'stock': 'unknown', 'ingredients': None, 'verified_labels': [], 'url': 'https://www.healthyu.co.ke/product/unit-fixture-not-for-serving/', 'source_record_id': 'UNIT_FIXTURE'}]
+    products = [{'id': 'UNIT_FIXTURE', 'sku': 'NOT_REAL', 'name': 'UNIT FIXTURE oats', 'description': 'Synthetic test fixture, not a Client X record.', 'category': ['Foods'], 'brand': None, 'price': 500.0, 'currency': 'KES', 'stock': 'unknown', 'ingredients': None, 'verified_labels': [], 'url': None, 'source_record_id': 'UNIT_FIXTURE'}]
     lexical = {'product_ids': ['UNIT_FIXTURE'], 'vocabulary': ['oats'], 'idf': {'oats': 1.0}, 'postings': {'oats': [[0, 1.0]]}}
     p = json.dumps(products).encode(); l = json.dumps(lexical).encode()
     (tmp_path / 'products.json').write_bytes(p); (tmp_path / 'lexical.json').write_bytes(l)
-    (tmp_path / 'manifest.json').write_text(json.dumps({'source_kind': 'healthyu_export', 'permission_approved': True, 'currency': 'KES', 'products_sha256': hashlib.sha256(p).hexdigest(), 'lexical_sha256': hashlib.sha256(l).hexdigest()}))
+    (tmp_path / 'manifest.json').write_text(json.dumps({'source_kind': 'client_x_export', 'client_label': 'Client X', 'retailer_links_redacted': True, 'permission_approved': True, 'currency': 'KES', 'products_sha256': hashlib.sha256(p).hexdigest(), 'lexical_sha256': hashlib.sha256(l).hexdigest()}))
     return Catalogue(tmp_path)
 
 def test_hard_budget_and_unknown_attributes(catalogue):

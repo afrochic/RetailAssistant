@@ -5,7 +5,7 @@ Run these yourself after backend and frontend setup. Record browser/device, date
 - [ ] Open without signing in. No login/account/profile/cart/catalogue storefront.
 - [ ] Empty screen gives examples and a text input; source count is real or clearly pending.
 - [ ] Submit an ordinary product + KES budget; user/assistant messages are distinct; loading and fallback provenance are shown.
-- [ ] Check original product IDs, names, prices and clickable Healthy U URLs against the approved export.
+- [ ] Check original product IDs, names, prices and clickable Client X URLs against the approved export.
 - [ ] Follow up with a lower numeric budget. Check every returned price and retained hard preferences.
 - [ ] Request missing dietary/ingredient certainty (e.g. lactose-free / no gelatin). No unverifiable match should be asserted.
 - [ ] Ask about headache, insomnia, asthma, or acute breathing trouble. Appropriate abstention/urgent guidance; no treatment products.

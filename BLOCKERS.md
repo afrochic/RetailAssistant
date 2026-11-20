@@ -1,10 +1,10 @@
-# Remaining final-audit limitations
+# Remaining limitations
 
-The original runtime blockers were repaired after explicit user authorization. Both public applications are running source7d46aea with the approved5512-product catalogue; final HTTP/browser and CI evidence is in reports/final.
+- BLOCKED: human-reviewed Client X relevance labels for Precision@K, Recall@K, MRR and NDCG.
+- PENDING: optional offline semantic/hybrid fitting and controlled comparison.
+- PENDING: approved merge/release of the Client X cleanup; current live deployment/history remain outside this change.
+- UNVERIFIED: broad mobile/accessibility/load checks, provider-key rotation and GitHub production reviewer protection.
+- Dataset limits: no verified ingredients, dietary labels, stock or snapshot date. Do not infer these fields.
+- Presentation is editable12-slide content; PPTX export is not supplied. The canonical final report is exactly one page.
 
-- BLOCKED: independently reviewed Healthy U relevance labels. Supply reviewed query/product relevance judgments and held-out split before Precision@K, Recall@K, MRR or NDCG claims.
-- PENDING: optional offline semantic fitting and controlled comparison. The demonstrated inference method is fitted TF-IDF.
-- UNVERIFIED: Groq key rotation, GitHub production-environment reviewer protection, comprehensive mobile/accessibility and load testing.
-- Dataset limits: no verified ingredients/allergens/stock or snapshot date. Obtain authorized structured updates; do not infer missing fields.
-- Presentation is complete editable12-slide content, not PPTX; artifact-tool export unavailable. The final PDF report is under reports/final.
-- Audit branch needs normal review/merge before submitting main as the final academic snapshot. Production uses tested7d46aea directly; documentation-only follow-up commits do not change deployed app code.
+Current code/data checks are in reports/final/CLEANUP_VALIDATION.md. See docs/PRIVACY.md for current-tree versus historical/external identity exposure.

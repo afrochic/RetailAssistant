@@ -36,7 +36,17 @@ apps/api/catalogue/*.npy
 apps/**/tsconfig.tsbuildinfo
 reports/mvp/results/
 
-# Approved compact Healthy U inference artifacts for reproducible deployment
+# Approved compact Client X inference artifacts for reproducible deployment
 !apps/api/catalogue/products.json
 !apps/api/catalogue/lexical.json
 !apps/api/catalogue/manifest.json
+
+.DS_Store
+legacy/**/__pycache__/
+legacy/**/.pytest_cache/
+# Historical experiments: keep original tracked checkpoints, not local caches/downloads.
+legacy/flipkart/artifacts/**
+!legacy/flipkart/artifacts/fitted_transformers.joblib
+!legacy/flipkart/artifacts/retriever_index.joblib
+legacy/flipkart/data/raw/
+legacy/flipkart/data/processed/

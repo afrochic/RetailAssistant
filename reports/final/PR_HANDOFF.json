@@ -1,7 +1,11 @@
 {
+  "number": 3,
+  "url": "https://github.com/afrochic/RetailAssistant/pull/3",
+  "draft": false,
+  "head_sha": "5436ed89e1d7b0d2737bc4affb571d6a39c618a8",
   "existing": false,
-  "number": 2,
-  "url": "https://github.com/afrochic/RetailAssistant/pull/2",
-  "draft": true,
-  "head_sha": "b3255ddaafd633b7674158dcb91fe270034161f0"
+  "production_deployment_executed": false,
+  "merged": false,
+  "ci_verified_source": "5436ed89e1d7b0d2737bc4affb571d6a39c618a8",
+  "ci_status": "PASS"
 }

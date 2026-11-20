@@ -13,6 +13,8 @@ OUTPUT = ROOT / 'reports/final/evaluation/production_rag_checks.json'
 
 
 def main():
+    if not PRODUCTION.exists():
+        raise SystemExit('Historical identifying payloads were withdrawn. Supply a newly approved Client X response capture before running this verifier; no result was generated.')
     raw_evidence = PRODUCTION.read_bytes()
     evidence = json.loads(raw_evidence)
     catalogue_raw = CATALOGUE.read_bytes()
@@ -41,11 +43,11 @@ def main():
                     reasons.append(f'This catalogue option is priced at KES {price:,.2f}. Current stock is unknown.')
                     if budget is not None:
                         reasons.append(f'The listed price, KES {price:,.2f}, is within your KES {budget:,.2f} budget. Current stock is unknown.')
-            entry = {'case_id': name, 'id': ref['id'], 'source_fields_equal': field_checks, 'budget_satisfied': budget is None or (price is not None and price <= budget), 'supported_reason_exact': ref['reason'] in reasons, 'answer_contains_exact_name_id_reason': f"**{ref['name']}** [HU:{ref['id']}]\n\n{ref['reason']}" in response['answer']}
+            entry = {'case_id': name, 'id': ref['id'], 'source_fields_equal': field_checks, 'budget_satisfied': budget is None or (price is not None and price <= budget), 'supported_reason_exact': ref['reason'] in reasons, 'answer_contains_exact_name_id_reason': f"**{ref['name']}** [CX:{ref['id']}]\n\n{ref['reason']}" in response['answer']}
             entry['pass'] = all(field_checks.values()) and entry['budget_satisfied'] and entry['supported_reason_exact'] and entry['answer_contains_exact_name_id_reason']
             per_refs.append(entry)
             references.append(entry)
-        cited_ids = re.findall(r'\[HU:([^\]]+)\]', response['answer'])
+        cited_ids = re.findall(r'\[CX:([^\]]+)\]', response['answer'])
         row = {'case_id': name, 'http_status': case['status'], 'mode': response['mode'], 'expected_mode': wanted_mode, 'mode_correct': response['mode'] == wanted_mode, 'reference_occurrences': len(per_refs), 'refs_source_grounded': all(r['pass'] for r in per_refs), 'answer_citations_match_reference_ids': cited_ids == [r['id'] for r in response['references']], 'resolved_budget_expected': response['preferences']['max_price'] == budget, 'cors_expected_frontend': case['cors_origin'] == 'https://retail-assistant-tau.vercel.app', 'latency_seconds': case['latency_seconds']}
         if name in ['B_suitability', 'C_medical', 'D_no_match']:
             row['appropriate_abstention'] = response['references'] == []

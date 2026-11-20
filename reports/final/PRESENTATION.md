@@ -2,19 +2,19 @@
 
 DSA 8401 Applied Machine Learning | MSc Data Science & Analytics | Admission 109419
 Evidence cut-off: 20 November 2026. Twelve editable slides with speaker notes.
-This is complete presentation content, not a PPTX export. Final presentation-MVP verdict: READY WITH LIMITATIONS.
+This is complete presentation content, not a PPTX export. Historical pre-anonymization verdict: READY WITH LIMITATIONS. Current anonymized local pipeline diagnostics are verified; publication and fresh live checks remain pending.
 
 ---
 
 ## Slide 1 - RetailAssist
 
-**A conversational Healthy U product recommendation system**
+**A conversational Client X product recommendation system**
 
 Catalogue retrieval, constrained generation and honest deployment evaluation
 
 Admission 109419 | DSA 8401 | 20 November 2026
 
-**Speaker notes:** Describe this as an independent student project. The current evidence supports a working local baseline and controlled public end-to-end requests after explicitly authorized repair. State the remaining semantic, ranking-evaluation and UI-verification limits before the live demo.
+**Speaker notes:** Describe this as an independent student project. Fresh anonymized local diagnostics passed. Controlled public end-to-end requests passed historically before anonymization, after explicitly authorized repair. State the remaining semantic, ranking-evaluation and UI-verification limits before the live demo.
 
 ---
 
@@ -42,19 +42,19 @@ Admission 109419 | DSA 8401 | 20 November 2026
 
 ---
 
-## Slide 4 - Healthy U dataset and data quality
+## Slide 4 - Client X dataset and data quality
 
-**5,512 approved records; all 5,512 accepted during executed ingestion**
+**Fresh anonymized ingestion: 5,512 approved records, all accepted; zero rejects**
 
 - No duplicate raw IDs or normalized product-name groups found.
 - All records have valid positive KES prices; median KES 1,599.
 - Price range: KES 35 to KES 19,999; 133 overlapping category labels.
 - Structured ingredients, verified dietary labels, stock and snapshot date are unavailable.
 
-**Figure:** `evaluation/category_distribution.png`
-**Supporting table:** `evaluation/missing_data.csv`
+**Figure:** `evaluation/category_distribution.png` (regenerated with Client X title).
+**Supporting table:** `evaluation/missing_data.csv` (current anonymized snapshot).
 
-**Speaker notes:** Permission and KES RRP were confirmed by the user. The source hash is recorded in the report and manifest. Category labels overlap, so the chart is not a mutually exclusive class distribution. Name-uniqueness checks do not prove that no near-duplicate products exist. No customer data is part of the pipeline.
+**Speaker notes:** Permission and KES RRP were confirmed by the user. The current source hash is recorded in the anonymized manifest. Category labels overlap, so the chart is not a mutually exclusive class distribution. Name-uniqueness checks do not prove that no near-duplicate products exist. No customer data is part of the pipeline.
 
 ---
 
@@ -81,7 +81,7 @@ Response -> verified product references, KES prices and generation mode
 - Fit 12,000 TF-IDF features and normalized sparse postings.
 - Validate artifact hashes and product/index alignment at inference startup.
 
-**Figure:** `evaluation/price_distribution.png`
+**Figure:** `evaluation/price_distribution.png` (current anonymized snapshot).
 
 **Speaker notes:** The price figure uses measured catalogue values, not synthetic examples. Source-record IDs maintain traceability. Price filtering happens before ranking so an otherwise relevant over-budget record cannot be returned. The serialized lexical artifact was byte-identical across two local fits with the same inputs and environment.
 
@@ -110,29 +110,29 @@ Response -> verified product references, KES prices and generation mode
 
 ---
 
-## Slide 9 - Measured local results
+## Slide 9 - Fresh anonymized local results
 
 | Measure | Actual local result |
 | --- | --- |
-| Mean warm retrieval latency | 1.33 ms |
-| P95 warm retrieval latency | 2.53 ms |
-| Cold artifact load | 102.38 ms |
+| Mean warm retrieval latency | 1.13 ms |
+| P95 warm retrieval latency | 2.26 ms |
+| Cold artifact load | 55.90 ms |
 | Returned reference occurrences | 640 |
 | Invalid IDs / constraint violations | 0 / 0 |
 | Expected abstention cases | 5 of 5 passed |
 | Repeat result ordering | Identical across repetitions |
 
-**Verification:** 23 API tests passed; frontend type/lint/build and both image/runtime checks passed. Non-production backend, frontend and Docker CI all completed PASS at revision 7d46aea.
+**Current verification:** 25 API tests, backend Ruff and frontend type/lint/standalone build passed. Local readiness and three-reference fallback passed with retailer URLs omitted. Both Compose images and the root API image built; disposable container readiness and anonymized fallback passed. Anonymized production verification remains pending. Historical pre-anonymization backend, frontend and Docker CI passed at 7d46aea.
 
-**Local integration:** four actual local Groq responses across before/after checks; dietary clarification, urgent medical response and impossible-budget abstention each returned no products.
+**Historical integration:** actual local Groq responses and safety checks passed before anonymization; they are not represented as new provider tests of this snapshot.
 
-**Figure:** `evaluation/retrieval_latency.png`
+**Figure:** `evaluation/retrieval_latency.png` (fresh anonymized local measurements; 260 timings).
 
-**Speaker notes:** A budget-number retrieval defect was found and fixed with a red/green regression; post-fix outputs returned three KES 499 rice-cake products. These measurements came from one local Python 3.12 process. Zero failures on these cases does not prove universal grounding, medical safety or relevance. P@K, R@K, MRR and NDCG were intentionally not computed without judgments. No semantic comparison chart is included because the semantic artifact was unavailable.
+**Speaker notes:** A budget-number retrieval defect was historically found and fixed with a red/green regression. The fresh anonymous measurements came from one local Python 3.12 process. Zero failures on these cases does not prove universal grounding, medical safety or relevance. P@K, R@K, MRR and NDCG were intentionally not computed without judgments. No semantic comparison chart is included because the semantic artifact was unavailable.
 
 ---
 
-## Slide 10 - Public application after authorized repair
+## Slide 10 - Historical public application and current cleanup
 
 Frontend: https://retail-assistant-tau.vercel.app/
 Backend: https://retail-assist-api.vercel.app/
@@ -142,11 +142,11 @@ Backend: https://retail-assist-api.vercel.app/
 - Five public cases: 200; two Groq-grounded responses, dietary clarification, urgent medical safety and no-match abstention.
 - Browser interaction rendered four product references, KES prices and retailer links.
 
-**Figure:** `production/browser_grounded_chat.png`
+**Screenshot omitted:** original capture exposed the client identity or retailer links. A new anonymized capture is required.
 
-**Final verdict: READY WITH LIMITATIONS**
+**Historical live verdict: READY WITH LIMITATIONS; anonymized rollout pending**
 
-**Speaker notes:** Initial readiness, origin, limiter and CORS failures were preserved in the evidence and repaired only after explicit authorization. Both current production source revisions were confirmed as 7d46aea. Mobile layout and several UI interactions remain unverified. The genuine public chat screenshot is production/browser_grounded_chat.png; deployment dashboards have separately named captures. Public requests A/E each returned three KES499 rice-cake references with genuine groq_grounded mode. This is successful targeted smoke evidence, not general relevance validation.
+**Speaker notes:** Initial readiness, origin, limiter and CORS failures were preserved in the evidence and repaired only after explicit authorization. Both historical pre-anonymization production source revisions were confirmed as 7d46aea. Mobile layout and several UI interactions remain unverified. The original identifying screenshots are not included in this public presentation; they are not relabelled as anonymous evidence. Current anonymized deployment has not been verified. Public requests A/E each returned three KES499 rice-cake references with genuine groq_grounded mode. This is successful targeted smoke evidence, not general relevance validation.
 
 ---
 
@@ -165,14 +165,14 @@ Backend: https://retail-assist-api.vercel.app/
 
 **Delivered evidence:** approved-data ingestion, fitted lexical artifact, reproducibility checks, real local measurements and successful controlled public Groq/API tests after documented repair.
 
-**Before a live presentation:**
+**Before presenting the anonymized snapshot:**
 
-1. Recheck public readiness and free-tier quota before the presentation.
+1. Complete fresh anonymized checks; confirm deployment source and free-tier quota.
 2. Check mobile layout, New Chat and remaining UI states.
 3. Inspect live references; avoid inferring current stock or dietary suitability.
 4. Complete semantic experiments and human relevance annotation to meet the proposal’s remaining evaluation commitments.
 
-**Speaker notes:** The defensible conclusion is a functioning presentation MVP with incomplete ranking-effectiveness and full-interface validation. Future work includes source freshness, verified dietary attributes, a faithful semantic comparison and systematic safety evaluation. AI assistance was used for code, audit and writing; see AI_USE.md.
+**Speaker notes:** The earlier presentation MVP worked under controlled checks. The anonymized pipeline has fresh local diagnostics; its production rollout, ranking-effectiveness and full-interface validation remain incomplete. Future work includes source freshness, verified dietary attributes, a faithful semantic comparison and systematic safety evaluation. AI assistance was used for code, audit and writing; see AI_USE.md.
 
 ## References for speaker notes
 

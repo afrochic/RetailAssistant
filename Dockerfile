@@ -1,14 +1,20 @@
-FROM python:3.9-slim
+# Current API image from repository-root context. Use Compose for both services.
+# syntax=docker/dockerfile:1
+FROM python:3.12-slim-bookworm AS dependencies
+WORKDIR /build
+RUN python -m venv /opt/venv
+COPY apps/api/requirements.txt .
+RUN /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
+
+FROM python:3.12-slim-bookworm AS runtime
+ENV PATH="/opt/venv/bin:$PATH" PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 APP_ENV=production PORT=8080
 WORKDIR /app
-ENV PYTHONUNBUFFERED=1 PYTHONPATH=/app/src HF_HOME=/app/artifacts/model_cache
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-COPY src src
-COPY web web
-COPY artifacts artifacts
-RUN if [ ! -f artifacts/retriever.joblib ]; then python -m retailassist.bootstrap; fi
-RUN useradd --uid 10001 --create-home appuser && chown -R appuser:appuser /app
-USER appuser
-EXPOSE 8000
-HEALTHCHECK --interval=30s --timeout=5s --start-period=90s CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"
-CMD ["uvicorn", "retailassist.api:app", "--host", "0.0.0.0", "--port", "8000"]
+COPY --from=dependencies /opt/venv /opt/venv
+RUN groupadd --gid 10001 retail && useradd --uid 10001 --gid retail --no-create-home retail
+COPY --chown=retail:retail apps/api/app.py ./
+COPY --chown=retail:retail apps/api/retail_mvp ./retail_mvp
+COPY --chown=retail:retail apps/api/catalogue ./catalogue
+USER retail
+EXPOSE 8080
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 CMD python -c "import os,urllib.request;urllib.request.urlopen('http://127.0.0.1:'+os.environ['PORT']+'/health',timeout=4)"
+CMD ["sh", "-c", "exec python -m uvicorn app:app --host 0.0.0.0 --port ${PORT:-8080} --no-access-log"]

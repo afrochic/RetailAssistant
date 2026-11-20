@@ -1,0 +1,9 @@
+# Current methodology — Client X
+
+The task is constrained content retrieval with grounded language generation. A scripted pipeline reads the approved distribution source, normalizes text/categories/prices, checks IDs, learns a 12,000-feature vocabulary and IDF, and stores normalized sparse postings. Query TF-IDF scores rank products after required metadata constraints. Parsed budget clauses do not contribute numeric relevance features. Unknown ingredients, labels and stock cannot pass a required filter.
+
+TF-IDF provides a compact, interpretable baseline without training a large model or downloading weights at request time. Optional offline MiniLM teacher embeddings, PCA, a fitted TF-IDF-to-embedding projection and reciprocal rank fusion are available but have not been fitted/evaluated for this submission. The projection is approximate; it must not be described as native transformer query encoding. Collaborative filtering and supervised rankers are excluded because no interaction data or defensible relevance labels exist.
+
+Groq openai/gpt-oss-120b is a hosted inference provider. The project does not train/fine-tune GPT-OSS. A constrained response schema selects retrieved IDs and record-specific supported explanations; invalid output falls back to deterministic catalogue facts. Medical/urgent requests are handled before retrieval and generation. Rate and token reservations are shared for public instances; a missing shared limiter fails closed.
+
+Current measurement covers data integrity, deterministic retrieval, budget/metadata constraints, abstention and warm-process latency. It is not a labelled ranking benchmark. Precision@K, Recall@K, MRR and NDCG are blocked until independent human relevance judgments exist. Proposed semantic and hybrid methods require their own fitted artifacts and controlled comparison. Old results are labelled historical; they are not repurposed as new Client X evidence.

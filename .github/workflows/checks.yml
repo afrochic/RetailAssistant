@@ -1,5 +1,8 @@
 name: Legacy Flipkart validation (manual only)
 on: workflow_dispatch
+defaults:
+  run:
+    working-directory: legacy/flipkart
 jobs:
   tests:
     runs-on: ubuntu-22.04
@@ -10,8 +13,8 @@ jobs:
           python-version: '3.9'
           cache: pip
           cache-dependency-path: |
-            requirements.txt
-            requirements-dev.txt
+            legacy/flipkart/requirements.txt
+            legacy/flipkart/requirements-dev.txt
       - run: pip install torch==2.8.0 --index-url https://download.pytorch.org/whl/cpu
       - run: pip install -r requirements-dev.txt
       - run: pip install -e . --no-deps
