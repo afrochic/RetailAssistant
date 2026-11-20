@@ -1,0 +1,26 @@
+[
+  {
+    "id": 44692439969,
+    "name": "MVP Docker validation (manual, no publish)",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "5436ed89e1d7b0d2737bc4affb571d6a39c618a8",
+    "html_url": "https://github.com/afrochic/RetailAssistant/actions/runs/44692439969"
+  },
+  {
+    "id": 44692435830,
+    "name": "MVP frontend validation (manual)",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "5436ed89e1d7b0d2737bc4affb571d6a39c618a8",
+    "html_url": "https://github.com/afrochic/RetailAssistant/actions/runs/44692435830"
+  },
+  {
+    "id": 44692431692,
+    "name": "MVP backend validation (manual)",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "5436ed89e1d7b0d2737bc4affb571d6a39c618a8",
+    "html_url": "https://github.com/afrochic/RetailAssistant/actions/runs/44692431692"
+  }
+]

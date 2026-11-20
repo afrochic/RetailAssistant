@@ -1,0 +1,20 @@
+[
+  {
+    "workflow": "mvp-backend.yml",
+    "dispatch_status": 204,
+    "branch": "cleanup/client-x-submission",
+    "sha": "5436ed89e1d7b0d2737bc4affb571d6a39c618a8"
+  },
+  {
+    "workflow": "mvp-frontend.yml",
+    "dispatch_status": 204,
+    "branch": "cleanup/client-x-submission",
+    "sha": "5436ed89e1d7b0d2737bc4affb571d6a39c618a8"
+  },
+  {
+    "workflow": "mvp-docker.yml",
+    "dispatch_status": 204,
+    "branch": "cleanup/client-x-submission",
+    "sha": "5436ed89e1d7b0d2737bc4affb571d6a39c618a8"
+  }
+]

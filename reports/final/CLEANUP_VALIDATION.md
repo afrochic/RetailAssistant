@@ -25,3 +25,12 @@ Local HTTP evidence is in cleanup_local_api.json. Actual data/CSV/plots are in e
 Original identifying screenshots, payloads and obsolete raw stdout duplicates were withdrawn; originals were archived privately where needed. The client name/domain is absent from the current submission text, not erased from Git/CI/cloud history. Product text/IDs may remain externally reidentifiable.
 
 Commands: python -m pytest -q; python -m ruff check --config apps/api/pyproject.toml apps/api scripts/mvp; npm run typecheck/lint/build under apps/web; prepare.py ingest/index; audit_offline.py; docker compose build.
+
+## GitHub verification
+
+Current Client X application source5436ed8 passed all three manual workflows:
+- Backend: https://github.com/afrochic/RetailAssistant/actions/runs/44692431692
+- Frontend: https://github.com/afrochic/RetailAssistant/actions/runs/44692435830
+- Docker: https://github.com/afrochic/RetailAssistant/actions/runs/44692439969
+
+PR#3 https://github.com/afrochic/RetailAssistant/pull/3 is ready for review. Later evidence-only commits do not change tested application code. No merge or deployment is implied by these results.
